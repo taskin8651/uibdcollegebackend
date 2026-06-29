@@ -1,0 +1,584 @@
+﻿
+@extends('frontend.master')
+@section('content')
+
+<main id="mainContent">
+    <!-- Hero section: official intro, primary actions and student statistics -->
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="site-shell hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow"><i class="bi bi-stars"></i> Official Academic Information Portal</span>
+          <h1>B.D. College, Patna</h1>
+          <p class="hero-lead">Official academic portal for notices, admissions, examination updates, departments, NAAC/IQAC, downloads, RTI disclosure and student support.</p>
+          <div class="hero-actions">
+            <a href="#notices" class="btn primary"><i class="bi bi-megaphone"></i> Latest Notices</a>
+            <a href="#admissions" class="btn light"><i class="bi bi-journal-check"></i> Admission Updates</a>
+            <a href="downloads.html" class="btn ghost"><i class="bi bi-download"></i> Downloads</a>
+          </div>
+          <div class="hero-metrics">
+            <div><strong data-count="9174">0</strong><span>Total Students</span></div>
+            <div><strong data-count="5196">0</strong><span>Male Students</span></div>
+            <div><strong data-count="3978">0</strong><span>Female Students</span></div>
+            <div><strong>UG / PG</strong><span>Programmes</span></div>
+            <div><strong>B+</strong><span>NAAC Highlight</span></div>
+            <div><strong>C-12847</strong><span>AISHE Code</span></div>
+          </div>
+        </div>
+
+        <div class="hero-media reveal delay-1">
+          <img src="assets/img/bdcpat_img_001.jpg" alt="B.D. College campus building">
+          <div class="media-card one">
+            <i class="bi bi-file-earmark-text"></i>
+            <span>Notice-first communication</span>
+          </div>
+          <div class="media-card two">
+            <i class="bi bi-phone"></i>
+            <span>Fully responsive frontend</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick services: most-used links for students and visitors -->
+    <section class="quick-services">
+      <div class="site-shell service-grid">
+        <a class="service-card reveal" href="#admissions"><i class="bi bi-person-plus"></i><strong>Admissions</strong><span>Forms, eligibility, merit list</span></a>
+        <a class="service-card reveal delay-1" href="#examination"><i class="bi bi-clipboard-check"></i><strong>Examination</strong><span>Schedules, forms, results</span></a>
+        <a class="service-card reveal delay-2" href="#notices"><i class="bi bi-megaphone"></i><strong>Notices</strong><span>Circulars and archives</span></a>
+        <a class="service-card reveal delay-3" href="#students"><i class="bi bi-life-preserver"></i><strong>Student Support</strong><span>Scholarship, grievance, cells</span></a>
+        <a class="service-card reveal delay-4" href="#naac"><i class="bi bi-award"></i><strong>NAAC / IQAC</strong><span>AQAR, SSR, minutes</span></a>
+        <a class="service-card reveal delay-5" href="#disclosure"><i class="bi bi-shield-check"></i><strong>Disclosure</strong><span>RTI, policies, tenders</span></a>
+      </div>
+    </section>
+
+    <!-- About section: college profile, vision/mission and institutional identity -->
+    <section class="section about-section" id="about">
+      <div class="site-shell two-col">
+        <div class="image-panel reveal">
+          <img src="assets/img/founder_bdcpat.jpg" alt="Founder of B.D. College">
+        </div>
+        <div class="content-block reveal delay-1">
+          <span class="section-kicker">About Institution</span>
+          <h2>Formal, transparent and student-friendly college communication.</h2>
+          <p>B.D. College, Patna frontend is structured for a constituent government college. It focuses on verified academic information, administrative notices, statutory documents, admission updates, examination updates and easy public access.</p>
+          <div class="check-grid">
+            <span><i class="bi bi-check2-circle"></i> College profile</span>
+            <span><i class="bi bi-check2-circle"></i> Vision & mission</span>
+            <span><i class="bi bi-check2-circle"></i> Principal's message</span>
+            <span><i class="bi bi-check2-circle"></i> College at a glance</span>
+            <span><i class="bi bi-check2-circle"></i> Institutional values</span>
+            <span><i class="bi bi-check2-circle"></i> Public transparency</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Administration section: principal, officials and administrative information -->
+    <section class="section official-section" id="administration">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Administration</span>
+          <h2>Administrative information and important officials.</h2>
+          <p>Profiles can show approved name, designation, role, photograph and official contact details.</p>
+        </div>
+        <div class="slider-shell js-slider" aria-label="Administration slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous administration item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next administration item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="official-grid slider-track">
+          <article class="official-card reveal">
+            <img src="assets/img/chancellor_bdcpat.jpg" alt="Lt Gen Syed Ata Hasnain (Retd.), Honorable Chancellor, Universities of Bihar">
+            <h3>Lt Gen Syed Ata Hasnain (Retd.)</h3><p>Honorable Chancellor, Universities of Bihar</p>
+          </article>
+          <article class="official-card reveal delay-1">
+            <img src="assets/img/vc_bdcpat.jpg" alt="Prof. Upendra Prasad Singh, Honorable Vice-Chancellor, PPU, Patna">
+            <h3>Prof. Upendra Prasad Singh</h3><p>Honorable Vice-Chancellor, PPU, Patna</p>
+          </article>
+          <article class="official-card reveal delay-2">
+            <img src="assets/img/official/pvc_bdcpat.jpg" alt="Prof. Abu Bakar, Honourable Registrar Patliputra University, Patna">
+            <h3>Prof. Abu Bakar</h3><p>Honourable Registrar Patliputra University, Patna</p>
+          </article>
+          <article class="official-card reveal delay-3">
+            <img src="assets/img/principal_bdcpat.jpg" alt="Prof. Diwakar Prasad, Principal, Bhuvaneshwari Dayal College, Mithapur, Patna">
+            <h3>Prof. Diwakar Prasad</h3><p>Principal, Bhuvaneshwari Dayal College, Mithapur, Patna</p>
+          </article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notices section: tabbed notice board with category filters -->
+    <section class="section notice-section" id="notices">
+      <div class="site-shell notice-layout">
+        <div class="notice-board reveal">
+          <div class="board-head">
+            <div>
+              <span class="section-kicker">Notices & Circulars</span>
+              <h2>Searchable public notice system.</h2>
+            </div>
+            <div class="tabs" role="tablist">
+              <button class="tab active" data-tab="general">General</button>
+              <button class="tab" data-tab="admission">Admission</button>
+              <button class="tab" data-tab="exam">Exam</button>
+              <button class="tab" data-tab="iqac">IQAC</button>
+            </div>
+          </div>
+          <div class="tab-panel active" id="general">
+            <article class="notice-item"><time><strong>17</strong><span>Jun 2026</span></time><div><b>Admission Notice 2026-2030 Sem-I</b><p>Official admission notice PDF for Semester-I students.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
+            <article class="notice-item"><time><strong>18</strong><span>May 2026</span></time><div><b>Patliputra University Vocational Part-I Exam Schedule 2026</b><p>Schedule, sitting details and practical/viva-voce instructions.</p></div><a href="assets/pdf/bdcpat_202512312337.pdf" target="_blank"><i class="bi bi-download"></i></a></article>
+            <article class="notice-item"><time><strong>01</strong><span>Apr 2026</span></time><div><b>Revised remuneration rates and examination department charges</b><p>University circular with official PDF.</p></div><a href="assets/pdf/bdcpat_202604011516.pdf" target="_blank"><i class="bi bi-download"></i></a></article>
+            <article class="notice-item"><time><strong>09</strong><span>Mar 2026</span></time><div><b>Semester course selection notice for 2025-29 batch</b><p>Faculty-wise subject offering details for students.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
+          </div>
+          <div class="tab-panel" id="admission">
+            <article class="notice-item"><time><strong>17</strong><span>Jun 2026</span></time><div><b>Admission Notice 2026-2030 Sem-I</b><p>Official admission notice PDF for Semester-I students.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
+            <article class="notice-item"><time><strong>02</strong><span>Jun 2026</span></time><div><b>Admission merit list publication schedule</b><p>Selection list and reporting instructions placeholder.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
+          </div>
+          <div class="tab-panel" id="exam">
+            <article class="notice-item"><time><strong>04</strong><span>Jun 2026</span></time><div><b>Examination form fill-up instruction</b><p>Form, fee, admit card and university link placeholder.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
+          </div>
+          <div class="tab-panel" id="iqac">
+            <article class="notice-item"><time><strong>28</strong><span>May 2026</span></time><div><b>IQAC meeting minutes and action taken report</b><p>Quality assurance document placeholder.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
+          </div>
+        </div>
+
+        <aside class="priority-panel reveal delay-1">
+          <h3>Priority Access</h3>
+          <a href="assets/pdf/Admission-Notice.pdf" download><span><i class="bi bi-journal-bookmark"></i> Admission Notice 2026-2030 Sem-I</span><i class="bi bi-arrow-right"></i></a>
+          <a href="#examination"><span><i class="bi bi-file-medical"></i> Exam Updates</span><i class="bi bi-arrow-right"></i></a>
+          <a href="downloads.html"><span><i class="bi bi-folder2-open"></i> Student Forms</span><i class="bi bi-arrow-right"></i></a>
+          <a href="#disclosure"><span><i class="bi bi-file-lock2"></i> RTI / Disclosure</span><i class="bi bi-arrow-right"></i></a>
+          <a href="#contact"><span><i class="bi bi-whatsapp"></i> Admission Helpdesk</span><i class="bi bi-arrow-right"></i></a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Academics section: courses, calendar, syllabus and timetable -->
+    <section class="section" id="academics">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Academics</span>
+          <h2>Courses, syllabus, calendar and time table.</h2>
+          <p>Final course list must be verified by the college before upload.</p>
+        </div>
+        <div class="slider-shell js-slider" aria-label="Academics slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous academic item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next academic item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="programme-grid slider-track">
+          <article class="programme-card reveal"><i class="bi bi-mortarboard"></i><h3>Courses Offered</h3><p>UG, PG, vocational and professional programme details.</p></article>
+          <article class="programme-card reveal delay-1"><i class="bi bi-calendar2-week"></i><h3>Academic Calendar</h3><p>Session-wise calendar upload and download.</p></article>
+          <article class="programme-card reveal delay-2"><i class="bi bi-file-earmark-text"></i><h3>Syllabus</h3><p>Course-wise and subject-wise syllabus PDFs.</p><a href="syllabus-downloads.html">View Syllabus <i class="bi bi-arrow-right"></i></a></article>
+          <article class="programme-card reveal delay-3"><i class="bi bi-table"></i><h3>Time Table</h3><p>Class, department and exam timetable uploads.</p></article>
+          <article class="programme-card reveal delay-4"><i class="bi bi-link-45deg"></i><h3>University Guidelines</h3><p>Useful links to PPU and official academic documents.</p></article>
+          <article class="programme-card reveal delay-5"><i class="bi bi-card-checklist"></i><h3>Programme Details</h3><p>Eligibility, duration, seats, fee and admission process.</p></article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Departments section: department categories and subject links -->
+    <section class="section departments-section" id="departments">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Departments</span>
+          <h2>Department-wise pages with faculty, syllabus and activities.</h2>
+        </div>
+        <div class="slider-shell js-slider" aria-label="Departments slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous department item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next department item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="dept-grid slider-track">
+          <a class="dept-card reveal" href="department-detail.html"><span>Science</span><strong>Botany</strong><small>Faculty, lab, syllabus</small></a>
+          <a class="dept-card reveal delay-1" href="department-detail.html"><span>Science</span><strong>Zoology</strong><small>Resources and notices</small></a>
+          <a class="dept-card reveal delay-2" href="department-detail.html"><span>Science</span><strong>Chemistry</strong><small>Lab and academic details</small></a>
+          <a class="dept-card reveal delay-3" href="department-detail.html"><span>Science</span><strong>Physics</strong><small>Course resources</small></a>
+          <a class="dept-card reveal delay-4" href="department-detail.html"><span>Science</span><strong>Mathematics</strong><small>Faculty and syllabus</small></a>
+          <a class="dept-card reveal delay-5" href="department.html"><span>Commerce</span><strong>Commerce</strong><small>Programme updates</small></a>
+          <a class="dept-card reveal" href="department.html"><span>Humanities</span><strong>Hindi / English</strong><small>Department profile</small></a>
+          <a class="dept-card reveal delay-1" href="department.html"><span>Vocational</span><strong>BCA / BBA / MBA / MCA</strong><small>Professional courses</small></a>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admissions section: admission workflow, helpdesk and prospectus action -->
+    <section class="section admissions-section" id="admissions">
+      <div class="site-shell split-section">
+        <div class="content-block reveal">
+          <span class="section-kicker">Admissions</span>
+          <h2>Everything students need before applying.</h2>
+          <p>This frontend includes admission notice, courses available, eligibility criteria, process, dates, documents, merit lists, fee structure, reservation rules, helpdesk and prospectus download placeholders.</p>
+          <div class="timeline">
+            <div><span>01</span><b>Check official notice</b><small>Courses, dates and guidelines</small></div>
+            <div><span>02</span><b>Prepare documents</b><small>Certificates and ID proof</small></div>
+            <div><span>03</span><b>Apply / verify</b><small>PPU link and helpdesk</small></div>
+            <div><span>04</span><b>Merit list</b><small>Selection and reporting</small></div>
+          </div>
+        </div>
+        <div class="admission-card reveal delay-1">
+          <h3>Admission Helpdesk</h3>
+          <p>Contact & WhatsApp number can be retained or updated after confirmation by the college.</p>
+          <a href="tel:+917903275820" class="btn primary"><i class="bi bi-telephone"></i> +91 7903275820</a>
+          <a href="downloads.html" class="btn light"><i class="bi bi-file-earmark-pdf"></i> Prospectus Download</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Examination section: form fill-up, schedule, admit card and result links -->
+    <section class="section" id="examination">
+      <div class="site-shell exam-grid">
+        <div class="section-title left reveal">
+          <span class="section-kicker">Examination</span>
+          <h2>Visible exam hub for regular student visits.</h2>
+          <p>Exam notices, internal exams, practical schedule, form instructions, admit card notice, result link and helpdesk details.</p>
+        </div>
+        <div class="exam-cards">
+          <article class="exam-card reveal"><i class="bi bi-pencil-square"></i><h3>Form Fill-Up</h3><p>Instructions and dates.</p></article>
+          <article class="exam-card reveal delay-1"><i class="bi bi-calendar-event"></i><h3>Exam Schedule</h3><p>Theory and practical exams.</p></article>
+          <article class="exam-card reveal delay-2"><i class="bi bi-person-badge"></i><h3>Admit Card</h3><p>Download and verification.</p></article>
+          <article class="exam-card reveal delay-3"><i class="bi bi-graph-up-arrow"></i><h3>Result Links</h3><p>University result access.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Students corner: scholarships, cells, grievance, NSS/NCC and certificates -->
+    <section class="section students-section" id="students">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Students Corner</span>
+          <h2>Support services, forms, cells and student welfare.</h2>
+        </div>
+        <div class="slider-shell js-slider" aria-label="Students corner slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous student support item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next student support item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="support-grid slider-track">
+          <article class="support-card reveal"><i class="bi bi-cash-coin"></i><h3>Scholarship</h3><p>Scholarship information and links.</p></article>
+          <article class="support-card reveal delay-1"><i class="bi bi-ban"></i><h3>Anti-Ragging</h3><p>Information and undertaking links.</p></article>
+          <article class="support-card reveal delay-2"><i class="bi bi-person-raised-hand"></i><h3>Grievance Redressal</h3><p>Student grievance process.</p></article>
+          <article class="support-card reveal delay-3"><i class="bi bi-gender-female"></i><h3>ICC / Women Cell</h3><p>Internal complaint and support.</p></article>
+          <article class="support-card reveal delay-4"><i class="bi bi-book"></i><h3>Library</h3><p>Library rules and resources.</p></article>
+          <article class="support-card reveal delay-5"><i class="bi bi-briefcase"></i><h3>Placement Cell</h3><p>Career guidance and placement.</p></article>
+          <article class="support-card reveal"><i class="bi bi-people"></i><h3>NSS / NCC</h3><p>Extension activities.</p></article>
+          <article class="support-card reveal delay-1"><i class="bi bi-file-person"></i><h3>Certificates</h3><p>Bonafide, character and CLC links.</p></article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Committees and cells section: statutory and student-support committees -->
+    <section class="section committees-section" id="committees">
+      <div class="site-shell two-col reverse">
+        <div class="content-block reveal">
+          <span class="section-kicker">Committees / Cells</span>
+          <h2>Mandatory committees presented clearly.</h2>
+          <p>IQAC, NAAC, admission, examination, anti-ragging, grievance, ICC, SC/ST, minority, OBC, equal opportunity, NSS, NCC, placement, sports, library, cultural and research committees.</p>
+          <div class="chip-list">
+            <span>IQAC</span><span>NAAC</span><span>Anti-Ragging</span><span>Grievance</span><span>ICC</span><span>NSS</span><span>NCC</span><span>Placement</span><span>Sports</span><span>Library</span>
+          </div>
+        </div>
+        <div class="image-panel reveal delay-1">
+          <img src="assets/img/bdcpat_202604212319.jpg" alt="B.D. College institutional activity">
+        </div>
+      </div>
+    </section>
+
+    <!-- NAAC / IQAC section: quality assurance documents and reports -->
+    <section class="section naac-section" id="naac">
+      <div class="site-shell naac-grid">
+        <div class="naac-highlight reveal">
+          <span class="section-kicker light-kicker">NAAC / IQAC</span>
+          <strong>Quality Assurance</strong>
+          <p>Dedicated frontend for IQAC composition, meetings, minutes, action taken reports, AQAR, SSR, criteria-wise documents, best practices, SSS and institutional distinctiveness.</p>
+        </div>
+        <div class="document-list reveal delay-1">
+          <a href="iqac-reports.html#aqarReports"><i class="bi bi-file-earmark-pdf"></i><span><b>AQAR Reports</b><small>Session-wise upload</small></span><em>PDF</em></a>
+          <a href="iqac-reports.html#ssrReports"><i class="bi bi-file-earmark-pdf"></i><span><b>SSR Documents</b><small>Criteria-wise documents</small></span><em>PDF</em></a>
+          <a href="iqac-reports.html#meetingReports"><i class="bi bi-file-earmark-pdf"></i><span><b>Meeting Minutes</b><small>IQAC records</small></span><em>PDF</em></a>
+          <a href="iqac-reports.html#bestPractices"><i class="bi bi-file-earmark-pdf"></i><span><b>Best Practices</b><small>Institutional practices</small></span><em>PDF</em></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RTI / statutory disclosure section: mandatory public information -->
+    <section class="section disclosure-section" id="disclosure">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">RTI / Statutory Disclosure</span>
+          <h2>Public transparency and mandatory information.</h2>
+        </div>
+        <div class="disclosure-grid">
+          <a class="disclosure-card reveal" href="reservation-policy.html"><i class="bi bi-file-lock2"></i><strong>RTI</strong></a>
+          <a class="disclosure-card reveal delay-1" href="about.html#collegeGlance"><i class="bi bi-building-check"></i><strong>Affiliation</strong></a>
+          <a class="disclosure-card reveal delay-2" href="iqac-policy.html"><i class="bi bi-journal-text"></i><strong>Policies</strong></a>
+          <a class="disclosure-card reveal delay-3" href="nirf-data.html"><i class="bi bi-cash-stack"></i><strong>Audit Reports</strong></a>
+          <a class="disclosure-card reveal delay-4" href="tenders.html"><i class="bi bi-megaphone"></i><strong>Tenders</strong></a>
+          <a class="disclosure-card reveal delay-5" href="downloads.html"><i class="bi bi-person-workspace"></i><strong>Recruitment</strong></a>
+          <a class="disclosure-card reveal" href="student-zone.html#studentSupport"><i class="bi bi-shield-exclamation"></i><strong>Anti-Ragging</strong></a>
+          <a class="disclosure-card reveal delay-1" href="iqac.html"><i class="bi bi-clipboard2-check"></i><strong>Self Declaration</strong></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities section: library, labs, computer lab and seminar hall -->
+    <section class="section facilities-section" id="facilities">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Facilities</span>
+          <h2>Campus facilities and learning resources.</h2>
+        </div>
+        <div class="slider-shell js-slider" aria-label="Facilities slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous facility item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next facility item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="facility-track slider-track">
+          <article class="facility-card reveal"><img src="assets/img/bdcpat_202605301534.jpg" alt="B.D. College activity"><h3>Library</h3></article>
+          <article class="facility-card reveal delay-1"><img src="assets/img/bdcpat_202605301542.jpg" alt="B.D. College activity"><h3>Laboratories</h3></article>
+          <article class="facility-card reveal delay-2"><img src="assets/img/bdcpat_202605201509.jpg" alt="B.D. College seminar activity"><h3>Computer Lab</h3></article>
+          <article class="facility-card reveal delay-3"><img src="assets/img/bdcpat_202604212358.jpg" alt="B.D. College conference activity"><h3>Seminar Hall</h3></article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery section: campus, activities, seminars and media coverage -->
+    <section class="section gallery-section" id="gallery">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Gallery</span>
+          <h2>Events, campus life, NSS, NCC and academic activities.</h2>
+        </div>
+        <div class="slider-shell js-slider" aria-label="Gallery slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous gallery item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next gallery item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="gallery-grid slider-track">
+          <a class="gallery-item big reveal" href="official-assets.html"><img src="assets/img/bdcpat_img_001.jpg" alt="B.D. College campus"><span>Campus & Academic Activities</span></a>
+          <a class="gallery-item reveal delay-1" href="ncc.html"><img src="assets/img/bdcpat_202605232005.jpg" alt="NCC activity at B.D. College"><span>NSS / NCC</span></a>
+          <a class="gallery-item reveal delay-2" href="event-downloads.html"><img src="assets/img/bdcpat_202605201518.jpg" alt="Seminar at B.D. College"><span>Seminars</span></a>
+          <a class="gallery-item reveal delay-3" href="syllabus-downloads.html"><img src="assets/img/bdcpat_202604212325.jpg" alt="Academic activity at B.D. College"><span>Learning</span></a>
+          <a class="gallery-item reveal delay-4" href="official-assets.html"><img src="assets/img/Media_bdcpat_202605101337.jpg" alt="News media coverage of B.D. College"><span>News & Media</span></a>
+        </div>
+        </div>
+
+        <div class="media-highlights">
+          <article class="media-news reveal">
+            <img src="assets/img/Media_bdcpat_202605261137.jpg" alt="BD College crowned college champion in NCC camp">
+            <div><strong>NCC Camp Achievement</strong><span>BD College crowned college champion in NCC camp.</span></div>
+          </article>
+          <article class="media-news reveal delay-1">
+            <img src="assets/img/Media_bdcpat_202605261148.jpg" alt="BD College annual training camp achievement">
+            <div><strong>College Champion</strong><span>Annual training camp title and student achievement highlight.</span></div>
+          </article>
+          <article class="media-news reveal delay-2">
+            <img src="assets/img/Media_bdcpat_202605101337.jpg" alt="Research and dissertation writing information">
+            <div><strong>Academic Media</strong><span>Information on research and dissertation writing.</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events section: dedicated college events and activity highlights -->
+    <section class="section events-section" id="events">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Events</span>
+          <h2>College events, activities and achievements.</h2>
+          <p>Important academic, cultural, NSS/NCC and institutional event highlights can be managed from admin panel later.</p>
+        </div>
+
+        <div class="slider-shell js-slider" aria-label="Events slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous event item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next event item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="event-grid slider-track">
+          <article class="event-card reveal">
+            <img src="assets/img/bdcpat_202605232005.jpg" alt="NCC activity at B.D. College">
+            <div>
+              <span>NCC Activity</span>
+              <h3>Annual Training Camp Achievement</h3>
+              <p>Student participation, discipline, leadership and NCC achievement updates.</p>
+            </div>
+          </article>
+          <article class="event-card reveal delay-1">
+            <img src="assets/img/bdcpat_202605201518.jpg" alt="Seminar at B.D. College">
+            <div>
+              <span>Academic Event</span>
+              <h3>Seminar & Workshop Updates</h3>
+              <p>Research, dissertation writing and department-level academic programmes.</p>
+            </div>
+          </article>
+          <article class="event-card reveal delay-2">
+            <img src="assets/img/bdcpat_202604212319.jpg" alt="B.D. College institutional event">
+            <div>
+              <span>Institutional Activity</span>
+              <h3>Campus Programme</h3>
+              <p>Official college activities, cultural events and student development programmes.</p>
+            </div>
+          </article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media section: dedicated news and media coverage cards -->
+    <section class="section media-section" id="media">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Media</span>
+          <h2>News, press coverage and media updates.</h2>
+          <p>Media section can show news clippings, captions, department, date and full-size image links.</p>
+        </div>
+
+        <div class="slider-shell js-slider" aria-label="Media slider">
+          <div class="slider-controls">
+            <button class="slider-btn prev" type="button" aria-label="Previous media item"><i class="bi bi-chevron-left"></i></button>
+            <button class="slider-btn next" type="button" aria-label="Next media item"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        <div class="media-grid slider-track">
+          <article class="press-card reveal">
+            <img src="assets/img/Media_bdcpat_202605261137.jpg" alt="BD College crowned college champion in NCC camp">
+            <div><span>24 May 2026</span><h3>BD College crowned college champion in NCC camp</h3><p>Department: National Cadet Corps (NCC)</p></div>
+          </article>
+          <article class="press-card reveal delay-1">
+            <img src="assets/img/Media_bdcpat_202605261148.jpg" alt="BD College got the title of College Champion">
+            <div><span>24 May 2026</span><h3>BD College got the title of College Champion</h3><p>Annual training camp achievement and student recognition.</p></div>
+          </article>
+          <article class="press-card reveal delay-2">
+            <img src="assets/img/Media_bdcpat_202605101337.jpg" alt="Information on research and dissertation writing">
+            <div><span>10 May 2026</span><h3>Information on research and dissertation writing</h3><p>Department: Sociology</p></div>
+          </article>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Downloads section: document library and forms -->
+    <section class="section downloads-section" id="downloads">
+      <div class="site-shell downloads-layout">
+        <div class="content-block reveal">
+          <span class="section-kicker">Downloads</span>
+          <h2>Document library with category-wise access.</h2>
+          <p>Prospectus, admission forms, examination forms, scholarship forms, syllabus, academic calendar, timetable, policies, committee documents, NAAC/IQAC documents, tender and recruitment documents.</p>
+        </div>
+        <div class="download-grid">
+          <a class="download-card reveal" href="downloads.html"><i class="bi bi-file-earmark-pdf"></i><b>Downloads</b><span>All categories</span></a>
+          <a class="download-card reveal delay-1" href="notice-downloads.html"><i class="bi bi-file-earmark-text"></i><b>Notices</b><span>Files</span></a>
+          <a class="download-card reveal delay-2" href="assets/pdf/College_Holiday_Calendar_2026_bdcpat.pdf" target="_blank"><i class="bi bi-calendar2-week"></i><b>Calendar</b><span>Academic</span></a>
+          <a class="download-card reveal delay-3" href="syllabus-downloads.html"><i class="bi bi-folder-check"></i><b>Syllabus</b><span>Reports</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page directory: index hub connecting every important local page -->
+    <section class="section disclosure-section" id="pageDirectory">
+      <div class="site-shell">
+        <div class="section-title reveal">
+          <span class="section-kicker">Site Directory</span>
+          <h2>Every page connected from the homepage.</h2>
+        </div>
+        <div class="disclosure-grid">
+          <a class="disclosure-card reveal" href="about.html"><i class="bi bi-building"></i><strong>About</strong></a>
+          <a class="disclosure-card reveal delay-1" href="administration.html"><i class="bi bi-person-badge"></i><strong>Administration</strong></a>
+          <a class="disclosure-card reveal delay-2" href="administrative-staff.html"><i class="bi bi-people"></i><strong>Admin Staff</strong></a>
+          <a class="disclosure-card reveal delay-3" href="academics.html"><i class="bi bi-mortarboard"></i><strong>Academics</strong></a>
+          <a class="disclosure-card reveal delay-4" href="department.html"><i class="bi bi-diagram-3"></i><strong>Departments</strong></a>
+          <a class="disclosure-card reveal delay-5" href="department-detail.html"><i class="bi bi-journal-text"></i><strong>Department Detail</strong></a>
+          <a class="disclosure-card reveal" href="departments.html"><i class="bi bi-grid"></i><strong>Departments Alias</strong></a>
+          <a class="disclosure-card reveal" href="notice.html"><i class="bi bi-megaphone"></i><strong>Notices</strong></a>
+          <a class="disclosure-card reveal delay-1" href="notice-downloads.html"><i class="bi bi-download"></i><strong>Notice Files</strong></a>
+          <a class="disclosure-card reveal delay-2" href="events.html"><i class="bi bi-calendar-event"></i><strong>Events</strong></a>
+          <a class="disclosure-card reveal delay-3" href="event-downloads.html"><i class="bi bi-images"></i><strong>Event Files</strong></a>
+          <a class="disclosure-card reveal delay-4" href="downloads.html"><i class="bi bi-folder2-open"></i><strong>Downloads</strong></a>
+          <a class="disclosure-card reveal delay-5" href="official-assets.html"><i class="bi bi-archive"></i><strong>All Assets</strong></a>
+          <a class="disclosure-card reveal" href="syllabus-downloads.html"><i class="bi bi-file-earmark-text"></i><strong>Syllabus PDFs</strong></a>
+          <a class="disclosure-card reveal delay-1" href="student-zone.html"><i class="bi bi-life-preserver"></i><strong>Student Zone</strong></a>
+          <a class="disclosure-card reveal delay-2" href="certificate.html"><i class="bi bi-file-person"></i><strong>Certificates</strong></a>
+          <a class="disclosure-card reveal delay-3" href="students-grievance-redressal.html"><i class="bi bi-person-raised-hand"></i><strong>Grievance</strong></a>
+          <a class="disclosure-card reveal delay-4" href="placement-guidance-cell.html"><i class="bi bi-briefcase"></i><strong>Placement</strong></a>
+          <a class="disclosure-card reveal delay-5" href="reservation-policy.html"><i class="bi bi-shield-check"></i><strong>Reservation</strong></a>
+          <a class="disclosure-card reveal" href="nss.html"><i class="bi bi-people-fill"></i><strong>NSS</strong></a>
+          <a class="disclosure-card reveal delay-1" href="ncc.html"><i class="bi bi-flag"></i><strong>NCC</strong></a>
+          <a class="disclosure-card reveal delay-2" href="startup-cell.html"><i class="bi bi-lightbulb"></i><strong>Startup Cell</strong></a>
+          <a class="disclosure-card reveal delay-3" href="eco-club.html"><i class="bi bi-tree"></i><strong>Eco Club</strong></a>
+          <a class="disclosure-card reveal delay-4" href="debate-club.html"><i class="bi bi-chat-square-text"></i><strong>Debate Club</strong></a>
+          <a class="disclosure-card reveal delay-5" href="dramatics-society.html"><i class="bi bi-masks"></i><strong>Dramatics</strong></a>
+          <a class="disclosure-card reveal" href="literary-society.html"><i class="bi bi-book"></i><strong>Literary</strong></a>
+          <a class="disclosure-card reveal delay-1" href="health-center.html"><i class="bi bi-heart-pulse"></i><strong>Health Center</strong></a>
+          <a class="disclosure-card reveal delay-2" href="iqac.html"><i class="bi bi-award"></i><strong>IQAC</strong></a>
+          <a class="disclosure-card reveal delay-3" href="iqac-members.html"><i class="bi bi-person-lines-fill"></i><strong>IQAC Members</strong></a>
+          <a class="disclosure-card reveal delay-4" href="iqac-policy.html"><i class="bi bi-file-lock2"></i><strong>IQAC Policy</strong></a>
+          <a class="disclosure-card reveal delay-5" href="iqac-reports.html"><i class="bi bi-file-earmark-pdf"></i><strong>IQAC Reports</strong></a>
+          <a class="disclosure-card reveal" href="iqac-feedback.html"><i class="bi bi-clipboard-data"></i><strong>IQAC Feedback</strong></a>
+          <a class="disclosure-card reveal delay-1" href="nirf.html"><i class="bi bi-bar-chart"></i><strong>NIRF</strong></a>
+          <a class="disclosure-card reveal delay-2" href="nirf-reports.html"><i class="bi bi-file-bar-graph"></i><strong>NIRF Reports</strong></a>
+          <a class="disclosure-card reveal delay-3" href="nirf-data.html"><i class="bi bi-table"></i><strong>NIRF Data</strong></a>
+          <a class="disclosure-card reveal delay-4" href="tenders.html"><i class="bi bi-megaphone"></i><strong>Tenders</strong></a>
+          <a class="disclosure-card reveal delay-5" href="feedback.html"><i class="bi bi-chat-dots"></i><strong>Feedback</strong></a>
+          <a class="disclosure-card reveal" href="student-feedback.html"><i class="bi bi-person-check"></i><strong>Student Feedback</strong></a>
+          <a class="disclosure-card reveal delay-1" href="teacher-feedback.html"><i class="bi bi-person-video3"></i><strong>Teacher Feedback</strong></a>
+          <a class="disclosure-card reveal delay-2" href="parents-feedback.html"><i class="bi bi-people"></i><strong>Parents Feedback</strong></a>
+          <a class="disclosure-card reveal delay-3" href="feedback-statistics.html"><i class="bi bi-pie-chart"></i><strong>Feedback Stats</strong></a>
+          <a class="disclosure-card reveal delay-4" href="contact-us.html"><i class="bi bi-telephone"></i><strong>Contact</strong></a>
+          <a class="disclosure-card reveal delay-5" href="demo.html"><i class="bi bi-window"></i><strong>Demo</strong></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alumni and admin scope section: CMS modules and alumni area -->
+    <section class="section alumni-admin-section" id="alumni">
+      <div class="site-shell two-col">
+        <div class="admin-scope reveal">
+          <span class="section-kicker light-kicker">Admin Panel Scope</span>
+          <h2>Frontend ready for CMS integration.</h2>
+          <p>Modules: banners, notices, admissions, examination, courses, departments, faculty, committees, gallery, downloads, calendar, timetable, syllabus, events, contact enquiries, SEO fields and user roles.</p>
+          <div class="chip-list inverse">
+            <span>Super Admin</span><span>Notice Manager</span><span>Department Editor</span><span>Gallery Manager</span><span>Download Manager</span>
+          </div>
+        </div>
+        <div class="alumni-card reveal delay-1">
+          <img src="assets/img/bdcpat_202604212358.jpg" alt="B.D. College event">
+          <div>
+            <span class="section-kicker">Alumni</span>
+            <h2>Alumni registration, events and achievements.</h2>
+            <p>Dedicated area for alumni association details, achievements, gallery and contact information.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact section: address, phone, email, map and enquiry form -->
+    <section class="section contact-section" id="contact">
+      <div class="site-shell contact-grid">
+        <div class="contact-info reveal">
+          <span class="section-kicker light-kicker">Contact Us</span>
+          <h2>B.D. College, Patna</h2>
+          <p>Near Gauriamath, Mithapur, Patna, Post-GPO, Bihar, India - 800001</p>
+          <a href="tel:06122209909"><i class="bi bi-telephone"></i> 06122209909</a>
+          <a href="mailto:principalbdcollegepatna@gmail.com"><i class="bi bi-envelope"></i> principalbdcollegepatna@gmail.com</a>
+          <a href="https://maps.google.com/?q=B.D.+College+Patna" target="_blank" rel="noopener"><i class="bi bi-map"></i> View Google Map</a>
+        </div>
+        <form class="enquiry-form reveal delay-1" action="#">
+          <h3>Send Enquiry</h3>
+          <div class="form-grid">
+            <label>Full Name<input type="text" placeholder="Enter name"></label>
+            <label>Phone<input type="tel" placeholder="Enter phone"></label>
+            <label>Email<input type="email" placeholder="Enter email"></label>
+            <label>Type<select><option>Admission</option><option>Examination</option><option>Notice</option><option>General</option></select></label>
+            <label class="wide">Message<textarea placeholder="Write your message"></textarea></label>
+          </div>
+          <button class="btn primary" type="submit"><i class="bi bi-send"></i> Submit</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+@endsection
