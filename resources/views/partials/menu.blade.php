@@ -465,34 +465,71 @@ Department Notices
         </div>
     </div>
 @endif
+@if(
+    auth()->user()->can('iqac_page_access') ||
+    auth()->user()->can('iqac_member_access') ||
+    auth()->user()->can('iqac_document_access')
+)
+    @php
+        $iqacActive = request()->is('admin/iqac-page*')
+            || request()->is('admin/iqac-members*')
+            || request()->is('admin/iqac-documents*');
+    @endphp
 
-@can('iqac_page_access')
-    <a href="{{ route('admin.iqac-page.edit') }}"
-       class="nav-link {{ request()->is('admin/iqac-page*') ? 'active' : '' }}"
-       data-tooltip="IQAC Page CMS">
-        <i class="fas fa-award nav-icon"></i>
-        <span class="nav-label">IQAC Page CMS</span>
-    </a>
-@endcan
+    <div x-data="{ open: {{ $iqacActive ? 'true' : 'false' }} }">
 
-@can('iqac_member_access')
-    <a href="{{ route('admin.iqac-members.index') }}"
-       class="nav-link {{ request()->is('admin/iqac-members*') ? 'active' : '' }}"
-       data-tooltip="IQAC Members">
-        <i class="fas fa-users nav-icon"></i>
-        <span class="nav-label">IQAC Members</span>
-    </a>
-@endcan
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="IQAC Management"
+                class="nav-link nav-group-btn {{ $iqacActive ? 'active' : '' }}">
 
-@can('iqac_document_access')
-    <a href="{{ route('admin.iqac-documents.index') }}"
-       class="nav-link {{ request()->is('admin/iqac-documents*') ? 'active' : '' }}"
-       data-tooltip="IQAC Documents">
-        <i class="fas fa-file-pdf nav-icon"></i>
-        <span class="nav-label">IQAC Documents</span>
-    </a>
-@endcan
-        <p class="sidebar-section-title compact nav-label">Account</p>
+            <div class="nav-group-left">
+                <i class="fas fa-award nav-icon"></i>
+                <span class="nav-label">IQAC Management</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('iqac_page_access')
+                <a href="{{ route('admin.iqac-page.edit') }}"
+                   class="sub-link {{ request()->is('admin/iqac-page*') ? 'active' : '' }}">
+                    <i class="fas fa-file-alt"></i>
+                    IQAC Page CMS
+                </a>
+            @endcan
+
+            @can('iqac_member_access')
+                <a href="{{ route('admin.iqac-members.index') }}"
+                   class="sub-link {{ request()->is('admin/iqac-members*') ? 'active' : '' }}">
+                    <i class="fas fa-users"></i>
+                    IQAC Members
+                </a>
+            @endcan
+
+            @can('iqac_document_access')
+                <a href="{{ route('admin.iqac-documents.index') }}"
+                   class="sub-link {{ request()->is('admin/iqac-documents*') ? 'active' : '' }}">
+                    <i class="fas fa-file-pdf"></i>
+                    IQAC Documents
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endif
+
+<p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
