@@ -510,34 +510,32 @@
         </p>
       </div>
 
-      <div class="admin-gallery-grid">
+      @if($administrationGalleries->count())
+    <div class="admin-gallery-grid">
 
-        <a href="#" class="admin-gallery-item big reveal">
-          <img src="assets/img/bdcpat_img_001.jpg" alt="B.D. College campus">
-          <span>Campus & Administration</span>
-        </a>
+        @foreach($administrationGalleries as $index => $administrationGallery)
+            @php
+                $imageUrl = $administrationGallery->getFirstMediaUrl('image');
+                $linkUrl = $administrationGallery->url ?: ($imageUrl ?: '#');
 
-        <a href="#" class="admin-gallery-item reveal delay-1">
-          <img src="assets/img/bdcpat_202605201518.jpg" alt="B.D. College activity">
-          <span>Official Programme</span>
-        </a>
+                $delayClass = $index > 0 ? 'delay-' . min($index, 4) : '';
+            @endphp
 
-        <a href="#" class="admin-gallery-item reveal delay-2">
-          <img src="assets/img/bdcpat_202604212319.jpg" alt="B.D. College institutional event">
-          <span>Institutional Activity</span>
-        </a>
+            @if($imageUrl)
+                <a href="{{ $linkUrl }}"
+                   class="admin-gallery-item {{ $administrationGallery->is_big ? 'big' : '' }} reveal {{ $delayClass }}"
+                   @if($linkUrl !== '#') target="_blank" rel="noopener" @endif>
 
-        <a href="#" class="admin-gallery-item reveal delay-3">
-          <img src="assets/img/Media_bdcpat_202605261137.jpg" alt="B.D. College media coverage">
-          <span>News & Media</span>
-        </a>
+                    <img src="{{ $imageUrl }}"
+                         alt="{{ $administrationGallery->alt_text ?: $administrationGallery->title }}">
 
-        <a href="#" class="admin-gallery-item reveal delay-4">
-          <img src="assets/img/Media_bdcpat_202605261148.jpg" alt="B.D. College media update">
-          <span>Press Coverage</span>
-        </a>
+                    <span>{{ $administrationGallery->title }}</span>
+                </a>
+            @endif
+        @endforeach
 
-      </div>
+    </div>
+@endif
 
     </div>
   </section>

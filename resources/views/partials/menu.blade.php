@@ -234,10 +234,11 @@
 
         <div class="nav-divider"></div>
 
-@if(auth()->user()->can('principal_history_access') || auth()->user()->can('staff_download_access'))
+@if(auth()->user()->can('principal_history_access') || auth()->user()->can('staff_download_access') || auth()->user()->can('administration_gallery_access'))
     @php
         $administrationActive = request()->is('admin/principal-histories*')
-            || request()->is('admin/staff-downloads*');
+            || request()->is('admin/staff-downloads*')
+            || request()->is('admin/administration-galleries*');
     @endphp
 
     <div x-data="{ open: {{ $administrationActive ? 'true' : 'false' }} }">
@@ -278,6 +279,14 @@
                    class="sub-link {{ request()->is('admin/staff-downloads*') ? 'active' : '' }}">
                     <i class="fas fa-file-pdf"></i>
                     Staff Downloads
+                </a>
+            @endcan
+
+            @can('administration_gallery_access')
+                <a href="{{ route('admin.administration-galleries.index') }}"
+                   class="sub-link {{ request()->is('admin/administration-galleries*') ? 'active' : '' }}">
+                    <i class="fas fa-images"></i>
+                    Administration Gallery
                 </a>
             @endcan
 

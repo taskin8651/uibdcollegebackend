@@ -81,6 +81,9 @@ Route::resource('principal-histories', 'PrincipalHistoriesController');
 
 Route::delete('staff-downloads/destroy', 'StaffDownloadsController@massDestroy')->name('staff-downloads.massDestroy');
 Route::resource('staff-downloads', 'StaffDownloadsController');
+
+Route::delete('administration-galleries/destroy', 'AdministrationGalleriesController@massDestroy')->name('administration-galleries.massDestroy');
+Route::resource('administration-galleries', 'AdministrationGalleriesController');
 });
 
 
