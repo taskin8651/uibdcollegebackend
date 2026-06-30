@@ -25,6 +25,8 @@ Route::get('/administration', 'Frontend\AdministrationController@index')->name('
 Route::get('/departments', 'Frontend\DepartmentController@index')->name('frontend.departments');
 Route::get('/departments/{department}', 'Frontend\DepartmentController@show')->name('frontend.departments.show');
 
+Route::get('/extension-activities', 'Frontend\ExtensionActivityController@index')->name('frontend.extension-activities');
+Route::get('/extension-activities/{extensionActivity}', 'Frontend\ExtensionActivityController@show')->name('frontend.extension-activities.show');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -113,6 +115,18 @@ Route::resource('department-resources', 'DepartmentResourcesController');
 // Department Notices
 Route::delete('department-notices/destroy', 'DepartmentNoticesController@massDestroy')->name('department-notices.massDestroy');
 Route::resource('department-notices', 'DepartmentNoticesController');
+
+Route::delete('extension-activities/destroy', 'ExtensionActivitiesController@massDestroy')->name('extension-activities.massDestroy');
+Route::resource('extension-activities', 'ExtensionActivitiesController');
+
+Route::delete('extension-activity-points/destroy', 'ExtensionActivityPointsController@massDestroy')->name('extension-activity-points.massDestroy');
+Route::resource('extension-activity-points', 'ExtensionActivityPointsController');
+
+Route::delete('extension-activity-objectives/destroy', 'ExtensionActivityObjectivesController@massDestroy')->name('extension-activity-objectives.massDestroy');
+Route::resource('extension-activity-objectives', 'ExtensionActivityObjectivesController');
+
+Route::delete('extension-activity-events/destroy', 'ExtensionActivityEventsController@massDestroy')->name('extension-activity-events.massDestroy');
+Route::resource('extension-activity-events', 'ExtensionActivityEventsController');
 });
 
 
