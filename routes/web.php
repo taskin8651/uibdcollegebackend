@@ -21,6 +21,10 @@ Auth::routes();
 Route::get('/about-us', 'Frontend\AboutController@index')->name('frontend.about');
 Route::get('/academics', 'Frontend\AcademicController@index')->name('frontend.academic');
 Route::get('/administration', 'Frontend\AdministrationController@index')->name('frontend.administration');
+
+Route::get('/departments', 'Frontend\DepartmentController@index')->name('frontend.departments');
+Route::get('/departments/{department}', 'Frontend\DepartmentController@show')->name('frontend.departments.show');
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -84,6 +88,31 @@ Route::resource('staff-downloads', 'StaffDownloadsController');
 
 Route::delete('administration-galleries/destroy', 'AdministrationGalleriesController@massDestroy')->name('administration-galleries.massDestroy');
 Route::resource('administration-galleries', 'AdministrationGalleriesController');
+
+
+// Department Page CMS
+Route::get('department-page', 'DepartmentPageController@edit')->name('department-page.edit');
+Route::put('department-page', 'DepartmentPageController@update')->name('department-page.update');
+
+// Department Categories
+Route::delete('department-categories/destroy', 'DepartmentCategoriesController@massDestroy')->name('department-categories.massDestroy');
+Route::resource('department-categories', 'DepartmentCategoriesController');
+
+// Departments
+Route::delete('departments/destroy', 'DepartmentsController@massDestroy')->name('departments.massDestroy');
+Route::resource('departments', 'DepartmentsController');
+
+// Department Faculties
+Route::delete('department-faculties/destroy', 'DepartmentFacultiesController@massDestroy')->name('department-faculties.massDestroy');
+Route::resource('department-faculties', 'DepartmentFacultiesController');
+
+// Department Resources
+Route::delete('department-resources/destroy', 'DepartmentResourcesController@massDestroy')->name('department-resources.massDestroy');
+Route::resource('department-resources', 'DepartmentResourcesController');
+
+// Department Notices
+Route::delete('department-notices/destroy', 'DepartmentNoticesController@massDestroy')->name('department-notices.massDestroy');
+Route::resource('department-notices', 'DepartmentNoticesController');
 });
 
 

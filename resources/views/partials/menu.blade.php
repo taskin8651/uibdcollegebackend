@@ -250,7 +250,7 @@
 
             <div class="nav-group-left">
                 <i class="fas fa-user-shield nav-icon"></i>
-                <span class="nav-label">Administration Management</span>
+                <span class="nav-label">Administration</span>
             </div>
 
             <i class="fas fa-chevron-right chevron"
@@ -287,6 +287,102 @@
                    class="sub-link {{ request()->is('admin/administration-galleries*') ? 'active' : '' }}">
                     <i class="fas fa-images"></i>
                     Administration Gallery
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endif
+
+        <div class="nav-divider"></div>
+
+@if(
+    auth()->user()->can('department_page_access') ||
+    auth()->user()->can('department_category_access') ||
+    auth()->user()->can('department_access') ||
+    auth()->user()->can('department_faculty_access') ||
+    auth()->user()->can('department_resource_access') ||
+    auth()->user()->can('department_notice_access')
+)
+    @php
+        $departmentActive = request()->is('admin/department-page*')
+            || request()->is('admin/department-categories*')
+            || request()->is('admin/departments*')
+            || request()->is('admin/department-faculties*')
+            || request()->is('admin/department-resources*')
+            || request()->is('admin/department-notices*');
+    @endphp
+
+    <div x-data="{ open: {{ $departmentActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Departments"
+                class="nav-link nav-group-btn {{ $departmentActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-building nav-icon"></i>
+                <span class="nav-label">Department Management</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('department_page_access')
+                <a href="{{ route('admin.department-page.edit') }}"
+                   class="sub-link {{ request()->is('admin/department-page*') ? 'active' : '' }}">
+                    <i class="fas fa-file-alt"></i>
+                    Department Page CMS
+                </a>
+            @endcan
+
+            @can('department_category_access')
+                <a href="{{ route('admin.department-categories.index') }}"
+                   class="sub-link {{ request()->is('admin/department-categories*') ? 'active' : '' }}">
+                    <i class="fas fa-layer-group"></i>
+                    Department Categories
+                </a>
+            @endcan
+
+            @can('department_access')
+                <a href="{{ route('admin.departments.index') }}"
+                   class="sub-link {{ request()->is('admin/departments*') ? 'active' : '' }}">
+                    <i class="fas fa-building"></i>
+                    Departments
+                </a>
+            @endcan
+
+            @can('department_faculty_access')
+                <a href="{{ route('admin.department-faculties.index') }}"
+                   class="sub-link {{ request()->is('admin/department-faculties*') ? 'active' : '' }}">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    Faculty Members
+                </a>
+            @endcan
+
+            @can('department_resource_access')
+                <a href="{{ route('admin.department-resources.index') }}"
+                   class="sub-link {{ request()->is('admin/department-resources*') ? 'active' : '' }}">
+                    <i class="fas fa-folder-open"></i>
+                    Department Resources
+                </a>
+            @endcan
+
+            @can('department_notice_access')
+                <a href="{{ route('admin.department-notices.index') }}"
+                   class="sub-link {{ request()->is('admin/department-notices*') ? 'active' : '' }}">
+                    <i class="fas fa-bullhorn"></i>
+                    Department Notices
                 </a>
             @endcan
 
