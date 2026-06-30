@@ -263,7 +263,7 @@
                 <h4>Holiday Calendar 2026 of the Governor of Bihar</h4>
                 <p>Update date: 16/01/2026 14:18:43</p>
               </div>
-              <a href="official-assets.html"><i class="bi bi-folder2-open"></i></a>
+              <a href="assets/pdf/College_Holiday_Calendar_2026_bdcpat.pdf"><i class="bi bi-folder2-open"></i></a>
             </article>
 
             <article class="holiday-item">
@@ -582,7 +582,6 @@
     </section>
 @endif
 
-@endsection
   <!-- NATIONAL DIGITAL INITIATIVES END -->
 
 
