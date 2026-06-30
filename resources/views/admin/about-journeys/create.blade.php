@@ -44,17 +44,25 @@
                         Year / Label
                     </label>
 
-                    <input type="text"
-                           name="year_label"
-                           id="year_label"
-                           value="{{ old('year_label') }}"
-                           placeholder="1905 / 1970 / Today"
-                           class="field-input {{ $errors->has('year_label') ? 'error' : '' }}">
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-calendar-alt icon"></i>
+
+                        <input type="text"
+                               name="year_label"
+                               id="year_label"
+                               value="{{ old('year_label') }}"
+                               placeholder="1905 / 1970 / Today"
+                               class="field-input {{ $errors->has('year_label') ? 'error' : '' }}">
+                    </div>
 
                     @if($errors->has('year_label'))
                         <p class="field-error">
                             <i class="fas fa-exclamation-circle"></i>
                             {{ $errors->first('year_label') }}
+                        </p>
+                    @else
+                        <p class="field-hint">
+                            Example: 1905, 1970, 2014, Today
                         </p>
                     @endif
                 </div>
@@ -64,13 +72,17 @@
                         Title <span class="req">*</span>
                     </label>
 
-                    <input type="text"
-                           name="title"
-                           id="title"
-                           value="{{ old('title') }}"
-                           required
-                           placeholder="Enter journey title"
-                           class="field-input {{ $errors->has('title') ? 'error' : '' }}">
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-heading icon"></i>
+
+                        <input type="text"
+                               name="title"
+                               id="title"
+                               value="{{ old('title') }}"
+                               required
+                               placeholder="Enter journey title"
+                               class="field-input {{ $errors->has('title') ? 'error' : '' }}">
+                    </div>
 
                     @if($errors->has('title'))
                         <p class="field-error">
@@ -96,6 +108,10 @@
                             <i class="fas fa-exclamation-circle"></i>
                             {{ $errors->first('description') }}
                         </p>
+                    @else
+                        <p class="field-hint">
+                            Write a short timeline description for the frontend journey section.
+                        </p>
                     @endif
                 </div>
 
@@ -104,17 +120,26 @@
                         Sort Order
                     </label>
 
-                    <input type="number"
-                           name="sort_order"
-                           id="sort_order"
-                           value="{{ old('sort_order', 0) }}"
-                           min="0"
-                           class="field-input {{ $errors->has('sort_order') ? 'error' : '' }}">
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-sort-numeric-down icon"></i>
+
+                        <input type="number"
+                               name="sort_order"
+                               id="sort_order"
+                               value="{{ old('sort_order', 0) }}"
+                               min="0"
+                               placeholder="0"
+                               class="field-input {{ $errors->has('sort_order') ? 'error' : '' }}">
+                    </div>
 
                     @if($errors->has('sort_order'))
                         <p class="field-error">
                             <i class="fas fa-exclamation-circle"></i>
                             {{ $errors->first('sort_order') }}
+                        </p>
+                    @else
+                        <p class="field-hint">
+                            Lower number will appear first.
                         </p>
                     @endif
                 </div>

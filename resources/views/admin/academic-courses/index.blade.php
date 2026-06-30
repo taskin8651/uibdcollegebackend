@@ -20,63 +20,123 @@
     @endcan
 </div>
 
-@if(session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
+<div class="stats-grid">
+    <div class="stat-card">
+        <p class="stat-label">Total Courses</p>
+        <p class="stat-value">{{ $academicCourses->count() }}</p>
     </div>
-@endif
+
+    <div class="stat-card">
+        <p class="stat-label">Published</p>
+        <p class="stat-value">{{ $academicCourses->where('status', 1)->count() }}</p>
+    </div>
+
+    <div class="stat-card">
+        <p class="stat-label">Draft</p>
+        <p class="stat-value">{{ $academicCourses->where('status', 0)->count() }}</p>
+    </div>
+
+    <div class="stat-card">
+        <p class="stat-label">Added Today</p>
+        <p class="stat-value">{{ $academicCourses->where('created_at', '>=', now()->startOfDay())->count() }}</p>
+    </div>
+</div>
 
 <div class="page-card">
+    <div class="page-card-header">
+        <p class="page-card-title">All Academic Courses</p>
+
+        <span class="page-card-note">
+            <i class="fas fa-info-circle"></i>
+            Select rows to use bulk actions
+        </span>
+    </div>
+
     <div class="page-card-table">
-        <table class="min-w-full">
+        <table class="min-w-full datatable datatable-AcademicCourse">
             <thead>
                 <tr>
+                    <th style="width:40px;"></th>
+                    <th>ID</th>
                     <th>Order</th>
-                    <th>Icon</th>
-                    <th>Title</th>
-                    <th>Description</th>
+                    <th>Course</th>
+                    <th>Subject Tags</th>
                     <th>Status</th>
-                    <th style="width:190px;">Actions</th>
+                    <th style="text-align:right;">Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-                @forelse($academicCourses as $academicCourse)
-                    <tr>
-                        <td>{{ $academicCourse->sort_order }}</td>
+                @foreach($academicCourses as $academicCourse)
+                    <tr data-entry-id="{{ $academicCourse->id }}">
+                        <td></td>
 
                         <td>
-                            <i class="{{ $academicCourse->icon_class ?: 'bi bi-book' }}" style="font-size:22px;"></i>
+                            <span class="id-text">#{{ $academicCourse->id }}</span>
                         </td>
 
                         <td>
-                            <strong>{{ $academicCourse->title }}</strong>
+                            {{ $academicCourse->sort_order }}
                         </td>
 
                         <td>
-                            {{ \Illuminate\Support\Str::limit($academicCourse->description, 90) }}
+                            <div class="inline-flex-center">
+                                <div class="avatar-circle" style="background:#4F46E5;">
+                                    <i class="{{ $academicCourse->icon_class ?: 'bi bi-book' }}"></i>
+                                </div>
+
+                                <div>
+                                    <p class="table-main-text">{{ $academicCourse->title }}</p>
+                                    <p class="table-sub-text">
+                                        {{ \Illuminate\Support\Str::limit($academicCourse->description, 70) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="tag-wrap">
+                                @foreach([
+                                    $academicCourse->tag_one,
+                                    $academicCourse->tag_two,
+                                    $academicCourse->tag_three,
+                                    $academicCourse->tag_four,
+                                    $academicCourse->tag_five,
+                                    $academicCourse->tag_six,
+                                ] as $tag)
+                                    @if($tag)
+                                        <span class="role-tag">{{ $tag }}</span>
+                                    @endif
+                                @endforeach
+                            </div>
                         </td>
 
                         <td>
                             @if($academicCourse->status)
-                                <span class="badge badge-success">Published</span>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="status-dot status-success"></span>
+                                    <span style="font-size:12.5px; color:#374151;">Published</span>
+                                </div>
                             @else
-                                <span class="badge badge-warning">Draft</span>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="status-dot status-warning"></span>
+                                    <span style="font-size:12.5px; color:#92400E;">Draft</span>
+                                </div>
                             @endif
                         </td>
 
                         <td>
                             <div class="action-row">
                                 @can('academic_course_show')
-                                    <a href="{{ route('admin.academic-courses.show', $academicCourse->id) }}"
-                                       class="btn-outline">
+                                    <a href="{{ route('admin.academic-courses.show', $academicCourse->id) }}" class="btn-outline">
+                                        <i class="fas fa-eye"></i>
                                         View
                                     </a>
                                 @endcan
 
                                 @can('academic_course_edit')
-                                    <a href="{{ route('admin.academic-courses.edit', $academicCourse->id) }}"
-                                       class="btn-outline btn-outline-edit">
+                                    <a href="{{ route('admin.academic-courses.edit', $academicCourse->id) }}" class="btn-outline btn-outline-edit">
+                                        <i class="fas fa-pencil-alt"></i>
                                         Edit
                                     </a>
                                 @endcan
@@ -84,11 +144,13 @@
                                 @can('academic_course_delete')
                                     <form action="{{ route('admin.academic-courses.destroy', $academicCourse->id) }}"
                                           method="POST"
-                                          onsubmit="return confirm('{{ trans('global.areYouSure') ?? 'Are you sure?' }}');">
-                                        @csrf
+                                          style="display:inline;"
+                                          onsubmit="return confirm('{{ trans('global.areYouSure') }}')">
                                         @method('DELETE')
+                                        @csrf
 
-                                        <button type="submit" class="btn-outline btn-outline-delete">
+                                        <button type="submit" class="btn-outline btn-outline-danger">
+                                            <i class="fas fa-trash-alt"></i>
                                             Delete
                                         </button>
                                     </form>
@@ -96,14 +158,27 @@
                             </div>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="6">No academic courses found.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+@parent
+<script>
+$(function () {
+    initAdminDataTable('.datatable-AcademicCourse', {
+        canDelete: @can('academic_course_delete') true @else false @endcan,
+        massDeleteUrl: "{{ route('admin.academic-courses.massDestroy') }}",
+        deleteText: "{{ trans('global.datatables.delete') }}",
+        zeroSelectedText: "{{ trans('global.datatables.zero_selected') }}",
+        confirmText: "{{ trans('global.areYouSure') }}",
+        searchPlaceholder: 'Search academic courses...',
+        infoText: 'Showing _START_–_END_ of _TOTAL_ academic courses'
+    });
+});
+</script>
 @endsection
