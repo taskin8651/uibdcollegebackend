@@ -412,67 +412,40 @@
 
 
   <!-- JOURNEY TIMELINE START -->
-  <section class="section journey-section">
-    <div class="site-shell">
+ @if($aboutJourneys->count())
+    <section class="section journey-section">
+        <div class="site-shell">
 
-      <div class="section-title reveal">
-        <span class="section-kicker">
-          <i class="bi bi-signpost-2"></i>
-          Institutional Journey
-        </span>
-        <h2>A legacy of education, development and student service.</h2>
-      </div>
+            <div class="section-title reveal">
+                <span class="section-kicker">
+                    <i class="bi bi-signpost-2"></i>
+                    Institutional Journey
+                </span>
 
-      <div class="journey-timeline">
+                <h2>A legacy of education, development and student service.</h2>
+            </div>
 
-        <article class="journey-item reveal">
-          <span>1905</span>
-          <div>
-            <h3>Birth of Late Bhuvneshwari Dayal</h3>
-            <p>
-              Born on July 11, 1905, he later became known for his dedication
-              to education, simplicity and social values.
-            </p>
-          </div>
-        </article>
+            <div class="journey-timeline">
 
-        <article class="journey-item reveal delay-1">
-          <span>1970</span>
-          <div>
-            <h3>Establishment of B.D. College</h3>
-            <p>
-              The college came into existence through the charity and noble
-              vision of Late Bhuvneshwari Dayal.
-            </p>
-          </div>
-        </article>
+                @foreach($aboutJourneys as $index => $journey)
+                    <article class="journey-item reveal {{ $index == 1 ? 'delay-1' : '' }}{{ $index == 2 ? 'delay-2' : '' }}{{ $index == 3 ? 'delay-3' : '' }}">
+                        <span>{{ $journey->year_label }}</span>
 
-        <article class="journey-item reveal delay-2">
-          <span>2014</span>
-          <div>
-            <h3>NAAC Accreditation</h3>
-            <p>
-              The college received NAAC accreditation and continued strengthening
-              quality assurance and institutional development.
-            </p>
-          </div>
-        </article>
+                        <div>
+                            <h3>{{ $journey->title }}</h3>
 
-        <article class="journey-item reveal delay-3">
-          <span>Today</span>
-          <div>
-            <h3>Constituent Unit of Patliputra University</h3>
-            <p>
-              The college offers academic opportunities across various streams
-              and continues to serve students of Patna and nearby areas.
-            </p>
-          </div>
-        </article>
+                            @if($journey->description)
+                                <p>{{ $journey->description }}</p>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
 
-      </div>
+            </div>
 
-    </div>
-  </section>
+        </div>
+    </section>
+@endif
   <!-- JOURNEY TIMELINE END -->
 
 

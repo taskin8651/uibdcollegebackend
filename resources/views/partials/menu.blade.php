@@ -110,20 +110,21 @@
 
         <div class="nav-divider"></div>
 
-        @can('about_page_access')
+       @if(auth()->user()->can('about_page_access') || auth()->user()->can('about_journey_access'))
     @php
-        $websiteActive = request()->is('admin/about-page*');
+        $aboutActive = request()->is('admin/about-page*')
+            || request()->is('admin/about-journeys*');
     @endphp
 
-    <div x-data="{ open: {{ $websiteActive ? 'true' : 'false' }} }">
+    <div x-data="{ open: {{ $aboutActive ? 'true' : 'false' }} }">
 
         <button type="button"
                 @click="open = !open"
-                data-tooltip="Website"
-                class="nav-link nav-group-btn {{ $websiteActive ? 'active' : '' }}">
+                data-tooltip="About"
+                class="nav-link nav-group-btn {{ $aboutActive ? 'active' : '' }}">
 
             <div class="nav-group-left">
-                <i class="fas fa-globe nav-icon"></i>
+                <i class="fas fa-university nav-icon"></i>
                 <span class="nav-label">About Management</span>
             </div>
 
@@ -140,15 +141,87 @@
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 -translate-y-1">
 
-            <a href="{{ route('admin.about-page.edit') }}"
-               class="sub-link {{ request()->is('admin/about-page*') ? 'active' : '' }}">
-                <i class="fas fa-university"></i>
-                About Page CMS
-            </a>
+            @can('about_page_access')
+                <a href="{{ route('admin.about-page.edit') }}"
+                   class="sub-link {{ request()->is('admin/about-page*') ? 'active' : '' }}">
+                    <i class="fas fa-university"></i>
+                    About Page CMS
+                </a>
+            @endcan
+
+            @can('about_journey_access')
+                <a href="{{ route('admin.about-journeys.index') }}"
+                   class="sub-link {{ request()->is('admin/about-journeys*') ? 'active' : '' }}">
+                    <i class="fas fa-route"></i>
+                    About Journeys
+                </a>
+            @endcan
 
         </div>
     </div>
-@endcan
+@endif
+        <div class="nav-divider"></div>
+
+
+@if(auth()->user()->can('academic_page_access') || auth()->user()->can('academic_course_access') || auth()->user()->can('digital_initiative_access'))
+    @php
+        $academicActive = request()->is('admin/academic-page*')
+            || request()->is('admin/academic-courses*')
+            || request()->is('admin/digital-initiatives*');
+    @endphp
+
+    <div x-data="{ open: {{ $academicActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Academic"
+                class="nav-link nav-group-btn {{ $academicActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-graduation-cap nav-icon"></i>
+                <span class="nav-label">Academic Management</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('academic_page_access')
+                <a href="{{ route('admin.academic-page.edit') }}"
+                   class="sub-link {{ request()->is('admin/academic-page*') ? 'active' : '' }}">
+                    <i class="fas fa-university"></i>
+                    Academic Page CMS
+                </a>
+            @endcan
+
+            @can('academic_course_access')
+                <a href="{{ route('admin.academic-courses.index') }}"
+                   class="sub-link {{ request()->is('admin/academic-courses*') ? 'active' : '' }}">
+                    <i class="fas fa-book-open"></i>
+                    Academic Courses
+                </a>
+            @endcan
+
+            @can('digital_initiative_access')
+                <a href="{{ route('admin.digital-initiatives.index') }}"
+                   class="sub-link {{ request()->is('admin/digital-initiatives*') ? 'active' : '' }}">
+                    <i class="fas fa-laptop-code"></i>
+                    Digital Initiatives
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endif
 
         <p class="sidebar-section-title compact nav-label">Account</p>
 

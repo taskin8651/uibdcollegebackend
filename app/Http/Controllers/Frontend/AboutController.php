@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\AboutPage;
+use App\Models\AboutJourney;
 
 class AboutController extends Controller
 {
@@ -15,6 +16,11 @@ class AboutController extends Controller
             abort(404);
         }
 
-        return view('frontend.about', compact('aboutPage'));
+           $aboutJourneys = AboutJourney::where('status', 1)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return view('frontend.about', compact('aboutPage','aboutJourneys'));
     }
 }

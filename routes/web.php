@@ -19,7 +19,7 @@ Auth::routes();
 */
 
 Route::get('/about-us', 'Frontend\AboutController@index')->name('frontend.about');
-
+Route::get('/academics', 'Frontend\AcademicController@index')->name('frontend.academic');
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +55,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('about-page', 'AboutPageController@edit')->name('about-page.edit');
     Route::put('about-page', 'AboutPageController@update')->name('about-page.update');
+// About Journeys
+Route::delete('about-journeys/destroy', 'AboutJourneysController@massDestroy')->name('about-journeys.massDestroy');
+Route::resource('about-journeys', 'AboutJourneysController');
 
+// Academic Page CMS
+Route::get('academic-page', 'AcademicPageController@edit')->name('academic-page.edit');
+Route::put('academic-page', 'AcademicPageController@update')->name('academic-page.update');
+
+// Academic Courses
+Route::delete('academic-courses/destroy', 'AcademicCoursesController@massDestroy')->name('academic-courses.massDestroy');
+Route::resource('academic-courses', 'AcademicCoursesController');
+
+// Digital Initiatives
+Route::delete('digital-initiatives/destroy', 'DigitalInitiativesController@massDestroy')->name('digital-initiatives.massDestroy');
+Route::resource('digital-initiatives', 'DigitalInitiativesController');
 });
 
 
