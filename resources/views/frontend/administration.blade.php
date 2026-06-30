@@ -6,53 +6,96 @@
 <main id="mainContent">
 
   <!-- ADMINISTRATION PAGE HERO START -->
-  <section class="admin-page-hero">
+  @php
+    $principalImage = $principalDesk && $principalDesk->getFirstMediaUrl('principal_image')
+        ? $principalDesk->getFirstMediaUrl('principal_image')
+        : asset('assets/img/principal_bdcpat.jpg');
+
+    $principalName = $currentPrincipal && $currentPrincipal->name
+        ? $currentPrincipal->name
+        : 'Prof. (Dr.) Diwakar Prasad';
+
+    $principalDesignation = $currentPrincipal && $currentPrincipal->designation
+        ? $currentPrincipal->designation
+        : 'Principal';
+
+    $principalFromDate = $currentPrincipal && $currentPrincipal->from_date
+        ? $currentPrincipal->from_date->format('d/m/Y')
+        : null;
+
+    $principalToDate = null;
+
+    if ($currentPrincipal) {
+        if ($currentPrincipal->to_date_label) {
+            $principalToDate = $currentPrincipal->to_date_label;
+        } elseif ($currentPrincipal->to_date) {
+            $principalToDate = $currentPrincipal->to_date->format('d/m/Y');
+        }
+    }
+@endphp
+
+<section class="admin-page-hero">
     <div class="admin-hero-bg"></div>
 
     <div class="site-shell admin-hero-inner">
-      <div class="admin-hero-content reveal">
-        <span class="eyebrow">
-          <i class="bi bi-person-workspace"></i>
-          Administration
-        </span>
+        <div class="admin-hero-content reveal">
+            <span class="eyebrow">
+                <i class="bi bi-person-workspace"></i>
+                Administration
+            </span>
 
-        <h1>College Administration</h1>
+            <h1>College Administration</h1>
 
-        <p>
-          View principal information, former principals, administrative staff,
-          office structure, committees, staff records, photo gallery and official
-          media updates of B.D. College, Patna.
-        </p>
+            <p>
+                View principal information, former principals, administrative staff,
+                office structure, committees, staff records, photo gallery and official
+                media updates of B.D. College, Patna.
+            </p>
 
-        <div class="hero-actions">
-          <a href="#principalDesk" class="btn primary">
-            <i class="bi bi-person-badge"></i>
-            Principal Desk
-          </a>
-          <a href="#formerPrincipals" class="btn light">
-            <i class="bi bi-clock-history"></i>
-            Former Principals
-          </a>
-          <a href="#adminStaff" class="btn ghost">
-            <i class="bi bi-people"></i>
-            Administrative Staff
-          </a>
+            <div class="hero-actions">
+                <a href="#principalDesk" class="btn primary">
+                    <i class="bi bi-person-badge"></i>
+                    Principal Desk
+                </a>
+
+                <a href="#formerPrincipals" class="btn light">
+                    <i class="bi bi-clock-history"></i>
+                    Former Principals
+                </a>
+
+                <a href="#adminStaff" class="btn ghost">
+                    <i class="bi bi-people"></i>
+                    Administrative Staff
+                </a>
+            </div>
         </div>
-      </div>
 
-      <div class="admin-hero-card reveal delay-1">
-        <img src="assets/img/principal_bdcpat.jpg" alt="Principal of B.D. College">
-        <h3>Prof. (Dr.) Diwakar Prasad </h3>
-        <p>Principal, B.D. College, Patna</p>
+        <div class="admin-hero-card reveal delay-1">
+            <img src="{{ $principalImage }}" alt="{{ $principalName }}">
 
-        <div class="admin-hero-pills">
-          <span>Administration</span>
-          <span>Office</span>
-          <span>Staff</span>
+            <h3>{{ $principalName }}</h3>
+
+            <p>
+                {{ $principalDesignation }}, B.D. College, Patna
+            </p>
+
+            @if($principalFromDate)
+                <p>
+                    From {{ $principalFromDate }}
+                    @if($principalToDate)
+                        to {{ $principalToDate }}
+                    @endif
+                </p>
+            @endif
+
+            <div class="admin-hero-pills">
+                <span>Administration</span>
+                <span>Office</span>
+                <span>Staff</span>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
   <!-- ADMINISTRATION PAGE HERO END -->
 
 
