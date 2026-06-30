@@ -232,6 +232,59 @@
     </div>
 @endif
 
+        <div class="nav-divider"></div>
+
+@if(auth()->user()->can('principal_history_access') || auth()->user()->can('staff_download_access'))
+    @php
+        $administrationActive = request()->is('admin/principal-histories*')
+            || request()->is('admin/staff-downloads*');
+    @endphp
+
+    <div x-data="{ open: {{ $administrationActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Administration"
+                class="nav-link nav-group-btn {{ $administrationActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-user-shield nav-icon"></i>
+                <span class="nav-label">Administration Management</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('principal_history_access')
+                <a href="{{ route('admin.principal-histories.index') }}"
+                   class="sub-link {{ request()->is('admin/principal-histories*') ? 'active' : '' }}">
+                    <i class="fas fa-user-tie"></i>
+                    Principal Histories
+                </a>
+            @endcan
+
+            @can('staff_download_access')
+                <a href="{{ route('admin.staff-downloads.index') }}"
+                   class="sub-link {{ request()->is('admin/staff-downloads*') ? 'active' : '' }}">
+                    <i class="fas fa-file-pdf"></i>
+                    Staff Downloads
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endif
+
         <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::get('/about-us', 'Frontend\AboutController@index')->name('frontend.about');
 Route::get('/academics', 'Frontend\AcademicController@index')->name('frontend.academic');
-
+Route::get('/administration', 'Frontend\AdministrationController@index')->name('frontend.administration');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -74,6 +74,13 @@ Route::resource('digital-initiatives', 'DigitalInitiativesController');
 // Holiday Calendars
 Route::delete('holiday-calendars/destroy', 'HolidayCalendarsController@massDestroy')->name('holiday-calendars.massDestroy');
 Route::resource('holiday-calendars', 'HolidayCalendarsController');
+
+// Principal Histories
+Route::delete('principal-histories/destroy', 'PrincipalHistoriesController@massDestroy')->name('principal-histories.massDestroy');
+Route::resource('principal-histories', 'PrincipalHistoriesController');
+
+Route::delete('staff-downloads/destroy', 'StaffDownloadsController@massDestroy')->name('staff-downloads.massDestroy');
+Route::resource('staff-downloads', 'StaffDownloadsController');
 });
 
 
