@@ -483,6 +483,15 @@ Department Notices
         <span class="nav-label">IQAC Members</span>
     </a>
 @endcan
+
+@can('iqac_document_access')
+    <a href="{{ route('admin.iqac-documents.index') }}"
+       class="nav-link {{ request()->is('admin/iqac-documents*') ? 'active' : '' }}"
+       data-tooltip="IQAC Documents">
+        <i class="fas fa-file-pdf nav-icon"></i>
+        <span class="nav-label">IQAC Documents</span>
+    </a>
+@endcan
         <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

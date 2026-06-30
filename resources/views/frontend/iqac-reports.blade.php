@@ -121,24 +121,33 @@
         </div>
 
         <div class="iqac-doc-list">
-          <a href="#">
-            <i class="bi bi-file-earmark-pdf"></i>
-            <span>
-              <b>Self Study Report</b>
-              <small>SSR document / NAAC accreditation report</small>
-            </span>
-            <em>PDF</em>
-          </a>
+    @forelse($ssrDocuments as $document)
+        @php
+            $fileUrl = $document->getFirstMediaUrl('iqac_file');
+        @endphp
 
-          <a href="#">
-            <i class="bi bi-file-earmark-pdf"></i>
+        <a href="{{ $fileUrl ?: '#' }}"
+           @if($fileUrl) target="_blank" rel="noopener" @endif>
+            <i class="{{ $document->icon_class ?: 'bi bi-file-earmark-pdf' }}"></i>
+
             <span>
-              <b>SSR Supporting Documents</b>
-              <small>Criteria-wise supporting documents</small>
+                <b>{{ $document->title }}</b>
+                <small>{{ $document->subtitle }}</small>
             </span>
-            <em>PDF</em>
-          </a>
-        </div>
+
+            <em>{{ $document->file_type ?: 'PDF' }}</em>
+        </a>
+    @empty
+        <a href="javascript:void(0)">
+            <i class="bi bi-info-circle"></i>
+            <span>
+                <b>No SSR documents available</b>
+                <small>Please check again later.</small>
+            </span>
+            <em>-</em>
+        </a>
+    @endforelse
+</div>
       </div>
 
     </div>
@@ -164,38 +173,47 @@
 
         <div class="iqac-table-scroll">
           <table class="iqac-table">
-            <thead>
-              <tr>
-                <th>S.No.</th>
-                <th>AQAR Year</th>
-                <th>Particular</th>
-                <th>Download</th>
-              </tr>
-            </thead>
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>AQAR Year</th>
+            <th>Particular</th>
+            <th>Download</th>
+        </tr>
+    </thead>
 
-            <tbody>
-              <tr>
-                <td>01</td>
-                <td>2025-26</td>
-                <td>Annual Quality Assurance Report</td>
-                <td><a href="#">Download</a></td>
-              </tr>
+    <tbody>
+        @forelse($aqarReports as $index => $report)
+            @php
+                $fileUrl = $report->getFirstMediaUrl('iqac_file');
+            @endphp
 
-              <tr>
-                <td>02</td>
-                <td>2024-25</td>
-                <td>Annual Quality Assurance Report</td>
-                <td><a href="#">Download</a></td>
-              </tr>
+            <tr>
+                <td>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</td>
 
-              <tr>
-                <td>03</td>
-                <td>2023-24</td>
-                <td>Annual Quality Assurance Report</td>
-                <td><a href="#">Download</a></td>
-              </tr>
-            </tbody>
-          </table>
+                <td>{{ $report->aqar_year ?: '-' }}</td>
+
+                <td>{{ $report->particular ?: $report->title }}</td>
+
+                <td>
+                    @if($fileUrl)
+                        <a href="{{ $fileUrl }}" target="_blank" rel="noopener">
+                            Download
+                        </a>
+                    @else
+                        <span>-</span>
+                    @endif
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="4" style="text-align:center;">
+                    No AQAR reports available.
+                </td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
         </div>
       </div>
 

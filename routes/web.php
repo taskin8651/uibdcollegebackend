@@ -30,6 +30,8 @@ Route::get('/extension-activities/{extensionActivity}', 'Frontend\ExtensionActiv
 
 Route::get('/iqac', 'Frontend\IqacController@index')->name('frontend.iqac');
 Route::get('/iqac-members', 'Frontend\IqacMemberController@index')->name('frontend.iqac-members');
+
+Route::get('/iqac-reports', 'Frontend\IqacReportController@index')->name('frontend.iqac-reports');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -136,6 +138,9 @@ Route::put('iqac-page', 'IqacPageController@update')->name('iqac-page.update');
 
 Route::delete('iqac-members/destroy', 'IqacMembersController@massDestroy')->name('iqac-members.massDestroy');
 Route::resource('iqac-members', 'IqacMembersController');
+
+Route::delete('iqac-documents/destroy', 'IqacDocumentsController@massDestroy')->name('iqac-documents.massDestroy');
+Route::resource('iqac-documents', 'IqacDocumentsController');
 });
 
 
