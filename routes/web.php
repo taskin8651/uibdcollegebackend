@@ -70,6 +70,10 @@ Route::resource('academic-courses', 'AcademicCoursesController');
 // Digital Initiatives
 Route::delete('digital-initiatives/destroy', 'DigitalInitiativesController@massDestroy')->name('digital-initiatives.massDestroy');
 Route::resource('digital-initiatives', 'DigitalInitiativesController');
+
+// Holiday Calendars
+Route::delete('holiday-calendars/destroy', 'HolidayCalendarsController@massDestroy')->name('holiday-calendars.massDestroy');
+Route::resource('holiday-calendars', 'HolidayCalendarsController');
 });
 
 

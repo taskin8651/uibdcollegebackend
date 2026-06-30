@@ -167,7 +167,8 @@
     @php
         $academicActive = request()->is('admin/academic-page*')
             || request()->is('admin/academic-courses*')
-            || request()->is('admin/digital-initiatives*');
+            || request()->is('admin/digital-initiatives*')
+            || request()->is('admin/holiday-calendars*');
     @endphp
 
     <div x-data="{ open: {{ $academicActive ? 'true' : 'false' }} }">
@@ -218,6 +219,14 @@
                     Digital Initiatives
                 </a>
             @endcan
+
+            @can('holiday_calendar_access')
+    <a href="{{ route('admin.holiday-calendars.index') }}"
+       class="sub-link {{ request()->is('admin/holiday-calendars*') ? 'active' : '' }}">
+        <i class="fas fa-calendar-alt"></i>
+        Holiday Calendars
+    </a>
+@endcan
 
         </div>
     </div>

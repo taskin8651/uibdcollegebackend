@@ -246,72 +246,39 @@
             </a>
           </div>
 
-          <div class="holiday-list">
+          @if($holidayCalendars->count())
+    <div class="holiday-list">
+
+        @foreach($holidayCalendars as $holidayCalendar)
+            @php
+                $fileUrl = $holidayCalendar->getFirstMediaUrl('holiday_file');
+            @endphp
 
             <article class="holiday-item">
-              <div class="holiday-year">2026</div>
-              <div>
-                <h4>Holiday Calendar 2026 of the B.D. College, Patna</h4>
-                <p>Update date: 25/05/2026 05:35:58</p>
-              </div>
-              <a href="assets/pdf/College_Holiday_Calendar_2026_bdcpat.pdf" target="_blank"><i class="bi bi-download"></i></a>
-            </article>
+                <div class="holiday-year">
+                    {{ $holidayCalendar->year_label }}
+                </div>
 
-            <article class="holiday-item">
-              <div class="holiday-year">2026</div>
-              <div>
-                <h4>Holiday Calendar 2026 of the Governor of Bihar</h4>
-                <p>Update date: 16/01/2026 14:18:43</p>
-              </div>
-              <a href="assets/pdf/College_Holiday_Calendar_2026_bdcpat.pdf"><i class="bi bi-folder2-open"></i></a>
-            </article>
+                <div>
+                    <h4>{{ $holidayCalendar->title }}</h4>
 
-            <article class="holiday-item">
-              <div class="holiday-year">2026</div>
-              <div>
-                <h4>Holiday Calendar 2026 of the Government of Bihar</h4>
-                <p>Update date: 19/02/2026 10:32:26</p>
-              </div>
-              <a href="assets/pdf/STATE_Holiday_Calendar_2026_bdcpat.pdf" target="_blank"><i class="bi bi-download"></i></a>
-            </article>
+                    @if($holidayCalendar->update_date)
+                        <p>
+                            Update date: {{ $holidayCalendar->update_date->format('d/m/Y H:i:s') }}
+                        </p>
+                    @endif
+                </div>
 
-            <article class="holiday-item">
-              <div class="holiday-year">2025</div>
-              <div>
-                <h4>Holiday Calendar 2025 of the B.D. College, Patna</h4>
-                <p>Update date: 19/11/2024 00:00:00</p>
-              </div>
-              <a href="official-assets.html"><i class="bi bi-folder2-open"></i></a>
+                @if($fileUrl)
+                    <a href="{{ $fileUrl }}" target="_blank" rel="noopener">
+                        <i class="bi bi-download"></i>
+                    </a>
+                @endif
             </article>
+        @endforeach
 
-            <article class="holiday-item">
-              <div class="holiday-year">2025</div>
-              <div>
-                <h4>Holiday Calendar 2025 of the Governor of Bihar</h4>
-                <p>Update date: 19/11/2024 00:00:00</p>
-              </div>
-              <a href="assets/pdf/GOVERNOR_Holiday_Calendar_2025_bdcpat.pdf" target="_blank"><i class="bi bi-download"></i></a>
-            </article>
-
-            <article class="holiday-item">
-              <div class="holiday-year">2025</div>
-              <div>
-                <h4>Holiday Calendar 2025 of the Government of Bihar</h4>
-                <p>Update date: 19/11/2024 00:00:00</p>
-              </div>
-              <a href="assets/pdf/STATE_Holiday_Calendar_2025_bdcpat.pdf" target="_blank"><i class="bi bi-download"></i></a>
-            </article>
-
-            <article class="holiday-item">
-              <div class="holiday-year">2024</div>
-              <div>
-                <h4>Holiday Calendar 2024 of the Patliputra University, Patna</h4>
-                <p>Update date: 19/08/2025 00:00:00</p>
-              </div>
-              <a href="assets/pdf/UNIV_Holiday_Calendar_2024_bdcpat.pdf" target="_blank"><i class="bi bi-download"></i></a>
-            </article>
-
-          </div>
+    </div>
+@endif
         </div>
 
         <aside class="holiday-side reveal delay-1">
