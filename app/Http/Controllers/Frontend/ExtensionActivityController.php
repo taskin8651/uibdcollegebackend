@@ -14,7 +14,7 @@ class ExtensionActivityController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('frontend.extension-activities', compact('extensionActivities'));
+        return view('frontend.extension-activity', compact('extensionActivities'));
     }
 
     public function show(ExtensionActivity $extensionActivity)

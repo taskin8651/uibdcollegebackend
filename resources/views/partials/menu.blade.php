@@ -465,6 +465,24 @@ Department Notices
         </div>
     </div>
 @endif
+
+@can('iqac_page_access')
+    <a href="{{ route('admin.iqac-page.edit') }}"
+       class="nav-link {{ request()->is('admin/iqac-page*') ? 'active' : '' }}"
+       data-tooltip="IQAC Page CMS">
+        <i class="fas fa-award nav-icon"></i>
+        <span class="nav-label">IQAC Page CMS</span>
+    </a>
+@endcan
+
+@can('iqac_member_access')
+    <a href="{{ route('admin.iqac-members.index') }}"
+       class="nav-link {{ request()->is('admin/iqac-members*') ? 'active' : '' }}"
+       data-tooltip="IQAC Members">
+        <i class="fas fa-users nav-icon"></i>
+        <span class="nav-label">IQAC Members</span>
+    </a>
+@endcan
         <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}
