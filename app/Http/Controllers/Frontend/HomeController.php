@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\AboutPage;
 use App\Models\AdministrativeOfficial;
+use App\Models\AdministrationGallery;
+use App\Models\CollegeEvent;
 use App\Models\Department;
 use App\Models\HomeHeroSection;
 use App\Models\NoticeBoard;
@@ -126,6 +128,32 @@ class HomeController extends Controller
             ->limit(12)
             ->get();
 
+        $facilityItems = AdministrationGallery::where('status', 1)
+            ->where('type', 'gallery')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->limit(4)
+            ->get();
+
+        $galleryItems = AdministrationGallery::where('status', 1)
+            ->where('type', 'gallery')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        $mediaItems = AdministrationGallery::where('status', 1)
+            ->where('type', 'media')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        $homeEvents = CollegeEvent::where('status', 1)
+            ->orderBy('sort_order')
+            ->orderByDesc('event_date')
+            ->orderByDesc('id')
+            ->limit(6)
+            ->get();
+
         return view('frontend.index', compact(
             'homeHero',
             'aboutPage',
@@ -136,7 +164,11 @@ class HomeController extends Controller
             'iqacNotices',
             'priorityNotices',
             'academicCards',
-            'departments'
+            'departments',
+            'facilityItems',
+            'galleryItems',
+            'mediaItems',
+            'homeEvents'
         ));
     }
 }

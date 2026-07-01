@@ -671,26 +671,80 @@
     </section>
 
     <!-- Facilities section: library, labs, computer lab and seminar hall -->
-    <section class="section facilities-section" id="facilities">
-      <div class="site-shell">
+   <section class="section facilities-section" id="facilities">
+    <div class="site-shell">
+
         <div class="section-title reveal">
-          <span class="section-kicker">Facilities</span>
-          <h2>Campus facilities and learning resources.</h2>
+            <span class="section-kicker">Facilities</span>
+            <h2>Campus facilities and learning resources.</h2>
         </div>
+
         <div class="slider-shell js-slider" aria-label="Facilities slider">
-          <div class="slider-controls">
-            <button class="slider-btn prev" type="button" aria-label="Previous facility item"><i class="bi bi-chevron-left"></i></button>
-            <button class="slider-btn next" type="button" aria-label="Next facility item"><i class="bi bi-chevron-right"></i></button>
-          </div>
-        <div class="facility-track slider-track">
-          <article class="facility-card reveal"><img src="assets/img/bdcpat_202605301534.jpg" alt="B.D. College activity"><h3>Library</h3></article>
-          <article class="facility-card reveal delay-1"><img src="assets/img/bdcpat_202605301542.jpg" alt="B.D. College activity"><h3>Laboratories</h3></article>
-          <article class="facility-card reveal delay-2"><img src="assets/img/bdcpat_202605201509.jpg" alt="B.D. College seminar activity"><h3>Computer Lab</h3></article>
-          <article class="facility-card reveal delay-3"><img src="assets/img/bdcpat_202604212358.jpg" alt="B.D. College conference activity"><h3>Seminar Hall</h3></article>
+
+            <div class="slider-controls">
+                <button class="slider-btn prev" type="button" aria-label="Previous facility item">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button class="slider-btn next" type="button" aria-label="Next facility item">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="facility-track slider-track">
+
+                @forelse(($facilityItems ?? collect()) as $index => $facility)
+                    @php
+                        $imageUrl = $facility->getFirstMediaUrl('image')
+                            ?: asset('assets/img/bdcpat_202605301534.jpg');
+
+                        $delayClass = $index ? 'delay-' . min($index, 4) : '';
+                    @endphp
+
+                    @if($facility->url)
+                        <a href="{{ $facility->url }}"
+                           class="facility-card reveal {{ $delayClass }}"
+                           @if(Str::startsWith($facility->url, ['http://', 'https://'])) target="_blank" rel="noopener" @endif>
+                            <img src="{{ $imageUrl }}"
+                                 alt="{{ $facility->alt_text ?: $facility->title }}">
+
+                            <h3>{{ $facility->title }}</h3>
+                        </a>
+                    @else
+                        <article class="facility-card reveal {{ $delayClass }}">
+                            <img src="{{ $imageUrl }}"
+                                 alt="{{ $facility->alt_text ?: $facility->title }}">
+
+                            <h3>{{ $facility->title }}</h3>
+                        </article>
+                    @endif
+
+                @empty
+                    <article class="facility-card reveal">
+                        <img src="{{ asset('assets/img/bdcpat_202605301534.jpg') }}" alt="B.D. College Library">
+                        <h3>Library</h3>
+                    </article>
+
+                    <article class="facility-card reveal delay-1">
+                        <img src="{{ asset('assets/img/bdcpat_202605301542.jpg') }}" alt="B.D. College Laboratories">
+                        <h3>Laboratories</h3>
+                    </article>
+
+                    <article class="facility-card reveal delay-2">
+                        <img src="{{ asset('assets/img/bdcpat_202605201509.jpg') }}" alt="B.D. College Computer Lab">
+                        <h3>Computer Lab</h3>
+                    </article>
+
+                    <article class="facility-card reveal delay-3">
+                        <img src="{{ asset('assets/img/bdcpat_202604212358.jpg') }}" alt="B.D. College Seminar Hall">
+                        <h3>Seminar Hall</h3>
+                    </article>
+                @endforelse
+
+            </div>
         </div>
-        </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <!-- Gallery section: campus, activities, seminars and media coverage -->
     <section class="section gallery-section" id="gallery">
@@ -705,27 +759,47 @@
             <button class="slider-btn next" type="button" aria-label="Next gallery item"><i class="bi bi-chevron-right"></i></button>
           </div>
         <div class="gallery-grid slider-track">
-          <a class="gallery-item big reveal" href="{{ route('frontend.official-assets') }}"><img src="assets/img/bdcpat_img_001.jpg" alt="B.D. College campus"><span>Campus & Academic Activities</span></a>
-          <a class="gallery-item reveal delay-1" href="{{ route('frontend.ncc') }}"><img src="assets/img/bdcpat_202605232005.jpg" alt="NCC activity at B.D. College"><span>NSS / NCC</span></a>
-          <a class="gallery-item reveal delay-2" href="{{ route('frontend.event-downloads') }}"><img src="assets/img/bdcpat_202605201518.jpg" alt="Seminar at B.D. College"><span>Seminars</span></a>
-          <a class="gallery-item reveal delay-3" href="{{ route('frontend.syllabus-downloads') }}"><img src="assets/img/bdcpat_202604212325.jpg" alt="Academic activity at B.D. College"><span>Learning</span></a>
-          <a class="gallery-item reveal delay-4" href="{{ route('frontend.official-assets') }}"><img src="assets/img/Media_bdcpat_202605101337.jpg" alt="News media coverage of B.D. College"><span>News & Media</span></a>
+          @forelse(($galleryItems ?? collect()) as $index => $galleryItem)
+            @php
+                $imageUrl = $galleryItem->getFirstMediaUrl('image') ?: asset('assets/img/bdcpat_img_001.jpg');
+                $linkUrl = $galleryItem->url ?: $imageUrl;
+                $delayClass = $index ? 'delay-' . min($index, 4) : '';
+            @endphp
+
+            <a class="gallery-item {{ $galleryItem->is_big ? 'big' : '' }} reveal {{ $delayClass }}"
+               href="{{ $linkUrl }}"
+               @if(\Illuminate\Support\Str::startsWith($linkUrl, ['http://', 'https://']) || $linkUrl === $imageUrl) target="_blank" rel="noopener" @endif>
+              <img src="{{ $imageUrl }}" alt="{{ $galleryItem->alt_text ?: $galleryItem->title }}">
+              <span>{{ $galleryItem->title }}</span>
+            </a>
+          @empty
+            <a class="gallery-item big reveal" href="{{ route('frontend.official-assets') }}"><img src="{{ asset('assets/img/bdcpat_img_001.jpg') }}" alt="B.D. College campus"><span>Campus & Academic Activities</span></a>
+            <a class="gallery-item reveal delay-1" href="{{ route('frontend.ncc') }}"><img src="{{ asset('assets/img/bdcpat_202605232005.jpg') }}" alt="NCC activity at B.D. College"><span>NSS / NCC</span></a>
+            <a class="gallery-item reveal delay-2" href="{{ route('frontend.event-downloads') }}"><img src="{{ asset('assets/img/bdcpat_202605201518.jpg') }}" alt="Seminar at B.D. College"><span>Seminars</span></a>
+          @endforelse
         </div>
         </div>
 
         <div class="media-highlights">
-          <article class="media-news reveal">
-            <img src="assets/img/Media_bdcpat_202605261137.jpg" alt="BD College crowned college champion in NCC camp">
-            <div><strong>NCC Camp Achievement</strong><span>BD College crowned college champion in NCC camp.</span></div>
-          </article>
-          <article class="media-news reveal delay-1">
-            <img src="assets/img/Media_bdcpat_202605261148.jpg" alt="BD College annual training camp achievement">
-            <div><strong>College Champion</strong><span>Annual training camp title and student achievement highlight.</span></div>
-          </article>
-          <article class="media-news reveal delay-2">
-            <img src="assets/img/Media_bdcpat_202605101337.jpg" alt="Research and dissertation writing information">
-            <div><strong>Academic Media</strong><span>Information on research and dissertation writing.</span></div>
-          </article>
+          @forelse(($mediaItems ?? collect())->take(3) as $index => $mediaItem)
+            @php
+                $imageUrl = $mediaItem->getFirstMediaUrl('image') ?: asset('assets/img/Media_bdcpat_202605101337.jpg');
+                $delayClass = $index ? 'delay-' . min($index, 2) : '';
+            @endphp
+
+            <article class="media-news reveal {{ $delayClass }}">
+              <img src="{{ $imageUrl }}" alt="{{ $mediaItem->alt_text ?: $mediaItem->title }}">
+              <div>
+                <strong>{{ $mediaItem->title }}</strong>
+                <span>{{ $mediaItem->alt_text ?: 'B.D. College media coverage and activity update.' }}</span>
+              </div>
+            </article>
+          @empty
+            <article class="media-news reveal">
+              <img src="{{ asset('assets/img/Media_bdcpat_202605261137.jpg') }}" alt="BD College crowned college champion in NCC camp">
+              <div><strong>NCC Camp Achievement</strong><span>BD College crowned college champion in NCC camp.</span></div>
+            </article>
+          @endforelse
         </div>
       </div>
     </section>
@@ -745,30 +819,40 @@
             <button class="slider-btn next" type="button" aria-label="Next event item"><i class="bi bi-chevron-right"></i></button>
           </div>
         <div class="event-grid slider-track">
-          <article class="event-card reveal">
-            <img src="assets/img/bdcpat_202605232005.jpg" alt="NCC activity at B.D. College">
-            <div>
-              <span>NCC Activity</span>
-              <h3>Annual Training Camp Achievement</h3>
-              <p>Student participation, discipline, leadership and NCC achievement updates.</p>
-            </div>
-          </article>
-          <article class="event-card reveal delay-1">
-            <img src="assets/img/bdcpat_202605201518.jpg" alt="Seminar at B.D. College">
-            <div>
-              <span>Academic Event</span>
-              <h3>Seminar & Workshop Updates</h3>
-              <p>Research, dissertation writing and department-level academic programmes.</p>
-            </div>
-          </article>
-          <article class="event-card reveal delay-2">
-            <img src="assets/img/bdcpat_202604212319.jpg" alt="B.D. College institutional event">
-            <div>
-              <span>Institutional Activity</span>
-              <h3>Campus Programme</h3>
-              <p>Official college activities, cultural events and student development programmes.</p>
-            </div>
-          </article>
+          @forelse(($homeEvents ?? collect()) as $index => $event)
+            @php
+                $imageUrl = $event->getFirstMediaUrl('event_image')
+                    ?: asset('assets/img/bdcpat_202605232005.jpg');
+
+                $delayClass = $index ? 'delay-' . min($index, 4) : '';
+                $eventLabel = $event->organizer ?: ($event->event_date ? $event->event_date->format('d M Y') : 'College Event');
+                $eventText = $event->short_description
+                    ?: \Illuminate\Support\Str::limit(strip_tags($event->description), 115)
+                    ?: 'Official college activity and student development programme.';
+            @endphp
+
+            <article class="event-card reveal {{ $delayClass }}">
+              <a href="{{ route('frontend.events.show', $event) }}">
+                <img src="{{ $imageUrl }}" alt="{{ $event->title }}">
+              </a>
+              <div>
+                <span>{{ $eventLabel }}</span>
+                <h3>
+                  <a href="{{ route('frontend.events.show', $event) }}">{{ $event->title }}</a>
+                </h3>
+                <p>{{ $eventText }}</p>
+              </div>
+            </article>
+          @empty
+            <article class="event-card reveal">
+              <img src="{{ asset('assets/img/bdcpat_202605232005.jpg') }}" alt="NCC activity at B.D. College">
+              <div>
+                <span>NCC Activity</span>
+                <h3>Annual Training Camp Achievement</h3>
+                <p>Student participation, discipline, leadership and NCC achievement updates.</p>
+              </div>
+            </article>
+          @endforelse
         </div>
         </div>
       </div>
@@ -789,18 +873,26 @@
             <button class="slider-btn next" type="button" aria-label="Next media item"><i class="bi bi-chevron-right"></i></button>
           </div>
         <div class="media-grid slider-track">
-          <article class="press-card reveal">
-            <img src="assets/img/Media_bdcpat_202605261137.jpg" alt="BD College crowned college champion in NCC camp">
-            <div><span>24 May 2026</span><h3>BD College crowned college champion in NCC camp</h3><p>Department: National Cadet Corps (NCC)</p></div>
-          </article>
-          <article class="press-card reveal delay-1">
-            <img src="assets/img/Media_bdcpat_202605261148.jpg" alt="BD College got the title of College Champion">
-            <div><span>24 May 2026</span><h3>BD College got the title of College Champion</h3><p>Annual training camp achievement and student recognition.</p></div>
-          </article>
-          <article class="press-card reveal delay-2">
-            <img src="assets/img/Media_bdcpat_202605101337.jpg" alt="Information on research and dissertation writing">
-            <div><span>10 May 2026</span><h3>Information on research and dissertation writing</h3><p>Department: Sociology</p></div>
-          </article>
+          @forelse(($mediaItems ?? collect()) as $index => $mediaItem)
+            @php
+                $imageUrl = $mediaItem->getFirstMediaUrl('image') ?: asset('assets/img/Media_bdcpat_202605101337.jpg');
+                $delayClass = $index ? 'delay-' . min($index, 4) : '';
+            @endphp
+
+            <article class="press-card reveal {{ $delayClass }}">
+              <img src="{{ $imageUrl }}" alt="{{ $mediaItem->alt_text ?: $mediaItem->title }}">
+              <div>
+                <span>Media Coverage</span>
+                <h3>{{ $mediaItem->title }}</h3>
+                <p>{{ $mediaItem->alt_text ?: 'B.D. College news, press coverage and media update.' }}</p>
+              </div>
+            </article>
+          @empty
+            <article class="press-card reveal">
+              <img src="{{ asset('assets/img/Media_bdcpat_202605261137.jpg') }}" alt="BD College crowned college champion in NCC camp">
+              <div><span>24 May 2026</span><h3>BD College crowned college champion in NCC camp</h3><p>Department: National Cadet Corps (NCC)</p></div>
+            </article>
+          @endforelse
         </div>
         </div>
       </div>

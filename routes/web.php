@@ -64,7 +64,7 @@ Route::view('/certificate', 'frontend.student-zone')->name('frontend.certificate
 Route::get('/downloads', 'Frontend\NoticeController@index')->name('frontend.downloads');
 Route::get('/notice-downloads', 'Frontend\NoticeController@index')->name('frontend.notice-downloads');
 Route::get('/event-downloads', 'Frontend\EventController@index')->name('frontend.event-downloads');
-Route::view('/official-assets', 'frontend.index')->name('frontend.official-assets');
+Route::get('/official-assets', 'Frontend\HomeController@index')->name('frontend.official-assets');
 Route::get('/syllabus-downloads', 'Frontend\AcademicController@index')->name('frontend.syllabus-downloads');
 Route::get('/nss', 'Frontend\ExtensionActivityController@nss')->name('frontend.nss');
 Route::get('/ncc', 'Frontend\ExtensionActivityController@ncc')->name('frontend.ncc');
@@ -79,7 +79,7 @@ Route::view('/parents-feedback', 'frontend.contact-us')->name('frontend.parents-
 Route::get('/feedback-statistics', 'Frontend\StudentFeedbackController@index')->name('frontend.feedback-statistics');
 Route::view('/placement-guidance-cell', 'frontend.student-zone')->name('frontend.placement-guidance-cell');
 Route::view('/students-grievance-redressal', 'frontend.student-zone')->name('frontend.students-grievance-redressal');
-Route::view('/demo', 'frontend.index')->name('frontend.demo');
+Route::get('/demo', 'Frontend\HomeController@index')->name('frontend.demo');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
