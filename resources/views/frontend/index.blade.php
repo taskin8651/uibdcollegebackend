@@ -38,6 +38,9 @@
 
     $mediaCardOne = optional($homeHero)->media_card_one_text ?? 'Notice-first communication';
     $mediaCardTwo = optional($homeHero)->media_card_two_text ?? 'Fully responsive frontend';
+
+    $primaryPhone = optional($websiteSetting)->phone ?: '06122209909';
+    $primaryPhoneHref = preg_replace('/[^0-9+]/', '', $primaryPhone);
 @endphp
 
 <section class="hero" id="home">
@@ -262,100 +265,290 @@
     </section>
 
     <!-- Notices section: tabbed notice board with category filters -->
-    <section class="section notice-section" id="notices">
-      <div class="site-shell notice-layout">
+  @php
+    $noticeTabs = [
+        'general' => [
+            'label' => 'General',
+            'items' => $generalNotices ?? collect(),
+        ],
+        'admission' => [
+            'label' => 'Admission',
+            'items' => $admissionNotices ?? collect(),
+        ],
+        'exam' => [
+            'label' => 'Exam',
+            'items' => $examNotices ?? collect(),
+        ],
+        'iqac' => [
+            'label' => 'IQAC',
+            'items' => $iqacNotices ?? collect(),
+        ],
+    ];
+@endphp
+
+<section class="section notice-section" id="notices">
+    <div class="site-shell notice-layout">
+
         <div class="notice-board reveal">
-          <div class="board-head">
-            <div>
-              <span class="section-kicker">Notices & Circulars</span>
-              <h2>Searchable public notice system.</h2>
+            <div class="board-head">
+                <div>
+                    <span class="section-kicker">Notices & Circulars</span>
+                    <h2>Searchable public notice system.</h2>
+                </div>
+
+                <div class="tabs" role="tablist">
+                    @foreach($noticeTabs as $tabKey => $tab)
+                        <button class="tab {{ $loop->first ? 'active' : '' }}"
+                                data-tab="{{ $tabKey }}"
+                                type="button">
+                            {{ $tab['label'] }}
+                        </button>
+                    @endforeach
+                </div>
             </div>
-            <div class="tabs" role="tablist">
-              <button class="tab active" data-tab="general">General</button>
-              <button class="tab" data-tab="admission">Admission</button>
-              <button class="tab" data-tab="exam">Exam</button>
-              <button class="tab" data-tab="iqac">IQAC</button>
-            </div>
-          </div>
-          <div class="tab-panel active" id="general">
-            <article class="notice-item"><time><strong>17</strong><span>Jun 2026</span></time><div><b>Admission Notice 2026-2030 Sem-I</b><p>Official admission notice PDF for Semester-I students.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
-            <article class="notice-item"><time><strong>18</strong><span>May 2026</span></time><div><b>Patliputra University Vocational Part-I Exam Schedule 2026</b><p>Schedule, sitting details and practical/viva-voce instructions.</p></div><a href="assets/pdf/bdcpat_202512312337.pdf" target="_blank"><i class="bi bi-download"></i></a></article>
-            <article class="notice-item"><time><strong>01</strong><span>Apr 2026</span></time><div><b>Revised remuneration rates and examination department charges</b><p>University circular with official PDF.</p></div><a href="assets/pdf/bdcpat_202604011516.pdf" target="_blank"><i class="bi bi-download"></i></a></article>
-            <article class="notice-item"><time><strong>09</strong><span>Mar 2026</span></time><div><b>Semester course selection notice for 2025-29 batch</b><p>Faculty-wise subject offering details for students.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
-          </div>
-          <div class="tab-panel" id="admission">
-            <article class="notice-item"><time><strong>17</strong><span>Jun 2026</span></time><div><b>Admission Notice 2026-2030 Sem-I</b><p>Official admission notice PDF for Semester-I students.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
-            <article class="notice-item"><time><strong>02</strong><span>Jun 2026</span></time><div><b>Admission merit list publication schedule</b><p>Selection list and reporting instructions placeholder.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
-          </div>
-          <div class="tab-panel" id="exam">
-            <article class="notice-item"><time><strong>04</strong><span>Jun 2026</span></time><div><b>Examination form fill-up instruction</b><p>Form, fee, admit card and university link placeholder.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
-          </div>
-          <div class="tab-panel" id="iqac">
-            <article class="notice-item"><time><strong>28</strong><span>May 2026</span></time><div><b>IQAC meeting minutes and action taken report</b><p>Quality assurance document placeholder.</p></div><a href="assets/pdf/Admission-Notice.pdf" download><i class="bi bi-download"></i></a></article>
-          </div>
+
+            @foreach($noticeTabs as $tabKey => $tab)
+                <div class="tab-panel {{ $loop->first ? 'active' : '' }}" id="{{ $tabKey }}">
+
+                    @forelse($tab['items'] as $notice)
+                        @php
+                            $fileUrl = $notice->getFirstMediaUrl('notice_file');
+                            $viewUrl = route('frontend.notice.show', $notice);
+                        @endphp
+
+                        <article class="notice-item">
+                            <time>
+                                <strong>
+                                    {{ $notice->publish_date ? $notice->publish_date->format('d') : '--' }}
+                                </strong>
+
+                                <span>
+                                    {{ $notice->publish_date ? $notice->publish_date->format('M Y') : 'To be updated' }}
+                                </span>
+                            </time>
+
+                            <div>
+                                <b>{{ $notice->heading }}</b>
+
+                                <p>
+                                    {{ $notice->details ?: \Illuminate\Support\Str::limit($notice->description, 95) }}
+                                </p>
+                            </div>
+
+                            @if($fileUrl)
+                                <a href="{{ $fileUrl }}" download title="Download Notice">
+                                    <i class="bi bi-download"></i>
+                                </a>
+                            @else
+                                <a href="{{ $viewUrl }}" title="View Notice">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            @endif
+                        </article>
+                    @empty
+                        <article class="notice-item">
+                            <time>
+                                <strong>--</strong>
+                                <span>No Notice</span>
+                            </time>
+
+                            <div>
+                                <b>No {{ $tab['label'] }} notice available</b>
+                                <p>Please check again later.</p>
+                            </div>
+
+                            <a href="{{ route('frontend.notice') }}">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </article>
+                    @endforelse
+
+                </div>
+            @endforeach
         </div>
 
         <aside class="priority-panel reveal delay-1">
-          <h3>Priority Access</h3>
-          <a href="assets/pdf/Admission-Notice.pdf" download><span><i class="bi bi-journal-bookmark"></i> Admission Notice 2026-2030 Sem-I</span><i class="bi bi-arrow-right"></i></a>
-          <a href="#examination"><span><i class="bi bi-file-medical"></i> Exam Updates</span><i class="bi bi-arrow-right"></i></a>
-          <a href="{{ route('frontend.downloads') }}"><span><i class="bi bi-folder2-open"></i> Student Forms</span><i class="bi bi-arrow-right"></i></a>
-          <a href="#disclosure"><span><i class="bi bi-file-lock2"></i> RTI / Disclosure</span><i class="bi bi-arrow-right"></i></a>
-          <a href="#contact"><span><i class="bi bi-whatsapp"></i> Admission Helpdesk</span><i class="bi bi-arrow-right"></i></a>
+            <h3>Priority Access</h3>
+
+            @forelse(($priorityNotices ?? collect()) as $priorityNotice)
+                @php
+                    $priorityFile = $priorityNotice->getFirstMediaUrl('notice_file');
+                    $priorityUrl = $priorityFile ?: route('frontend.notice.show', $priorityNotice);
+
+                    $icon = 'bi bi-megaphone';
+
+                    if (stripos($priorityNotice->heading, 'admission') !== false || stripos($priorityNotice->notice_type, 'admission') !== false) {
+                        $icon = 'bi bi-journal-bookmark';
+                    } elseif (stripos($priorityNotice->heading, 'exam') !== false || stripos($priorityNotice->notice_type, 'exam') !== false) {
+                        $icon = 'bi bi-file-medical';
+                    } elseif (stripos($priorityNotice->heading, 'iqac') !== false || stripos($priorityNotice->notice_type, 'iqac') !== false) {
+                        $icon = 'bi bi-award';
+                    }
+                @endphp
+
+                <a href="{{ $priorityUrl }}"
+                   @if($priorityFile) download @endif>
+                    <span>
+                        <i class="{{ $icon }}"></i>
+                        {{ \Illuminate\Support\Str::limit($priorityNotice->heading, 32) }}
+                    </span>
+
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            @empty
+                <a href="{{ route('frontend.notice') }}">
+                    <span>
+                        <i class="bi bi-megaphone"></i>
+                        View All Notices
+                    </span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            @endforelse
+
+            <a href="{{ route('frontend.downloads') }}">
+                <span>
+                    <i class="bi bi-folder2-open"></i>
+                    Student Forms
+                </span>
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a href="#contact">
+                <span>
+                    <i class="bi bi-whatsapp"></i>
+                    Admission Helpdesk
+                </span>
+                <i class="bi bi-arrow-right"></i>
+            </a>
         </aside>
-      </div>
-    </section>
+
+    </div>
+</section>
 
     <!-- Academics section: courses, calendar, syllabus and timetable -->
-    <section class="section" id="academics">
-      <div class="site-shell">
+    <!-- Academics section: courses, calendar, syllabus and timetable -->
+<section class="section" id="academics">
+    <div class="site-shell">
+
         <div class="section-title reveal">
-          <span class="section-kicker">Academics</span>
-          <h2>Courses, syllabus, calendar and time table.</h2>
-          <p>Final course list must be verified by the college before upload.</p>
+            <span class="section-kicker">Academics</span>
+            <h2>Courses, syllabus, calendar and time table.</h2>
+            <p>Explore academic information, syllabus, timetable, programme details and university guidelines.</p>
         </div>
+
         <div class="slider-shell js-slider" aria-label="Academics slider">
-          <div class="slider-controls">
-            <button class="slider-btn prev" type="button" aria-label="Previous academic item"><i class="bi bi-chevron-left"></i></button>
-            <button class="slider-btn next" type="button" aria-label="Next academic item"><i class="bi bi-chevron-right"></i></button>
-          </div>
-        <div class="programme-grid slider-track">
-          <article class="programme-card reveal"><i class="bi bi-mortarboard"></i><h3>Courses Offered</h3><p>UG, PG, vocational and professional programme details.</p></article>
-          <article class="programme-card reveal delay-1"><i class="bi bi-calendar2-week"></i><h3>Academic Calendar</h3><p>Session-wise calendar upload and download.</p></article>
-          <article class="programme-card reveal delay-2"><i class="bi bi-file-earmark-text"></i><h3>Syllabus</h3><p>Course-wise and subject-wise syllabus PDFs.</p><a href="{{ route('frontend.syllabus-downloads') }}">View Syllabus <i class="bi bi-arrow-right"></i></a></article>
-          <article class="programme-card reveal delay-3"><i class="bi bi-table"></i><h3>Time Table</h3><p>Class, department and exam timetable uploads.</p></article>
-          <article class="programme-card reveal delay-4"><i class="bi bi-link-45deg"></i><h3>University Guidelines</h3><p>Useful links to PPU and official academic documents.</p></article>
-          <article class="programme-card reveal delay-5"><i class="bi bi-card-checklist"></i><h3>Programme Details</h3><p>Eligibility, duration, seats, fee and admission process.</p></article>
+
+            <div class="slider-controls">
+                <button class="slider-btn prev" type="button" aria-label="Previous academic item">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button class="slider-btn next" type="button" aria-label="Next academic item">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="programme-grid slider-track">
+                @forelse(($academicCards ?? collect()) as $index => $card)
+                    @php
+                        $delayClass = $index ? 'delay-' . min($index, 5) : '';
+                    @endphp
+
+                    <article class="programme-card reveal {{ $delayClass }}">
+                        <i class="{{ $card['icon'] }}"></i>
+
+                        <h3>{{ $card['title'] }}</h3>
+
+                        <p>{{ $card['description'] }}</p>
+
+                        @if(!empty($card['url']))
+                            <a href="{{ $card['url'] }}">
+                                {{ $card['button'] ?? 'View Details' }}
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        @endif
+                    </article>
+                @empty
+                    <article class="programme-card reveal">
+                        <i class="bi bi-mortarboard"></i>
+                        <h3>Academic Information</h3>
+                        <p>Academic details will be updated soon.</p>
+                    </article>
+                @endforelse
+            </div>
+
         </div>
-        </div>
-      </div>
-    </section>
+
+    </div>
+</section>
 
     <!-- Departments section: department categories and subject links -->
-    <section class="section departments-section" id="departments">
-      <div class="site-shell">
+   <!-- Departments section: department categories and subject links -->
+<section class="section departments-section" id="departments">
+    <div class="site-shell">
+
         <div class="section-title reveal">
-          <span class="section-kicker">Departments</span>
-          <h2>Department-wise pages with faculty, syllabus and activities.</h2>
+            <span class="section-kicker">Departments</span>
+            <h2>Department-wise pages with faculty, syllabus and activities.</h2>
         </div>
+
         <div class="slider-shell js-slider" aria-label="Departments slider">
-          <div class="slider-controls">
-            <button class="slider-btn prev" type="button" aria-label="Previous department item"><i class="bi bi-chevron-left"></i></button>
-            <button class="slider-btn next" type="button" aria-label="Next department item"><i class="bi bi-chevron-right"></i></button>
-          </div>
-        <div class="dept-grid slider-track">
-          <a class="dept-card reveal" href="{{ route('frontend.departments') }}"><span>Science</span><strong>Botany</strong><small>Faculty, lab, syllabus</small></a>
-          <a class="dept-card reveal delay-1" href="{{ route('frontend.departments') }}"><span>Science</span><strong>Zoology</strong><small>Resources and notices</small></a>
-          <a class="dept-card reveal delay-2" href="{{ route('frontend.departments') }}"><span>Science</span><strong>Chemistry</strong><small>Lab and academic details</small></a>
-          <a class="dept-card reveal delay-3" href="{{ route('frontend.departments') }}"><span>Science</span><strong>Physics</strong><small>Course resources</small></a>
-          <a class="dept-card reveal delay-4" href="{{ route('frontend.departments') }}"><span>Science</span><strong>Mathematics</strong><small>Faculty and syllabus</small></a>
-          <a class="dept-card reveal delay-5" href="{{ route('frontend.departments') }}"><span>Commerce</span><strong>Commerce</strong><small>Programme updates</small></a>
-          <a class="dept-card reveal" href="{{ route('frontend.departments') }}"><span>Humanities</span><strong>Hindi / English</strong><small>Department profile</small></a>
-          <a class="dept-card reveal delay-1" href="{{ route('frontend.departments') }}"><span>Vocational</span><strong>BCA / BBA / MBA / MCA</strong><small>Professional courses</small></a>
+
+            <div class="slider-controls">
+                <button class="slider-btn prev" type="button" aria-label="Previous department item">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button class="slider-btn next" type="button" aria-label="Next department item">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="dept-grid slider-track">
+
+                @forelse(($departments ?? collect()) as $index => $department)
+                    @php
+                        $delayClass = $index ? 'delay-' . min($index, 5) : '';
+
+                        $departmentUrl = \Illuminate\Support\Facades\Route::has('frontend.departments.show')
+                            ? route('frontend.departments.show', $department)
+                            : route('frontend.departments');
+
+                        $categoryName = optional($department->category)->name
+                            ?: optional($department->category)->section_label
+                            ?: 'Department';
+
+                        $departmentText = $department->short_description
+                            ?: $department->class_level
+                            ?: 'Faculty, syllabus and academic updates';
+                    @endphp
+
+                    <a class="dept-card reveal {{ $delayClass }}"
+                       href="{{ $departmentUrl }}">
+
+                        <span>{{ $categoryName }}</span>
+
+                        <strong>{{ $department->name }}</strong>
+
+                        <small>
+                            {{ \Illuminate\Support\Str::limit($departmentText, 55) }}
+                        </small>
+
+                    </a>
+                @empty
+                    <a class="dept-card reveal" href="{{ route('frontend.departments') }}">
+                        <span>Departments</span>
+                        <strong>Academic Departments</strong>
+                        <small>Department details will be updated soon.</small>
+                    </a>
+                @endforelse
+
+            </div>
+
         </div>
-        </div>
-      </div>
-    </section>
+
+    </div>
+</section>
 
     <!-- Admissions section: admission workflow, helpdesk and prospectus action -->
     <section class="section admissions-section" id="admissions">
@@ -374,7 +567,7 @@
         <div class="admission-card reveal delay-1">
           <h3>Admission Helpdesk</h3>
           <p>Contact & WhatsApp number can be retained or updated after confirmation by the college.</p>
-          <a href="tel:+917903275820" class="btn primary"><i class="bi bi-telephone"></i> +91 7903275820</a>
+          <a href="tel:{{ $primaryPhoneHref }}" class="btn primary"><i class="bi bi-telephone"></i> {{ $primaryPhone }}</a>
           <a href="{{ route('frontend.downloads') }}" class="btn light"><i class="bi bi-file-earmark-pdf"></i> Prospectus Download</a>
         </div>
       </div>
@@ -714,7 +907,7 @@
           <span class="section-kicker light-kicker">Contact Us</span>
           <h2>B.D. College, Patna</h2>
           <p>Near Gauriamath, Mithapur, Patna, Post-GPO, Bihar, India - 800001</p>
-          <a href="tel:06122209909"><i class="bi bi-telephone"></i> 06122209909</a>
+          <a href="tel:{{ $primaryPhoneHref }}"><i class="bi bi-telephone"></i> {{ $primaryPhone }}</a>
           <a href="mailto:principalbdcollegepatna@gmail.com"><i class="bi bi-envelope"></i> principalbdcollegepatna@gmail.com</a>
           <a href="https://maps.google.com/?q=B.D.+College+Patna" target="_blank" rel="noopener"><i class="bi bi-map"></i> View Google Map</a>
         </div>
