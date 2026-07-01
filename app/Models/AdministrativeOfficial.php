@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class TenderNotice extends Model implements HasMedia
+class AdministrativeOfficial extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
     protected $fillable = [
-        'heading',
-        'details',
-        'publish_date',
-        'expire_date',
-        'document_title',
-        'document_subtitle',
+        'name',
+        'designation',
+        'institution',
+        'alt_text',
         'sort_order',
         'status',
         'created_at',
@@ -24,13 +22,11 @@ class TenderNotice extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'publish_date' => 'date',
-        'expire_date'  => 'date',
-        'status'       => 'boolean',
+        'status' => 'boolean',
     ];
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('tender_file')->singleFile();
+        $this->addMediaCollection('official_image')->singleFile();
     }
 }

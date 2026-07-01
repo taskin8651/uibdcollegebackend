@@ -4,41 +4,127 @@
 
 <main id="mainContent">
     <!-- Hero section: official intro, primary actions and student statistics -->
-    <section class="hero" id="home">
-      <div class="hero-bg"></div>
-      <div class="site-shell hero-grid">
+  @php
+    $heroImage = $homeHero && $homeHero->getFirstMediaUrl('hero_image')
+        ? $homeHero->getFirstMediaUrl('hero_image')
+        : asset('assets/img/bdcpat_img_001.jpg');
+
+    $heroTitle = optional($homeHero)->title ?? 'B.D. College, Patna';
+
+    $heroLead = optional($homeHero)->lead_text
+        ?? 'Official academic portal for notices, admissions, examination updates, departments, NAAC/IQAC, downloads, RTI disclosure and student support.';
+
+    $noticeLabel = optional($homeHero)->notice_button_label ?? 'Latest Notices';
+    $noticeUrl = optional($homeHero)->notice_button_url ?? '#notices';
+
+    $admissionLabel = optional($homeHero)->admission_button_label ?? 'Admission Updates';
+    $admissionUrl = optional($homeHero)->admission_button_url ?? '#admissions';
+
+    $downloadLabel = optional($homeHero)->download_button_label ?? 'Downloads';
+    $downloadUrl = optional($homeHero)->download_button_url ?? route('frontend.downloads');
+
+    $totalStudents = optional($homeHero)->total_students ?? 9174;
+    $maleStudents = optional($homeHero)->male_students ?? 5196;
+    $femaleStudents = optional($homeHero)->female_students ?? 3978;
+
+    $programmesValue = optional($homeHero)->programmes_value ?? 'UG / PG';
+    $programmesLabel = optional($homeHero)->programmes_label ?? 'Programmes';
+
+    $naacValue = optional($homeHero)->naac_value ?? 'B+';
+    $naacLabel = optional($homeHero)->naac_label ?? 'NAAC Highlight';
+
+    $aisheValue = optional($homeHero)->aishe_value ?? 'C-12847';
+    $aisheLabel = optional($homeHero)->aishe_label ?? 'AISHE Code';
+
+    $mediaCardOne = optional($homeHero)->media_card_one_text ?? 'Notice-first communication';
+    $mediaCardTwo = optional($homeHero)->media_card_two_text ?? 'Fully responsive frontend';
+@endphp
+
+<section class="hero" id="home">
+    <div class="hero-bg"></div>
+
+    <div class="site-shell hero-grid">
         <div class="hero-copy reveal">
-          <span class="eyebrow"><i class="bi bi-stars"></i> Official Academic Information Portal</span>
-          <h1>B.D. College, Patna</h1>
-          <p class="hero-lead">Official academic portal for notices, admissions, examination updates, departments, NAAC/IQAC, downloads, RTI disclosure and student support.</p>
-          <div class="hero-actions">
-            <a href="#notices" class="btn primary"><i class="bi bi-megaphone"></i> Latest Notices</a>
-            <a href="#admissions" class="btn light"><i class="bi bi-journal-check"></i> Admission Updates</a>
-            <a href="{{ route('frontend.downloads') }}" class="btn ghost"><i class="bi bi-download"></i> Downloads</a>
-          </div>
-          <div class="hero-metrics">
-            <div><strong data-count="9174">0</strong><span>Total Students</span></div>
-            <div><strong data-count="5196">0</strong><span>Male Students</span></div>
-            <div><strong data-count="3978">0</strong><span>Female Students</span></div>
-            <div><strong>UG / PG</strong><span>Programmes</span></div>
-            <div><strong>B+</strong><span>NAAC Highlight</span></div>
-            <div><strong>C-12847</strong><span>AISHE Code</span></div>
-          </div>
+
+            {{-- Badge static rakha gaya hai --}}
+            <span class="eyebrow">
+                <i class="bi bi-stars"></i>
+                Official Academic Information Portal
+            </span>
+
+            <h1>{{ $heroTitle }}</h1>
+
+            <p class="hero-lead">
+                {{ $heroLead }}
+            </p>
+
+            <div class="hero-actions">
+
+                {{-- Button icons static hain --}}
+                <a href="{{ $noticeUrl }}" class="btn primary">
+                    <i class="bi bi-megaphone"></i>
+                    {{ $noticeLabel }}
+                </a>
+
+                <a href="{{ $admissionUrl }}" class="btn light">
+                    <i class="bi bi-journal-check"></i>
+                    {{ $admissionLabel }}
+                </a>
+
+                <a href="{{ $downloadUrl }}" class="btn ghost">
+                    <i class="bi bi-download"></i>
+                    {{ $downloadLabel }}
+                </a>
+            </div>
+
+            <div class="hero-metrics">
+                <div>
+                    <strong data-count="{{ $totalStudents }}">0</strong>
+                    <span>Total Students</span>
+                </div>
+
+                <div>
+                    <strong data-count="{{ $maleStudents }}">0</strong>
+                    <span>Male Students</span>
+                </div>
+
+                <div>
+                    <strong data-count="{{ $femaleStudents }}">0</strong>
+                    <span>Female Students</span>
+                </div>
+
+                <div>
+                    <strong>{{ $programmesValue }}</strong>
+                    <span>{{ $programmesLabel }}</span>
+                </div>
+
+                <div>
+                    <strong>{{ $naacValue }}</strong>
+                    <span>{{ $naacLabel }}</span>
+                </div>
+
+                <div>
+                    <strong>{{ $aisheValue }}</strong>
+                    <span>{{ $aisheLabel }}</span>
+                </div>
+            </div>
         </div>
 
         <div class="hero-media reveal delay-1">
-          <img src="assets/img/bdcpat_img_001.jpg" alt="B.D. College campus building">
-          <div class="media-card one">
-            <i class="bi bi-file-earmark-text"></i>
-            <span>Notice-first communication</span>
-          </div>
-          <div class="media-card two">
-            <i class="bi bi-phone"></i>
-            <span>Fully responsive frontend</span>
-          </div>
+            <img src="{{ $heroImage }}" alt="{{ $heroTitle }} campus building">
+
+            <div class="media-card one">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>{{ $mediaCardOne }}</span>
+            </div>
+
+            <div class="media-card two">
+                <i class="bi bi-phone"></i>
+                <span>{{ $mediaCardTwo }}</span>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <!-- Quick services: most-used links for students and visitors -->
     <section class="quick-services">
@@ -53,26 +139,66 @@
     </section>
 
     <!-- About section: college profile, vision/mission and institutional identity -->
-    <section class="section about-section" id="about">
-      <div class="site-shell two-col">
+ @php
+    $aboutImage = asset('assets/img/founder_bdcpat.jpg');
+
+    if ($aboutPage && method_exists($aboutPage, 'getFirstMediaUrl')) {
+        $mediaImage = $aboutPage->getFirstMediaUrl('founder_image')
+            ?: $aboutPage->getFirstMediaUrl('history_image')
+            ?: $aboutPage->getFirstMediaUrl('about_image')
+            ?: $aboutPage->getFirstMediaUrl('image');
+
+        if ($mediaImage) {
+            $aboutImage = $mediaImage;
+        }
+    }
+
+    $aboutTitle = optional($aboutPage)->history_title
+        ?? optional($aboutPage)->hero_title
+        ?? 'Formal, transparent and student-friendly college communication.';
+
+    $aboutDescription = optional($aboutPage)->hero_description
+        ?? optional($aboutPage)->history_description_one
+        ?? 'B.D. College, Patna frontend is structured for a constituent government college. It focuses on verified academic information, administrative notices, statutory documents, admission updates, examination updates and easy public access.';
+
+    $aboutPoints = [
+        optional($aboutPage)->history_point_one ?? 'College profile',
+        optional($aboutPage)->history_point_two ?? 'Vision & mission',
+        optional($aboutPage)->history_point_three ?? "Principal's message",
+        optional($aboutPage)->history_point_four ?? 'College at a glance',
+        optional($aboutPage)->academic_point_one ?? 'Institutional values',
+        optional($aboutPage)->academic_point_six ?? 'Public transparency',
+    ];
+@endphp
+
+<section class="section about-section" id="about">
+    <div class="site-shell two-col">
+
         <div class="image-panel reveal">
-          <img src="assets/img/founder_bdcpat.jpg" alt="Founder of B.D. College">
+            <img src="{{ $aboutImage }}" alt="{{ optional($aboutPage)->hero_card_title ?? 'Founder of B.D. College' }}">
         </div>
+
         <div class="content-block reveal delay-1">
-          <span class="section-kicker">About Institution</span>
-          <h2>Formal, transparent and student-friendly college communication.</h2>
-          <p>B.D. College, Patna frontend is structured for a constituent government college. It focuses on verified academic information, administrative notices, statutory documents, admission updates, examination updates and easy public access.</p>
-          <div class="check-grid">
-            <span><i class="bi bi-check2-circle"></i> College profile</span>
-            <span><i class="bi bi-check2-circle"></i> Vision & mission</span>
-            <span><i class="bi bi-check2-circle"></i> Principal's message</span>
-            <span><i class="bi bi-check2-circle"></i> College at a glance</span>
-            <span><i class="bi bi-check2-circle"></i> Institutional values</span>
-            <span><i class="bi bi-check2-circle"></i> Public transparency</span>
-          </div>
+            <span class="section-kicker">About Institution</span>
+
+            <h2>{{ $aboutTitle }}</h2>
+
+            <p>{{ $aboutDescription }}</p>
+
+            <div class="check-grid">
+                @foreach($aboutPoints as $point)
+                    @if($point)
+                        <span>
+                            <i class="bi bi-check2-circle"></i>
+                            {{ $point }}
+                        </span>
+                    @endif
+                @endforeach
+            </div>
         </div>
-      </div>
-    </section>
+
+    </div>
+</section>
 
     <!-- Administration section: principal, officials and administrative information -->
     <section class="section official-section" id="administration">
@@ -82,29 +208,55 @@
           <h2>Administrative information and important officials.</h2>
           <p>Profiles can show approved name, designation, role, photograph and official contact details.</p>
         </div>
-        <div class="slider-shell js-slider" aria-label="Administration slider">
-          <div class="slider-controls">
-            <button class="slider-btn prev" type="button" aria-label="Previous administration item"><i class="bi bi-chevron-left"></i></button>
-            <button class="slider-btn next" type="button" aria-label="Next administration item"><i class="bi bi-chevron-right"></i></button>
-          </div>
-        <div class="official-grid slider-track">
-          <article class="official-card reveal">
-            <img src="assets/img/chancellor_bdcpat.jpg" alt="Lt Gen Syed Ata Hasnain (Retd.), Honorable Chancellor, Universities of Bihar">
-            <h3>Lt Gen Syed Ata Hasnain (Retd.)</h3><p>Honorable Chancellor, Universities of Bihar</p>
-          </article>
-          <article class="official-card reveal delay-1">
-            <img src="assets/img/vc_bdcpat.jpg" alt="Prof. Upendra Prasad Singh, Honorable Vice-Chancellor, PPU, Patna">
-            <h3>Prof. Upendra Prasad Singh</h3><p>Honorable Vice-Chancellor, PPU, Patna</p>
-          </article>
-          <article class="official-card reveal delay-2">
-            <img src="assets/img/official/pvc_bdcpat.jpg" alt="Prof. Abu Bakar, Honourable Registrar Patliputra University, Patna">
-            <h3>Prof. Abu Bakar</h3><p>Honourable Registrar Patliputra University, Patna</p>
-          </article>
-          <article class="official-card reveal delay-3">
-            <img src="assets/img/principal_bdcpat.jpg" alt="Prof. Diwakar Prasad, Principal, Bhuvaneshwari Dayal College, Mithapur, Patna">
-            <h3>Prof. Diwakar Prasad</h3><p>Principal, Bhuvaneshwari Dayal College, Mithapur, Patna</p>
-          </article>
-        </div>
+       <div class="slider-shell js-slider" aria-label="Administration slider">
+
+    <div class="slider-controls">
+        <button class="slider-btn prev" type="button" aria-label="Previous administration item">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button class="slider-btn next" type="button" aria-label="Next administration item">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="official-grid slider-track">
+
+        @forelse($administrativeOfficials as $index => $official)
+            @php
+                $imageUrl = $official->getFirstMediaUrl('official_image')
+                    ?: asset('assets/img/default-user.png');
+
+                $delayClass = $index ? 'delay-' . min($index, 3) : '';
+            @endphp
+
+            <article class="official-card reveal {{ $delayClass }}">
+                <img src="{{ $imageUrl }}"
+                     alt="{{ $official->alt_text ?: $official->name }}">
+
+                <h3>{{ $official->name }}</h3>
+
+                <p>
+                    {{ $official->designation }}
+                    @if($official->institution)
+                        , {{ $official->institution }}
+                    @endif
+                </p>
+            </article>
+        @empty
+            <article class="official-card reveal">
+                <img src="{{ asset('assets/img/default-user.png') }}" alt="Administrative Official">
+
+                <h3>Administrative Official</h3>
+
+                <p>Details will be updated soon.</p>
+            </article>
+        @endforelse
+
+    </div>
+</div>
+
+        
         </div>
       </div>
     </section>

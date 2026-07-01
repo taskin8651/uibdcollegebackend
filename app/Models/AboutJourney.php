@@ -8,7 +8,15 @@ class AboutJourney extends Model
 {
     protected $table = 'about_journeys';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'year_label',
+        'title',
+        'description',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

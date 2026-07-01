@@ -10,7 +10,16 @@ class DepartmentNotice extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'department_id',
+        'title',
+        'description',
+        'notice_date',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'notice_date' => 'date',

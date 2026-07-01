@@ -599,6 +599,23 @@ Department Notices
 
 <div class="nav-divider"></div>
 
+@can('home_hero_access')
+    <a href="{{ route('admin.home-hero.edit') }}"
+       class="nav-link {{ request()->is('admin/home-hero*') ? 'active' : '' }}"
+       data-tooltip="Home Hero CMS">
+        <i class="fas fa-home nav-icon"></i>
+        <span class="nav-label">Home Hero CMS</span>
+    </a>
+@endcan
+
+@can('administrative_official_access')
+    <a href="{{ route('admin.administrative-officials.index') }}"
+       class="nav-link {{ request()->is('admin/administrative-officials*') ? 'active' : '' }}"
+       data-tooltip="Administrative Officials">
+        <i class="fas fa-user-tie nav-icon"></i>
+        <span class="nav-label">Administrative Officials</span>
+    </a>
+@endcan
 
 @can('nirf_report_access')
     <a href="{{ route('admin.nirf-reports.index') }}"

@@ -11,7 +11,22 @@ class NoticeBoard extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'notice_type',
+        'heading',
+        'slug',
+        'details',
+        'description',
+        'publish_date',
+        'expire_date',
+        'document_title',
+        'document_subtitle',
+        'instructions',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'publish_date' => 'date',

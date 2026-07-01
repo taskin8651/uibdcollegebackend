@@ -10,7 +10,19 @@ class IqacDocument extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'document_type',
+        'title',
+        'subtitle',
+        'aqar_year',
+        'particular',
+        'icon_class',
+        'file_type',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

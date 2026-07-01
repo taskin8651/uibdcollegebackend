@@ -11,7 +11,23 @@ class CollegeEvent extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'slug',
+        'event_date',
+        'location',
+        'organizer',
+        'short_description',
+        'description',
+        'instructions',
+        'button_label',
+        'document_title',
+        'document_subtitle',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'event_date' => 'date',

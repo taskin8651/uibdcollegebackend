@@ -12,7 +12,15 @@ class HolidayCalendar extends Model implements HasMedia
 
     protected $table = 'holiday_calendars';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'year_label',
+        'title',
+        'update_date',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

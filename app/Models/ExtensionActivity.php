@@ -11,7 +11,34 @@ class ExtensionActivity extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'slug',
+        'icon_class',
+        'short_description',
+        'hero_label',
+        'hero_title',
+        'hero_description',
+        'card_title',
+        'card_subtitle',
+        'pill_one',
+        'pill_two',
+        'pill_three',
+        'about_kicker',
+        'about_title',
+        'about_description_one',
+        'about_description_two',
+        'objectives_title',
+        'events_title',
+        'join_kicker',
+        'join_title',
+        'join_description',
+        'contact_email',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

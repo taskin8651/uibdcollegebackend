@@ -7,7 +7,20 @@ use Illuminate\Support\Str;
 
 class DepartmentCategory extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'slug',
+        'icon_class',
+        'section_label',
+        'heading',
+        'description',
+        'anchor_id',
+        'layout_type',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

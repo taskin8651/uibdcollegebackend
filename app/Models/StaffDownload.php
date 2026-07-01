@@ -12,7 +12,14 @@ class StaffDownload extends Model implements HasMedia
 
     protected $table = 'staff_downloads';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'subtitle',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

@@ -18,7 +18,7 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 
-Route::view('/index', 'frontend.index')->name('frontend.home');
+Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 Route::get('/about-us', 'Frontend\AboutController@index')->name('frontend.about');
 Route::get('/academics', 'Frontend\AcademicController@index')->name('frontend.academic');
 Route::get('/administration', 'Frontend\AdministrationController@index')->name('frontend.administration');
@@ -213,6 +213,12 @@ Route::resource('teacher-feedback', 'TeacherFeedbackController')->only(['index',
 
 Route::delete('contact-enquiries/destroy', 'ContactEnquiriesController@massDestroy')->name('contact-enquiries.massDestroy');
 Route::resource('contact-enquiries', 'ContactEnquiriesController')->only(['index', 'show', 'destroy']);
+
+Route::get('home-hero', 'HomeHeroSectionController@edit')->name('home-hero.edit');
+Route::put('home-hero', 'HomeHeroSectionController@update')->name('home-hero.update');
+
+Route::delete('administrative-officials/destroy', 'AdministrativeOfficialsController@massDestroy')->name('administrative-officials.massDestroy');
+Route::resource('administrative-officials', 'AdministrativeOfficialsController');
 });
 
 

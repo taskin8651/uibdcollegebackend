@@ -12,7 +12,17 @@ class AdministrationGallery extends Model implements HasMedia
 
     protected $table = 'administration_galleries';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'type',
+        'title',
+        'alt_text',
+        'url',
+        'sort_order',
+        'is_big',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'is_big' => 'boolean',

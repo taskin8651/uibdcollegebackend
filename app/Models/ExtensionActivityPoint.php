@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtensionActivityPoint extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'extension_activity_id',
+        'title',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

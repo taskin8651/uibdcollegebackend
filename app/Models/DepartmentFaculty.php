@@ -10,7 +10,17 @@ class DepartmentFaculty extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'department_id',
+        'name',
+        'designation',
+        'qualification',
+        'specialization',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

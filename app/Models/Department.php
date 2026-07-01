@@ -11,7 +11,21 @@ class Department extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'department_category_id',
+        'name',
+        'slug',
+        'class_level',
+        'badge_type',
+        'icon_class',
+        'short_description',
+        'description_one',
+        'description_two',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'status' => 'boolean',

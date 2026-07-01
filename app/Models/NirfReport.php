@@ -10,7 +10,18 @@ class NirfReport extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'heading',
+        'description',
+        'publish_year',
+        'publish_date',
+        'badge_label',
+        'badge_class',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'publish_date' => 'date',
