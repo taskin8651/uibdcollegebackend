@@ -538,6 +538,15 @@ Department Notices
     </a>
 @endcan
 
+@can('notice_board_access')
+    <a href="{{ route('admin.notice-boards.index') }}"
+       class="nav-link {{ request()->is('admin/notice-boards*') ? 'active' : '' }}"
+       data-tooltip="Notice Board">
+        <i class="fas fa-bullhorn nav-icon"></i>
+        <span class="nav-label">Notice Board</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}
