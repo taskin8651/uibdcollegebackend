@@ -240,7 +240,7 @@ if ("IntersectionObserver" in window && sectionMap.length) {
 }
 
 // Enquiry form demo: prevents reload and shows frontend-only success feedback.
-document.querySelectorAll("form").forEach((form) => {
+document.querySelectorAll(".enquiry-form").forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const button = form.querySelector("button[type='submit']");

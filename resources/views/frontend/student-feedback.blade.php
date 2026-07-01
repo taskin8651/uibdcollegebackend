@@ -76,7 +76,7 @@
   <section class="feedback-quick-section">
     <div class="site-shell feedback-quick-grid">
 
-      <a href="student-feedback.html" class="feedback-quick-card reveal">
+      <a href="{{ route('frontend.student-feedback') }}" class="feedback-quick-card reveal">
         <i class="bi bi-person"></i>
         <strong>Student Feedback</strong>
         <span>Course, teaching and campus feedback</span>
