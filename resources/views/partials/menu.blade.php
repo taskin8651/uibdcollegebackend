@@ -547,6 +547,15 @@ Department Notices
     </a>
 @endcan
 
+@can('college_event_access')
+    <a href="{{ route('admin.college-events.index') }}"
+       class="nav-link {{ request()->is('admin/college-events*') ? 'active' : '' }}"
+       data-tooltip="Events">
+        <i class="fas fa-calendar-alt nav-icon"></i>
+        <span class="nav-label">Events</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

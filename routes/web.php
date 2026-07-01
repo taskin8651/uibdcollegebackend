@@ -38,6 +38,9 @@ Route::get('/nirf-reports', 'Frontend\NirfReportController@index')->name('fronte
 
 Route::get('/notice', 'Frontend\NoticeController@index')->name('frontend.notice');
 Route::get('/notice/{noticeBoard}', 'Frontend\NoticeController@show')->name('frontend.notice.show');
+
+Route::get('/events', 'Frontend\EventController@index')->name('frontend.events');
+Route::get('/events/{collegeEvent}', 'Frontend\EventController@show')->name('frontend.events.show');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -153,6 +156,9 @@ Route::resource('nirf-reports', 'NirfReportsController');
 
 Route::delete('notice-boards/destroy', 'NoticeBoardsController@massDestroy')->name('notice-boards.massDestroy');
 Route::resource('notice-boards', 'NoticeBoardsController');
+
+Route::delete('college-events/destroy', 'CollegeEventsController@massDestroy')->name('college-events.massDestroy');
+Route::resource('college-events', 'CollegeEventsController');
 });
 
 
