@@ -583,6 +583,15 @@ Department Notices
     </a>
 @endcan
 
+@can('contact_enquiry_access')
+    <a href="{{ route('admin.contact-enquiries.index') }}"
+       class="nav-link {{ request()->is('admin/contact-enquiries*') ? 'active' : '' }}"
+       data-tooltip="Contact Enquiries">
+        <i class="fas fa-envelope-open-text nav-icon"></i>
+        <span class="nav-label">Contact Enquiries</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

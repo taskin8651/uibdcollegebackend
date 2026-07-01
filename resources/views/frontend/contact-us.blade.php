@@ -220,63 +220,126 @@
         </div>
       </div>
 
-      <form class="contact-enquiry-form reveal delay-1" action="#" method="post">
+    @if(session('message'))
+    <div class="contact-alert success">
+        <i class="bi bi-check-circle"></i>
+        {{ session('message') }}
+    </div>
+@endif
 
-        <div class="contact-form-head">
-          <i class="bi bi-chat-dots"></i>
-          <div>
+@if($errors->any())
+    <div class="contact-alert error">
+        <i class="bi bi-exclamation-triangle"></i>
+        Please fill all required fields correctly.
+    </div>
+@endif
+
+<form class="contact-enquiry-form reveal delay-1"
+      action="{{ route('frontend.contact-enquiry.store') }}"
+      method="POST">
+    @csrf
+
+    <div class="contact-form-head">
+        <i class="bi bi-chat-dots"></i>
+        <div>
             <h3>Contact Form</h3>
             <p>Fill the details and college office will contact you.</p>
-          </div>
         </div>
+    </div>
 
-        <div class="contact-form-grid">
-          <label>
+    <div class="contact-form-grid">
+        <label>
             Full Name
-            <input type="text" name="name" placeholder="Enter your full name" required>
-          </label>
+            <input type="text"
+                   name="name"
+                   value="{{ old('name') }}"
+                   placeholder="Enter your full name"
+                   required>
+        </label>
 
-          <label>
+        <label>
             Mobile Number
-            <input type="tel" name="mobile" placeholder="Enter mobile number" required>
-          </label>
+            <input type="tel"
+                   name="mobile"
+                   value="{{ old('mobile') }}"
+                   placeholder="Enter mobile number"
+                   required>
+        </label>
 
-          <label>
+        <label>
             Email Address
-            <input type="email" name="email" placeholder="Enter email address">
-          </label>
+            <input type="email"
+                   name="email"
+                   value="{{ old('email') }}"
+                   placeholder="Enter email address">
+        </label>
 
-          <label>
+        <label>
             Query Type
             <select name="query_type" required>
-              <option value="">Select query type</option>
-              <option>Admission Enquiry</option>
-              <option>Student Support</option>
-              <option>Document / Certificate</option>
-              <option>Examination Query</option>
-              <option>Notice / Download</option>
-              <option>Website Issue</option>
-              <option>Other</option>
+                <option value="">Select query type</option>
+
+                @foreach([
+                    'Admission Enquiry',
+                    'Student Support',
+                    'Document / Certificate',
+                    'Examination Query',
+                    'Notice / Download',
+                    'Website Issue',
+                    'Other'
+                ] as $type)
+                    <option value="{{ $type }}" {{ old('query_type') == $type ? 'selected' : '' }}>
+                        {{ $type }}
+                    </option>
+                @endforeach
             </select>
-          </label>
+        </label>
 
-          <label class="wide">
+        <label class="wide">
             Subject
-            <input type="text" name="subject" placeholder="Enter subject">
-          </label>
+            <input type="text"
+                   name="subject"
+                   value="{{ old('subject') }}"
+                   placeholder="Enter subject">
+        </label>
 
-          <label class="wide">
+        <label class="wide">
             Message
-            <textarea name="message" placeholder="Write your message"></textarea>
-          </label>
-        </div>
+            <textarea name="message"
+                      rows="5"
+                      placeholder="Write your message">{{ old('message') }}</textarea>
+        </label>
+    </div>
 
-        <button type="submit" class="btn primary">
-          <i class="bi bi-send"></i>
-          Submit Enquiry
-        </button>
+    <button type="submit" class="btn primary">
+        <i class="bi bi-send"></i>
+        Submit Enquiry
+    </button>
+</form>
+<style>
+  .contact-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
 
-      </form>
+.contact-alert.success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.contact-alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+</style>
 
     </div>
   </section>

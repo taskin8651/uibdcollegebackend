@@ -48,6 +48,8 @@ Route::get('/student-feedback', 'Frontend\StudentFeedbackController@index')->nam
 Route::post('/student-feedback', 'Frontend\StudentFeedbackController@store')->name('frontend.student-feedback.store');
 Route::get('/teacher-feedback', 'Frontend\TeacherFeedbackController@index')->name('frontend.teacher-feedback');
 Route::post('/teacher-feedback', 'Frontend\TeacherFeedbackController@store')->name('frontend.teacher-feedback.store');
+
+Route::post('/contact-enquiry', 'Frontend\ContactEnquiryController@store')->name('frontend.contact-enquiry.store');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -175,6 +177,9 @@ Route::resource('student-feedback', 'StudentFeedbackController')->only(['index',
 
 Route::delete('teacher-feedback/destroy', 'TeacherFeedbackController@massDestroy')->name('teacher-feedback.massDestroy');
 Route::resource('teacher-feedback', 'TeacherFeedbackController')->only(['index', 'show', 'destroy']);
+
+Route::delete('contact-enquiries/destroy', 'ContactEnquiriesController@massDestroy')->name('contact-enquiries.massDestroy');
+Route::resource('contact-enquiries', 'ContactEnquiriesController')->only(['index', 'show', 'destroy']);
 });
 
 
