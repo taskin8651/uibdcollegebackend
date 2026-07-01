@@ -19,7 +19,7 @@
 
         <p>
           Category-wise reservation information, certificate requirements and
-          admission-related guidelines for students of B.D. College, Patna.
+          admission-related guidelines for students of {{ $websiteSetting->college_name }}.
         </p>
 
         <div class="hero-actions">

@@ -23,7 +23,7 @@
                 <h1>{{ optional($departmentPage)->hero_title ?? 'Academic Departments' }}</h1>
 
                 <p>
-                    {{ optional($departmentPage)->hero_description ?? 'Explore science, social science, humanities, commerce, vocational, professional and common departments of B.D. College, Patna.' }}
+                    {{ optional($departmentPage)->hero_description ?? 'Explore science, social science, humanities, commerce, vocational, professional and common departments of ' . $websiteSetting->college_name . '.' }}
                 </p>
 
                 <div class="hero-actions">
@@ -299,12 +299,12 @@
             </div>
 
             <div class="department-help-actions">
-                <a href="tel:06122209909" class="btn light">
+                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $websiteSetting->phone) }}" class="btn light">
                     <i class="bi bi-telephone"></i>
-                    06122209909
+                    {{ $websiteSetting->phone }}
                 </a>
 
-                <a href="mailto:principalbdcollegepatna@gmail.com" class="btn ghost">
+                <a href="mailto:{{ $websiteSetting->email }}" class="btn ghost">
                     <i class="bi bi-envelope"></i>
                     Email College
                 </a>

@@ -8,7 +8,7 @@
             </div>
 
             <span class="brand-text">
-                {{ trans('panel.site_title') }}
+                {{ optional($websiteSetting)->college_name ?: trans('panel.site_title') }}
             </span>
         </div>
     </div>

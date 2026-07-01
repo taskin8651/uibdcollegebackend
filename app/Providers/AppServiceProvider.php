@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('frontend.*', function ($view) {
+        View::composer('*', function ($view) {
             $websiteSetting = WebsiteSetting::firstOrCreate(['id' => 1], [
                 'site_title' => 'B.D. College, Patna | Official Website',
                 'college_name' => 'B.D. College, Patna',

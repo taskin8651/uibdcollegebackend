@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   @php
-    $siteTitle = $websiteSetting->site_title ?: 'B.D. College, Patna | Official Website';
-    $siteDescription = $websiteSetting->meta_description ?: 'Official website of B.D. College, Patna.';
+    $siteTitle = $websiteSetting->site_title ?: $websiteSetting->college_name;
+    $siteDescription = $websiteSetting->meta_description ?: 'Official website of ' . $websiteSetting->college_name . '.';
     $headerLogo = $websiteSetting->mediaUrl('header_logo', 'assets/img/logo_bdcpat.png');
     $universityLogo = $websiteSetting->mediaUrl('university_logo', 'assets/img/logo_ppupat.png');
     $footerLogo = $websiteSetting->mediaUrl('footer_logo', 'assets/img/logo_bdcpat.png');
@@ -381,7 +381,7 @@
         src="{{ $websiteSetting->map_embed_url }}"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="B.D. College Patna Google Map">
+        title="{{ $websiteSetting->college_name }} Google Map">
       </iframe>
     </div>
 

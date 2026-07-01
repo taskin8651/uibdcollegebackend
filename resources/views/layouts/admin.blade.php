@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ trans('panel.site_title') }}</title>
+    <title>{{ optional($websiteSetting)->site_title ?: trans('panel.site_title') }}</title>
 
     {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@
 
                 {{-- Breadcrumb --}}
                 <div class="breadcrumb-wrap hidden sm:flex">
-                    <span class="breadcrumb-item">{{ trans('panel.site_title') }}</span>
+                    <span class="breadcrumb-item">{{ optional($websiteSetting)->college_name ?: trans('panel.site_title') }}</span>
                     <span class="breadcrumb-separator">/</span>
                     <span class="breadcrumb-item active">@yield('page-title', 'Dashboard')</span>
                 </div>

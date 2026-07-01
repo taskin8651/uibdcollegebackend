@@ -76,12 +76,12 @@
 
         <article class="nirf-profile-card reveal">
           <span>Institution Name</span>
-          <strong>B.D. College, Patna</strong>
+          <strong>{{ $websiteSetting->college_name }}</strong>
         </article>
 
         <article class="nirf-profile-card reveal delay-1">
           <span>Affiliation</span>
-          <strong>Patliputra University, Patna</strong>
+          <strong>{{ $websiteSetting->affiliation_text }}</strong>
         </article>
 
         <article class="nirf-profile-card reveal delay-2">
@@ -91,17 +91,17 @@
 
         <article class="nirf-profile-card reveal delay-3">
           <span>AISHE Code</span>
-          <strong>C-12847</strong>
+          <strong>{{ $websiteSetting->aishe_code }}</strong>
         </article>
 
         <article class="nirf-profile-card reveal delay-4">
           <span>NAAC Grade</span>
-          <strong>B+ / CGPA 2.39</strong>
+          <strong>{{ $websiteSetting->naac_text }}</strong>
         </article>
 
         <article class="nirf-profile-card reveal delay-5">
           <span>Address</span>
-          <strong>Near Gauriamath, Mithapur, Patna - 800001</strong>
+          <strong>{{ $websiteSetting->address }}</strong>
         </article>
 
       </div>

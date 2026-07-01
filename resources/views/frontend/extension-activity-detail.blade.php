@@ -183,7 +183,7 @@
                     </a>
                 @endif
 
-                <a href="mailto:{{ $extensionActivity->contact_email ?: 'principalbdcollegepatna@gmail.com' }}" class="btn ghost">
+                <a href="mailto:{{ $extensionActivity->contact_email ?: $websiteSetting->email }}" class="btn ghost">
                     <i class="bi bi-envelope"></i>
                     Contact Office
                 </a>

@@ -20,7 +20,7 @@
             {{-- Static Badge --}}
             <span class="eyebrow">
                 <i class="bi bi-bank2"></i>
-                About B.D. College, Patna
+                About {{ $websiteSetting->college_name }}
             </span>
 
             <h1>{{ $aboutPage->hero_title }}</h1>
@@ -56,8 +56,8 @@
 
             {{-- Static Badges --}}
             <div class="about-hero-pills">
-                <span>NAAC B+</span>
-                <span>AISHE C-12847</span>
+                <span>{{ $websiteSetting->naac_text ?: 'NAAC B+' }}</span>
+                <span>AISHE {{ $websiteSetting->aishe_code }}</span>
                 <span>Established 1970</span>
             </div>
         </div>
@@ -217,7 +217,7 @@
         <article class="glance-card reveal">
           <i class="bi bi-bank2"></i>
           <h3>Institution Name</h3>
-          <p>B.D. College, Patna</p>
+          <p>{{ $websiteSetting->college_name }}</p>
         </article>
 
         <article class="glance-card reveal delay-1">
@@ -229,25 +229,25 @@
         <article class="glance-card reveal delay-2">
           <i class="bi bi-mortarboard"></i>
           <h3>University</h3>
-          <p>Constituent Unit of Patliputra University, Patna</p>
+          <p>{{ $websiteSetting->affiliation_text }}</p>
         </article>
 
         <article class="glance-card reveal delay-3">
           <i class="bi bi-award"></i>
           <h3>NAAC Status</h3>
-          <p>Accredited Grade B+ with CGPA 2.39/4</p>
+          <p>{{ $websiteSetting->naac_text }}</p>
         </article>
 
         <article class="glance-card reveal delay-4">
           <i class="bi bi-patch-check"></i>
           <h3>AISHE Code</h3>
-          <p>C-12847</p>
+          <p>{{ $websiteSetting->aishe_code }}</p>
         </article>
 
         <article class="glance-card reveal delay-5">
           <i class="bi bi-geo-alt"></i>
           <h3>Location</h3>
-          <p>Near Gauriamath, Mithapur, Patna, Bihar - 800001</p>
+          <p>{{ $websiteSetting->address }}</p>
         </article>
 
       </div>

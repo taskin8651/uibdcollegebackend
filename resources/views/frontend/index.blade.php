@@ -9,7 +9,7 @@
         ? $homeHero->getFirstMediaUrl('hero_image')
         : asset('assets/img/bdcpat_img_001.jpg');
 
-    $heroTitle = optional($homeHero)->title ?? 'B.D. College, Patna';
+    $heroTitle = optional($homeHero)->title ?? $websiteSetting->college_name;
 
     $heroLead = optional($homeHero)->lead_text
         ?? 'Official academic portal for notices, admissions, examination updates, departments, NAAC/IQAC, downloads, RTI disclosure and student support.';
@@ -33,14 +33,18 @@
     $naacValue = optional($homeHero)->naac_value ?? 'B+';
     $naacLabel = optional($homeHero)->naac_label ?? 'NAAC Highlight';
 
-    $aisheValue = optional($homeHero)->aishe_value ?? 'C-12847';
+    $aisheValue = optional($homeHero)->aishe_value ?? $websiteSetting->aishe_code;
     $aisheLabel = optional($homeHero)->aishe_label ?? 'AISHE Code';
 
     $mediaCardOne = optional($homeHero)->media_card_one_text ?? 'Notice-first communication';
     $mediaCardTwo = optional($homeHero)->media_card_two_text ?? 'Fully responsive frontend';
 
-    $primaryPhone = optional($websiteSetting)->phone ?: '06122209909';
+    $primaryPhone = optional($websiteSetting)->phone;
     $primaryPhoneHref = preg_replace('/[^0-9+]/', '', $primaryPhone);
+    $primaryEmail = optional($websiteSetting)->email;
+    $collegeName = optional($websiteSetting)->college_name;
+    $collegeAddress = optional($websiteSetting)->address;
+    $mapDirectionUrl = optional($websiteSetting)->map_direction_url;
 @endphp
 
 <section class="hero" id="home">
@@ -162,7 +166,7 @@
 
     $aboutDescription = optional($aboutPage)->hero_description
         ?? optional($aboutPage)->history_description_one
-        ?? 'B.D. College, Patna frontend is structured for a constituent government college. It focuses on verified academic information, administrative notices, statutory documents, admission updates, examination updates and easy public access.';
+        ?? $websiteSetting->college_name . ' frontend is structured for a constituent government college. It focuses on verified academic information, administrative notices, statutory documents, admission updates, examination updates and easy public access.';
 
     $aboutPoints = [
         optional($aboutPage)->history_point_one ?? 'College profile',
@@ -997,11 +1001,11 @@
       <div class="site-shell contact-grid">
         <div class="contact-info reveal">
           <span class="section-kicker light-kicker">Contact Us</span>
-          <h2>B.D. College, Patna</h2>
-          <p>Near Gauriamath, Mithapur, Patna, Post-GPO, Bihar, India - 800001</p>
+          <h2>{{ $collegeName }}</h2>
+          <p>{{ $collegeAddress }}</p>
           <a href="tel:{{ $primaryPhoneHref }}"><i class="bi bi-telephone"></i> {{ $primaryPhone }}</a>
-          <a href="mailto:principalbdcollegepatna@gmail.com"><i class="bi bi-envelope"></i> principalbdcollegepatna@gmail.com</a>
-          <a href="https://maps.google.com/?q=B.D.+College+Patna" target="_blank" rel="noopener"><i class="bi bi-map"></i> View Google Map</a>
+          <a href="mailto:{{ $primaryEmail }}"><i class="bi bi-envelope"></i> {{ $primaryEmail }}</a>
+          <a href="{{ $mapDirectionUrl }}" target="_blank" rel="noopener"><i class="bi bi-map"></i> View Google Map</a>
         </div>
         <form class="enquiry-form reveal delay-1" action="#">
           <h3>Send Enquiry</h3>

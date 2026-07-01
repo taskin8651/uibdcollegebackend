@@ -22,7 +22,7 @@
         <p>
           NIRF page provides access to ranking framework documents, institutional data,
           annual reports, disclosures, downloadable files and public information related
-          to B.D. College, Patna.
+          to {{ $websiteSetting->college_name }}.
         </p>
 
         <div class="hero-actions">
@@ -461,14 +461,14 @@
       </div>
 
       <div class="nirf-help-actions">
-        <a href="mailto:iqacbdcpatna@gmail.com" class="btn light">
+        <a href="mailto:{{ $websiteSetting->email }}" class="btn light">
           <i class="bi bi-envelope"></i>
-          iqacbdcpatna@gmail.com
+          {{ $websiteSetting->email }}
         </a>
 
-        <a href="tel:06122209909" class="btn ghost">
+        <a href="tel:{{ preg_replace('/[^0-9+]/', '', $websiteSetting->phone) }}" class="btn ghost">
           <i class="bi bi-telephone"></i>
-          06122209909
+          {{ $websiteSetting->phone }}
         </a>
       </div>
 

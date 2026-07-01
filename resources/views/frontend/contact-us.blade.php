@@ -52,7 +52,7 @@
 
         <div class="contact-hero-pills">
           <span>NAAC B+</span>
-          <span>AISHE C-12847</span>
+          <span>AISHE {{ $websiteSetting->aishe_code }}</span>
           <span>Mithapur</span>
         </div>
       </div>
@@ -368,7 +368,7 @@
             src="{{ $websiteSetting->map_embed_url }}"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="B.D. College Patna Google Map">
+            title="{{ $websiteSetting->college_name }} Google Map">
           </iframe>
         </div>
 

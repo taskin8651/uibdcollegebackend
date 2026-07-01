@@ -79,7 +79,7 @@
                 </p>
 
                 <p>
-                    {{ $department->description_two ?: 'Replace this dummy content with official department-wise information provided by B.D. College, Patna.' }}
+                    {{ $department->description_two ?: 'Replace this dummy content with official department-wise information provided by ' . $websiteSetting->college_name . '.' }}
                 </p>
 
                 <div class="check-grid">

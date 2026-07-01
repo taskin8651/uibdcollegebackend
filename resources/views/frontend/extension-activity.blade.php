@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   @php
-    $siteTitle = $websiteSetting->site_title ?: 'B.D. College, Patna | Official Website';
-    $siteDescription = $websiteSetting->meta_description ?: 'Official website of B.D. College, Patna.';
+    $siteTitle = $websiteSetting->site_title ?: $websiteSetting->college_name;
+    $siteDescription = $websiteSetting->meta_description ?: 'Official website of ' . $websiteSetting->college_name . '.';
     $headerLogo = $websiteSetting->mediaUrl('header_logo', 'assets/img/logo_bdcpat.png');
     $universityLogo = $websiteSetting->mediaUrl('university_logo', 'assets/img/logo_ppupat.png');
     $footerLogo = $websiteSetting->mediaUrl('footer_logo', 'assets/img/logo_bdcpat.png');
@@ -250,7 +250,7 @@
 
         <p>
           Explore NSS, NCC, Startup Cell, Eco Club, Debate Club, Dramatics Society,
-          Literary Society and Health Center activities of B.D. College, Patna.
+          Literary Society and Health Center activities of {{ $websiteSetting->college_name }}.
         </p>
 
         <div class="hero-actions">
@@ -578,7 +578,7 @@
       <a href="{{ route('frontend.home') }}" class="footer-logo">
         <img src="{{ $footerLogo }}" alt="{{ $websiteSetting->college_name }} Logo">
         <div>
-          <h3>B.D. College, Patna</h3>
+          <h3>{{ $websiteSetting->college_name }}</h3>
           <span>A Constituent Unit of Patliputra University</span>
         </div>
       </a>
@@ -702,7 +702,7 @@
         src="{{ $websiteSetting->map_embed_url }}"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="B.D. College Patna Google Map">
+        title="{{ $websiteSetting->college_name }} Google Map">
       </iframe>
     </div>
 

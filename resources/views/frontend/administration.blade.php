@@ -49,7 +49,7 @@
             <p>
                 View principal information, former principals, administrative staff,
                 office structure, committees, staff records, photo gallery and official
-                media updates of B.D. College, Patna.
+                media updates of {{ $websiteSetting->college_name }}.
             </p>
 
             <div class="hero-actions">
@@ -76,7 +76,7 @@
             <h3>{{ $principalName }}</h3>
 
             <p>
-                {{ $principalDesignation }}, B.D. College, Patna
+                {{ $principalDesignation }}, {{ $websiteSetting->college_name }}
             </p>
 
             @if($principalFromDate)
@@ -276,7 +276,7 @@
           <i class="bi bi-clock-history"></i>
           Former Principals
         </span>
-        <h2>Leadership journey of B.D. College, Patna.</h2>
+        <h2>Leadership journey of {{ $websiteSetting->college_name }}.</h2>
         <p>
           Official record of former principals with designation and duration.
         </p>
@@ -604,12 +604,12 @@
       </div>
 
       <div class="admin-contact-actions">
-        <a href="tel:06122209909" class="btn light">
+        <a href="tel:{{ preg_replace('/[^0-9+]/', '', $websiteSetting->phone) }}" class="btn light">
           <i class="bi bi-telephone"></i>
-          06122209909
+          {{ $websiteSetting->phone }}
         </a>
 
-        <a href="mailto:principalbdcollegepatna@gmail.com" class="btn ghost">
+        <a href="mailto:{{ $websiteSetting->email }}" class="btn ghost">
           <i class="bi bi-envelope"></i>
           Email College
         </a>
