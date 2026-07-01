@@ -82,7 +82,7 @@
         <span>Course, teaching and campus feedback</span>
       </a>
 
-      <a href="teacher-feedback.html" class="feedback-quick-card reveal delay-1">
+      <a href="{{ route('frontend.teacher-feedback') }}" class="feedback-quick-card reveal delay-1">
         <i class="bi bi-person-video3"></i>
         <strong>Teachers' Feedback</strong>
         <span>Faculty feedback and academic suggestions</span>

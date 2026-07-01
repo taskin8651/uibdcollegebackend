@@ -574,6 +574,15 @@ Department Notices
     </a>
 @endcan
 
+@can('teacher_feedback_access')
+    <a href="{{ route('admin.teacher-feedback.index') }}"
+       class="nav-link {{ request()->is('admin/teacher-feedback*') ? 'active' : '' }}"
+       data-tooltip="Teacher Feedback">
+        <i class="fas fa-chalkboard-teacher nav-icon"></i>
+        <span class="nav-label">Teacher Feedback</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

@@ -196,7 +196,7 @@
       </button>
       <div class="dropdown-menu">
         <a href="{{ route('frontend.student-feedback') }}">Student's Feedback</a>
-        <a href="teacher-feedback.html">Teachers' Feedback</a>
+        <a href="{{ route('frontend.teacher-feedback') }}">Teachers' Feedback</a>
         <a href="contact-us.html">Parents Feedback</a>
         <a href="feedback-statistics.html">Statistics of Feedback</a>
       </div>
@@ -673,7 +673,7 @@
     <div class="footer-col">
       <h4>Feedback</h4>
       <a href="{{ route('frontend.student-feedback') }}">Student Feedback</a>
-      <a href="teacher-feedback.html">Teachers Feedback</a>
+      <a href="{{ route('frontend.teacher-feedback') }}">Teachers Feedback</a>
       <a href="contact-us.html">Parents Feedback</a>
       <a href="feedback-statistics.html">Statistics of Feedback</a>
       <a href="certificate.html">Apply for Certificate</a>

@@ -46,6 +46,8 @@ Route::get('/tenders', 'Frontend\TenderController@index')->name('frontend.tender
 
 Route::get('/student-feedback', 'Frontend\StudentFeedbackController@index')->name('frontend.student-feedback');
 Route::post('/student-feedback', 'Frontend\StudentFeedbackController@store')->name('frontend.student-feedback.store');
+Route::get('/teacher-feedback', 'Frontend\TeacherFeedbackController@index')->name('frontend.teacher-feedback');
+Route::post('/teacher-feedback', 'Frontend\TeacherFeedbackController@store')->name('frontend.teacher-feedback.store');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -170,6 +172,9 @@ Route::resource('tender-notices', 'TenderNoticesController');
 
 Route::delete('student-feedback/destroy', 'StudentFeedbackController@massDestroy')->name('student-feedback.massDestroy');
 Route::resource('student-feedback', 'StudentFeedbackController')->only(['index', 'show', 'destroy']);
+
+Route::delete('teacher-feedback/destroy', 'TeacherFeedbackController@massDestroy')->name('teacher-feedback.massDestroy');
+Route::resource('teacher-feedback', 'TeacherFeedbackController')->only(['index', 'show', 'destroy']);
 });
 
 

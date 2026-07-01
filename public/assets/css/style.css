@@ -8984,6 +8984,29 @@ h3 {
   box-shadow: 0 0 0 4px rgba(18, 63, 140, 0.08);
 }
 
+.feedback-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.feedback-alert.success {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+}
+
+.feedback-alert.error {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
 .feedback-stat-section,
 .feedback-report-section {
   background: #fff;

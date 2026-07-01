@@ -524,7 +524,7 @@
           <a class="disclosure-card reveal delay-4" href="tenders.html"><i class="bi bi-megaphone"></i><strong>Tenders</strong></a>
           <a class="disclosure-card reveal delay-5" href="feedback.html"><i class="bi bi-chat-dots"></i><strong>Feedback</strong></a>
           <a class="disclosure-card reveal" href="{{ route('frontend.student-feedback') }}"><i class="bi bi-person-check"></i><strong>Student Feedback</strong></a>
-          <a class="disclosure-card reveal delay-1" href="teacher-feedback.html"><i class="bi bi-person-video3"></i><strong>Teacher Feedback</strong></a>
+          <a class="disclosure-card reveal delay-1" href="{{ route('frontend.teacher-feedback') }}"><i class="bi bi-person-video3"></i><strong>Teacher Feedback</strong></a>
           <a class="disclosure-card reveal delay-2" href="parents-feedback.html"><i class="bi bi-people"></i><strong>Parents Feedback</strong></a>
           <a class="disclosure-card reveal delay-3" href="feedback-statistics.html"><i class="bi bi-pie-chart"></i><strong>Feedback Stats</strong></a>
           <a class="disclosure-card reveal delay-4" href="contact-us.html"><i class="bi bi-telephone"></i><strong>Contact</strong></a>
