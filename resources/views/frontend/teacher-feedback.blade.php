@@ -1,4 +1,4 @@
-﻿
+
 
 @extends('frontend.master')
 @section('content')
@@ -31,7 +31,7 @@
             <i class="bi bi-list-check"></i>
             Feedback Areas
           </a>
-          <a href="feedback-statistics.html" class="btn ghost">
+          <a href="{{ route('frontend.feedback-statistics') }}" class="btn ghost">
             <i class="bi bi-bar-chart"></i>
             Statistics
           </a>
@@ -57,7 +57,7 @@
 
   <section class="feedback-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Feedback</span>
       <i class="bi bi-chevron-right"></i>
@@ -79,13 +79,13 @@
         <span>Faculty feedback and suggestions</span>
       </a>
 
-      <a href="parents-feedback.html" class="feedback-quick-card reveal delay-2">
+      <a href="{{ route('frontend.parents-feedback') }}" class="feedback-quick-card reveal delay-2">
         <i class="bi bi-people"></i>
         <strong>Parents Feedback</strong>
         <span>Parent satisfaction and response</span>
       </a>
 
-      <a href="feedback-statistics.html" class="feedback-quick-card reveal delay-3">
+      <a href="{{ route('frontend.feedback-statistics') }}" class="feedback-quick-card reveal delay-3">
         <i class="bi bi-bar-chart"></i>
         <strong>Statistics of Feedback</strong>
         <span>Feedback reports and analysis</span>

@@ -1,4 +1,4 @@
-﻿
+
 
 @extends('frontend.master')
 @section('content')
@@ -63,7 +63,7 @@
   <!-- BREADCRUMB START -->
   <section class="nirf-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <strong>NIRF</strong>
     </div>
@@ -87,7 +87,7 @@
         <span>Teaching, learning, research and outreach</span>
       </a>
 
-      <a href="nirf-data.html" class="nirf-quick-card reveal delay-2">
+      <a href="{{ route('frontend.nirf-data') }}" class="nirf-quick-card reveal delay-2">
         <i class="bi bi-database-check"></i>
         <strong>Institutional Data</strong>
         <span>College data and public disclosure</span>
@@ -169,7 +169,7 @@
             <p>Heading, description, publish year, publish date, download and view.</p>
           </div>
 
-          <a href="nirf-reports.html" class="btn primary">
+          <a href="{{ route('frontend.nirf-report') }}" class="btn primary">
             <i class="bi bi-folder2-open"></i>
             View All Reports
           </a>
@@ -374,7 +374,7 @@
           </div>
         </div>
 
-        <a href="nirf-data.html" class="btn primary">
+        <a href="{{ route('frontend.nirf-data') }}" class="btn primary">
           <i class="bi bi-arrow-right"></i>
           View Data Page
         </a>
@@ -399,37 +399,37 @@
 
       <div class="nirf-related-grid">
 
-        <a href="iqac.html" class="nirf-related-card reveal">
+        <a href="{{ route('frontend.iqac') }}" class="nirf-related-card reveal">
           <i class="bi bi-award"></i>
           <strong>IQAC & SSR</strong>
           <span>Quality assurance, SSR, AQAR and institutional reports</span>
         </a>
 
-        <a href="iqac-reports.html" class="nirf-related-card reveal delay-1">
+        <a href="{{ route('frontend.iqac-reports') }}" class="nirf-related-card reveal delay-1">
           <i class="bi bi-file-earmark-pdf"></i>
           <strong>SSR / AQAR</strong>
           <span>Quality reports and accreditation documents</span>
         </a>
 
-        <a href="feedback.html" class="nirf-related-card reveal delay-2">
+        <a href="{{ route('frontend.feedback') }}" class="nirf-related-card reveal delay-2">
           <i class="bi bi-chat-square-text"></i>
           <strong>Feedback</strong>
           <span>Student, teacher, parent and feedback statistics</span>
         </a>
 
-        <a href="departments.html" class="nirf-related-card reveal delay-3">
+        <a href="{{ route('frontend.departments') }}" class="nirf-related-card reveal delay-3">
           <i class="bi bi-building"></i>
           <strong>Departments</strong>
           <span>Academic departments and programme information</span>
         </a>
 
-        <a href="placement-guidance-cell.html" class="nirf-related-card reveal delay-4">
+        <a href="{{ route('frontend.placement-guidance-cell') }}" class="nirf-related-card reveal delay-4">
           <i class="bi bi-briefcase"></i>
           <strong>Placement & Guidance</strong>
           <span>Career guidance, placement support and outcomes</span>
         </a>
 
-        <a href="student-zone.html" class="nirf-related-card reveal delay-5">
+        <a href="{{ route('frontend.student-zone') }}" class="nirf-related-card reveal delay-5">
           <i class="bi bi-person-check"></i>
           <strong>Student Zone</strong>
           <span>Admission, fee, forms, policy and support services</span>

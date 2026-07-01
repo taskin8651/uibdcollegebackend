@@ -1,4 +1,4 @@
-﻿@extends('frontend.master')
+@extends('frontend.master')
 @section('content')
 <main id="mainContent">
 
@@ -46,9 +46,9 @@
 
   <section class="nirf-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
-      <a href="nirf.html">NIRF</a>
+      <a href="{{ route('frontend.nirf') }}">NIRF</a>
       <i class="bi bi-chevron-right"></i>
       <strong>Reports</strong>
     </div>

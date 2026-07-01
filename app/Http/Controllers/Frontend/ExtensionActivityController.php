@@ -21,6 +21,64 @@ class ExtensionActivityController extends Controller
     {
         abort_if(!$extensionActivity->status, 404);
 
+        return $this->renderActivity($extensionActivity);
+    }
+
+    public function nss()
+    {
+        return $this->showBySlug('nss');
+    }
+
+    public function ncc()
+    {
+        return $this->showBySlug('ncc');
+    }
+
+    public function startupCell()
+    {
+        return $this->showBySlug('startup-cell');
+    }
+
+    public function ecoClub()
+    {
+        return $this->showBySlug('eco-club');
+    }
+
+    public function debateClub()
+    {
+        return $this->showBySlug('debate-club');
+    }
+
+    public function dramaticsSociety()
+    {
+        return $this->showBySlug('dramatics-society');
+    }
+
+    public function literarySociety()
+    {
+        return $this->showBySlug('literary-society');
+    }
+
+    public function healthCenter()
+    {
+        return $this->showBySlug('health-center');
+    }
+
+    private function showBySlug(string $slug)
+    {
+        $extensionActivity = ExtensionActivity::where('slug', $slug)
+            ->where('status', 1)
+            ->first();
+
+        if (! $extensionActivity) {
+            return $this->index();
+        }
+
+        return $this->renderActivity($extensionActivity);
+    }
+
+    private function renderActivity(ExtensionActivity $extensionActivity)
+    {
         $extensionActivity->load([
             'points' => function ($query) {
                 $query->where('status', 1)

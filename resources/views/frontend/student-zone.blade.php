@@ -1,4 +1,4 @@
-﻿
+
 
 @extends('frontend.master')
 @section('content')
@@ -62,7 +62,7 @@
   <!-- BREADCRUMB START -->
   <section class="student-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Student Zone</span>
       <i class="bi bi-chevron-right"></i>
@@ -305,7 +305,7 @@
             Official page mentions 22.5% seats reserved for SC/ST candidates,
             including 15% for SC and 7.5% for ST, interchangeable if necessary.
           </p>
-          <a href="reservation-policy.html">Read Details <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.reservation-policy') }}">Read Details <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="reservation-card reveal delay-1">
@@ -315,7 +315,7 @@
             Official page mentions 27% seats reserved for OBC Non-Creamy Layer
             candidates as per Central List requirements.
           </p>
-          <a href="reservation-policy.html">Read Details <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.reservation-policy') }}">Read Details <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="reservation-card reveal delay-2">
@@ -325,7 +325,7 @@
             Students must produce valid original caste/category certificates at
             the time of admission and verification.
           </p>
-          <a href="reservation-policy.html">Read Details <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.reservation-policy') }}">Read Details <i class="bi bi-arrow-right"></i></a>
         </article>
 
       </div>
@@ -359,37 +359,37 @@
 
       <div class="student-form-grid">
 
-        <a href="certificate.html" class="student-form-card reveal">
+        <a href="{{ route('frontend.certificate') }}" class="student-form-card reveal">
           <i class="bi bi-file-person"></i>
           <strong>Bonafide Certificate</strong>
           <span>Application form</span>
         </a>
 
-        <a href="certificate.html" class="student-form-card reveal delay-1">
+        <a href="{{ route('frontend.certificate') }}" class="student-form-card reveal delay-1">
           <i class="bi bi-file-check"></i>
           <strong>Character Certificate</strong>
           <span>Student conduct certificate</span>
         </a>
 
-        <a href="certificate.html" class="student-form-card reveal delay-2">
+        <a href="{{ route('frontend.certificate') }}" class="student-form-card reveal delay-2">
           <i class="bi bi-file-earmark-break"></i>
           <strong>College Leaving Certificate</strong>
           <span>CLC application</span>
         </a>
 
-        <a href="certificate.html" class="student-form-card reveal delay-3">
+        <a href="{{ route('frontend.certificate') }}" class="student-form-card reveal delay-3">
           <i class="bi bi-file-earmark-medical"></i>
           <strong>Migration / Transfer</strong>
           <span>Student transfer support</span>
         </a>
 
-        <a href="certificate.html" class="student-form-card reveal delay-4">
+        <a href="{{ route('frontend.certificate') }}" class="student-form-card reveal delay-4">
           <i class="bi bi-file-lock"></i>
           <strong>Reservation Certificate Format</strong>
           <span>Category document guidance</span>
         </a>
 
-        <a href="certificate.html" class="student-form-card reveal delay-5">
+        <a href="{{ route('frontend.certificate') }}" class="student-form-card reveal delay-5">
           <i class="bi bi-folder-check"></i>
           <strong>Admission Document Checklist</strong>
           <span>Required documents list</span>
@@ -416,7 +416,7 @@
 
       <div class="student-support-grid">
 
-        <a href="students-grievance-redressal.html" class="student-support-card reveal">
+        <a href="{{ route('frontend.students-grievance-redressal') }}" class="student-support-card reveal">
           <i class="bi bi-person-raised-hand"></i>
           <h3>Students Grievance Redressal</h3>
           <p>Complaint submission, support and redressal process.</p>
@@ -434,7 +434,7 @@
           <p>Scholarship information and document guidance.</p>
         </a>
 
-        <a href="placement-guidance-cell.html" class="student-support-card reveal delay-3">
+        <a href="{{ route('frontend.placement-guidance-cell') }}" class="student-support-card reveal delay-3">
           <i class="bi bi-briefcase"></i>
           <h3>Placement & Guidance Cell</h3>
           <p>Career counselling and student guidance services.</p>

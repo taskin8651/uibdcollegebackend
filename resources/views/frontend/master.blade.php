@@ -59,19 +59,19 @@
 <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
   <div class="site-shell nav-inner">
 
-    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="{{ route('frontend.home') }}">Home</a>
 
     <div class="nav-item has-dropdown">
       <button class="nav-link nav-drop" type="button">
         About <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="about.html">About Us</a>
-        <a href="about.html#briefHistory">Introduction</a>
-        <a href="about.html#visionMission">Vision & Mission</a>
-        <a href="about.html#collegeGlance">Rules & Regulation</a>
-        <a href="administration.html#principalDesk">Principal's Message</a>
-        <a href="about.html#collegeGlance">College Magazine</a>
+        <a href="{{ route('frontend.about') }}">About Us</a>
+        <a href="{{ route('frontend.about') }}#briefHistory">Introduction</a>
+        <a href="{{ route('frontend.about') }}#visionMission">Vision & Mission</a>
+        <a href="{{ route('frontend.about') }}#collegeGlance">Rules & Regulation</a>
+        <a href="{{ route('frontend.administration') }}#principalDesk">Principal's Message</a>
+        <a href="{{ route('frontend.about') }}#collegeGlance">College Magazine</a>
       </div>
     </div>
 
@@ -80,12 +80,12 @@
         Academic <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="academics.html">Academic Overview</a>
-        <a href="academics.html#coursesOffered">Courses Offered</a>
-        <a href="academics.html#holidayCalendar">List of Holidays</a>
-        <a href="academics.html#timeTable">Time Table</a>
-        <a href="academics.html#syllabus">Syllabus</a>
-        <a href="academics.html#digitalInitiatives">National Digital Initiatives</a>
+        <a href="{{ route('frontend.academic') }}">Academic Overview</a>
+        <a href="{{ route('frontend.academic') }}#coursesOffered">Courses Offered</a>
+        <a href="{{ route('frontend.academic') }}#holidayCalendar">List of Holidays</a>
+        <a href="{{ route('frontend.academic') }}#timeTable">Time Table</a>
+        <a href="{{ route('frontend.academic') }}#syllabus">Syllabus</a>
+        <a href="{{ route('frontend.academic') }}#digitalInitiatives">National Digital Initiatives</a>
       </div>
     </div>
 
@@ -94,12 +94,12 @@
         Administration <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="administration.html">Administration</a>
-        <a href="administration.html#formerPrincipals">Former Principals</a>
-        <a href="administration.html#adminStaff">Administrative Staff</a>
-        <a href="administration.html#staffList">Staff List</a>
-        <a href="administration.html#adminGallery">Photo Gallery</a>
-        <a href="administration.html#adminGallery">News & Media</a>
+        <a href="{{ route('frontend.administration') }}">Administration</a>
+        <a href="{{ route('frontend.administration') }}#formerPrincipals">Former Principals</a>
+        <a href="{{ route('frontend.administration') }}#adminStaff">Administrative Staff</a>
+        <a href="{{ route('frontend.administration') }}#staffList">Staff List</a>
+        <a href="{{ route('frontend.administration') }}#adminGallery">Photo Gallery</a>
+        <a href="{{ route('frontend.administration') }}#adminGallery">News & Media</a>
       </div>
     </div>
 
@@ -108,10 +108,10 @@
         Department <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="department.html">All Department</a>
-        <a href="department-detail.html">Department Detail</a>
-        <a href="student-zone.html#studentSupport">Placement & Guidance Cell</a>
-        <a href="student-zone.html#studentSupport">Students Grievance Redressal</a>
+        <a href="{{ route('frontend.departments') }}">All Department</a>
+        <a href="{{ route('frontend.departments') }}">Department Detail</a>
+        <a href="{{ route('frontend.student-zone') }}#studentSupport">Placement & Guidance Cell</a>
+        <a href="{{ route('frontend.student-zone') }}#studentSupport">Students Grievance Redressal</a>
       </div>
     </div>
 
@@ -120,12 +120,12 @@
         Student Zone <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="student-zone.html">Student Zone</a>
-        <a href="student-zone.html#studentServices">Student Login</a>
+        <a href="{{ route('frontend.student-zone') }}">Student Zone</a>
+        <a href="{{ route('frontend.student-zone') }}#studentServices">Student Login</a>
         <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Fee Payment</a>
         <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Admission</a>
-        <a href="reservation-policy.html">Reservation Policy</a>
-        <a href="student-zone.html#formsCertificates">Certificates / Forms</a>
+        <a href="{{ route('frontend.reservation-policy') }}">Reservation Policy</a>
+        <a href="{{ route('frontend.student-zone') }}#formsCertificates">Certificates / Forms</a>
       </div>
     </div>
 
@@ -134,15 +134,15 @@
         Extension Activity <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="extension-activity.html">Extension Activity</a>
-        <a href="nss.html">NSS</a>
-        <a href="ncc.html">NCC</a>
-        <a href="startup-cell.html">Startup Cell</a>
-        <a href="eco-club.html">Vriksha Veda - Eco Club</a>
-        <a href="debate-club.html">Debate Club</a>
-        <a href="dramatics-society.html">Dramatics Society</a>
-        <a href="literary-society.html">Literary Society</a>
-        <a href="health-center.html">Health Center</a>
+        <a href="{{ route('frontend.extension-activities') }}">Extension Activity</a>
+        <a href="{{ route('frontend.nss') }}">NSS</a>
+        <a href="{{ route('frontend.ncc') }}">NCC</a>
+        <a href="{{ route('frontend.startup-cell') }}">Startup Cell</a>
+        <a href="{{ route('frontend.eco-club') }}">Vriksha Veda - Eco Club</a>
+        <a href="{{ route('frontend.debate-club') }}">Debate Club</a>
+        <a href="{{ route('frontend.dramatics-society') }}">Dramatics Society</a>
+        <a href="{{ route('frontend.literary-society') }}">Literary Society</a>
+        <a href="{{ route('frontend.health-center') }}">Health Center</a>
       </div>
     </div>
 
@@ -151,17 +151,17 @@
         IQAC & SSR <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="iqac.html">IQAC Home</a>
-        <a href="iqac-reports.html#ssrReports">SSR</a>
-        <a href="iqac-members.html">Members</a>
-        <a href="iqac-policy.html">Policy Documents</a>
-        <a href="iqac-reports.html#meetingReports">Minutes of Meeting</a>
-        <a href="iqac-reports.html#bestPractices">Best Practices</a>
-        <a href="iqac-feedback.html">Satisfaction Surveys</a>
-        <a href="iqac-reports.html#aqarReports">AQAR</a>
-        <a href="iqac-reports.html">Yearly Reports</a>
-        <a href="iqac-reports.html#activities">Activities</a>
-        <a href="iqac-feedback.html#feedbackTypes">Student Feedback</a>
+        <a href="{{ route('frontend.iqac') }}">IQAC Home</a>
+        <a href="{{ route('frontend.iqac-reports') }}#ssrReports">SSR</a>
+        <a href="{{ route('frontend.iqac-members') }}">Members</a>
+        <a href="{{ route('frontend.iqac-policy') }}">Policy Documents</a>
+        <a href="{{ route('frontend.iqac-reports') }}#meetingReports">Minutes of Meeting</a>
+        <a href="{{ route('frontend.iqac-reports') }}#bestPractices">Best Practices</a>
+        <a href="{{ route('frontend.iqac-feedback') }}">Satisfaction Surveys</a>
+        <a href="{{ route('frontend.iqac-reports') }}#aqarReports">AQAR</a>
+        <a href="{{ route('frontend.iqac-reports') }}">Yearly Reports</a>
+        <a href="{{ route('frontend.iqac-reports') }}#activities">Activities</a>
+        <a href="{{ route('frontend.iqac-feedback') }}#feedbackTypes">Student Feedback</a>
       </div>
     </div>
 
@@ -170,9 +170,9 @@
         NIRF <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="nirf.html">NIRF Home</a>
-        <a href="nirf-reports.html">NIRF Reports</a>
-        <a href="nirf-data.html">NIRF Data</a>
+        <a href="{{ route('frontend.nirf') }}">NIRF Home</a>
+        <a href="{{ route('frontend.nirf-report') }}">NIRF Reports</a>
+        <a href="{{ route('frontend.nirf-data') }}">NIRF Data</a>
       </div>
     </div>
 
@@ -181,12 +181,12 @@
         Notice <i class="bi bi-chevron-down"></i>
       </button>
       <div class="dropdown-menu">
-        <a href="notice.html">Notice</a>
-        <a href="events.html">Events</a>
-        <a href="tenders.html">Tenders</a>
-        <a href="notice-detail.html">Notice Detail</a>
-        <a href="downloads.html">Downloads</a>
-        <a href="index.html#admission">Admission Merit List</a>
+        <a href="{{ route('frontend.notice') }}">Notice</a>
+        <a href="{{ route('frontend.events') }}">Events</a>
+        <a href="{{ route('frontend.tenders') }}">Tenders</a>
+        <a href="{{ route('frontend.notice') }}">Notice Detail</a>
+        <a href="{{ route('frontend.downloads') }}">Downloads</a>
+        <a href="{{ route('frontend.home') }}#admission">Admission Merit List</a>
       </div>
     </div>
 
@@ -197,13 +197,13 @@
       <div class="dropdown-menu">
         <a href="{{ route('frontend.student-feedback') }}">Student's Feedback</a>
         <a href="{{ route('frontend.teacher-feedback') }}">Teachers' Feedback</a>
-        <a href="contact-us.html">Parents Feedback</a>
-        <a href="feedback-statistics.html">Statistics of Feedback</a>
+        <a href="{{ route('frontend.contact') }}">Parents Feedback</a>
+        <a href="{{ route('frontend.feedback-statistics') }}">Statistics of Feedback</a>
       </div>
     </div>
 
-    <a class="nav-link" href="contact-us.html">Contact Us</a>
-    <a class="nav-link login-link" href="student-zone.html#studentServices">Login</a>
+    <a class="nav-link" href="{{ route('frontend.contact') }}">Contact Us</a>
+    <a class="nav-link login-link" href="{{ route('frontend.student-zone') }}#studentServices">Login</a>
 
     <button class="search-trigger" id="searchTrigger" type="button" aria-label="Search website">
       <i class="bi bi-search"></i>
@@ -219,7 +219,7 @@
       <div class="ticker">
         <a class="ticker-download" href="assets/pdf/Admission-Notice.pdf" download><span>Admission Notice 2026-2030 Sem-I</span></a>
       </div>
-      <a href="index.html#notices">View All</a>
+      <a href="{{ route('frontend.home') }}#notices">View All</a>
     </div>
   </section>
 
@@ -235,7 +235,7 @@
 
     <!-- BRAND -->
     <div class="footer-brand">
-      <a href="index.html" class="footer-logo">
+      <a href="{{ route('frontend.home') }}" class="footer-logo">
         <img src="assets/img/logo_bdcpat.png" alt="B.D. College Logo">
         <div>
           <h3>B.D. College, Patna</h3>
@@ -252,92 +252,92 @@
     <!-- ABOUT -->
     <div class="footer-col">
       <h4>About</h4>
-      <a href="about.html">About Us</a>
-      <a href="about.html#briefHistory">Introduction</a>
-      <a href="about.html#visionMission">Vision & Mission</a>
-      <a href="about.html#collegeGlance">Rules & Regulation</a>
-      <a href="administration.html#principalDesk">Principal’s Message</a>
-      <a href="about.html#collegeGlance">College Magazine</a>
+      <a href="{{ route('frontend.about') }}">About Us</a>
+      <a href="{{ route('frontend.about') }}#briefHistory">Introduction</a>
+      <a href="{{ route('frontend.about') }}#visionMission">Vision & Mission</a>
+      <a href="{{ route('frontend.about') }}#collegeGlance">Rules & Regulation</a>
+      <a href="{{ route('frontend.administration') }}#principalDesk">Principal’s Message</a>
+      <a href="{{ route('frontend.about') }}#collegeGlance">College Magazine</a>
     </div>
 
     <!-- ACADEMIC -->
     <div class="footer-col">
       <h4>Academic</h4>
-      <a href="academics.html">Academic Overview</a>
-      <a href="department.html">Departments</a>
-      <a href="academics.html#holidayCalendar">List of Holidays</a>
-      <a href="academics.html#timeTable">Time Table</a>
-      <a href="academics.html#syllabus">Syllabus</a>
-      <a href="academics.html#digitalInitiatives">National Digital Initiatives</a>
+      <a href="{{ route('frontend.academic') }}">Academic Overview</a>
+      <a href="{{ route('frontend.departments') }}">Departments</a>
+      <a href="{{ route('frontend.academic') }}#holidayCalendar">List of Holidays</a>
+      <a href="{{ route('frontend.academic') }}#timeTable">Time Table</a>
+      <a href="{{ route('frontend.academic') }}#syllabus">Syllabus</a>
+      <a href="{{ route('frontend.academic') }}#digitalInitiatives">National Digital Initiatives</a>
     </div>
 
     <!-- ADMINISTRATION -->
     <div class="footer-col">
       <h4>Administration</h4>
-      <a href="administration.html">Administration</a>
-      <a href="administration.html#formerPrincipals">Former Principals</a>
-      <a href="administration.html#adminStaff">Administrative Staff</a>
-      <a href="administration.html#staffList">Staff List</a>
-      <a href="administration.html#adminGallery">Photo Gallery</a>
-      <a href="administration.html#adminGallery">News & Media</a>
+      <a href="{{ route('frontend.administration') }}">Administration</a>
+      <a href="{{ route('frontend.administration') }}#formerPrincipals">Former Principals</a>
+      <a href="{{ route('frontend.administration') }}#adminStaff">Administrative Staff</a>
+      <a href="{{ route('frontend.administration') }}#staffList">Staff List</a>
+      <a href="{{ route('frontend.administration') }}#adminGallery">Photo Gallery</a>
+      <a href="{{ route('frontend.administration') }}#adminGallery">News & Media</a>
     </div>
 
     <!-- STUDENT ZONE -->
     <div class="footer-col">
       <h4>Student Zone</h4>
-      <a href="student-zone.html">Student Zone</a>
-      <a href="student-zone.html#studentServices">Student Login</a>
+      <a href="{{ route('frontend.student-zone') }}">Student Zone</a>
+      <a href="{{ route('frontend.student-zone') }}#studentServices">Student Login</a>
       <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Fee Payment</a>
       <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Admission</a>
-      <a href="reservation-policy.html">Reservation Policy</a>
-      <a href="student-zone.html#formsCertificates">Forms & Certificates</a>
+      <a href="{{ route('frontend.reservation-policy') }}">Reservation Policy</a>
+      <a href="{{ route('frontend.student-zone') }}#formsCertificates">Forms & Certificates</a>
     </div>
 
     <!-- DEPARTMENTS -->
     <div class="footer-col">
       <h4>Departments</h4>
-      <a href="department.html">All Departments</a>
-      <a href="department-detail.html">Department Detail</a>
-      <a href="student-zone.html#studentSupport">Placement & Guidance Cell</a>
-      <a href="student-zone.html#studentSupport">Students Grievance Redressal</a>
-      <a href="nirf.html">NIRF</a>
-      <a href="nirf-reports.html">NIRF Reports</a>
+      <a href="{{ route('frontend.departments') }}">All Departments</a>
+      <a href="{{ route('frontend.departments') }}">Department Detail</a>
+      <a href="{{ route('frontend.student-zone') }}#studentSupport">Placement & Guidance Cell</a>
+      <a href="{{ route('frontend.student-zone') }}#studentSupport">Students Grievance Redressal</a>
+      <a href="{{ route('frontend.nirf') }}">NIRF</a>
+      <a href="{{ route('frontend.nirf-report') }}">NIRF Reports</a>
     </div>
 
     <!-- EXTENSION ACTIVITY -->
     <div class="footer-col">
       <h4>Extension Activity</h4>
-      <a href="extension-activity.html">Extension Activity</a>
-      <a href="nss.html">NSS</a>
-      <a href="ncc.html">NCC</a>
-      <a href="startup-cell.html">Startup Cell</a>
-      <a href="eco-club.html">Vriksha Veda - Eco Club</a>
-      <a href="debate-club.html">Debate Club</a>
-      <a href="dramatics-society.html">Dramatics Society</a>
-      <a href="literary-society.html">Literary Society</a>
-      <a href="health-center.html">Health Center</a>
+      <a href="{{ route('frontend.extension-activities') }}">Extension Activity</a>
+      <a href="{{ route('frontend.nss') }}">NSS</a>
+      <a href="{{ route('frontend.ncc') }}">NCC</a>
+      <a href="{{ route('frontend.startup-cell') }}">Startup Cell</a>
+      <a href="{{ route('frontend.eco-club') }}">Vriksha Veda - Eco Club</a>
+      <a href="{{ route('frontend.debate-club') }}">Debate Club</a>
+      <a href="{{ route('frontend.dramatics-society') }}">Dramatics Society</a>
+      <a href="{{ route('frontend.literary-society') }}">Literary Society</a>
+      <a href="{{ route('frontend.health-center') }}">Health Center</a>
     </div>
 
     <!-- IQAC / PUBLIC INFO -->
     <div class="footer-col">
       <h4>IQAC / Public Info</h4>
-      <a href="iqac.html">IQAC & SSR</a>
-      <a href="iqac-members.html">IQAC Members</a>
-      <a href="iqac-policy.html">Policy Documents</a>
-      <a href="iqac-reports.html">SSR / AQAR Reports</a>
-      <a href="iqac-feedback.html">Feedback & Surveys</a>
-      <a href="nirf-data.html">NIRF Data</a>
+      <a href="{{ route('frontend.iqac') }}">IQAC & SSR</a>
+      <a href="{{ route('frontend.iqac-members') }}">IQAC Members</a>
+      <a href="{{ route('frontend.iqac-policy') }}">Policy Documents</a>
+      <a href="{{ route('frontend.iqac-reports') }}">SSR / AQAR Reports</a>
+      <a href="{{ route('frontend.iqac-feedback') }}">Feedback & Surveys</a>
+      <a href="{{ route('frontend.nirf-data') }}">NIRF Data</a>
     </div>
 
     <!-- NOTICE -->
     <div class="footer-col">
       <h4>Notice</h4>
-      <a href="notice.html">Notice Board</a>
-      <a href="notice-detail.html">Notice Detail</a>
-      <a href="events.html">Events</a>
-      <a href="tenders.html">Tenders</a>
-      <a href="downloads.html">Downloads</a>
-      <a href="index.html#admission">Admission Merit List</a>
+      <a href="{{ route('frontend.notice') }}">Notice Board</a>
+      <a href="{{ route('frontend.notice') }}">Notice Detail</a>
+      <a href="{{ route('frontend.events') }}">Events</a>
+      <a href="{{ route('frontend.tenders') }}">Tenders</a>
+      <a href="{{ route('frontend.downloads') }}">Downloads</a>
+      <a href="{{ route('frontend.home') }}#admission">Admission Merit List</a>
     </div>
 
     <!-- FEEDBACK -->
@@ -345,10 +345,10 @@
       <h4>Feedback</h4>
       <a href="{{ route('frontend.student-feedback') }}">Student Feedback</a>
       <a href="{{ route('frontend.teacher-feedback') }}">Teachers Feedback</a>
-      <a href="contact-us.html">Parents Feedback</a>
-      <a href="feedback-statistics.html">Statistics of Feedback</a>
-      <a href="certificate.html">Apply for Certificate</a>
-      <a href="contact-us.html">Contact Us</a>
+      <a href="{{ route('frontend.contact') }}">Parents Feedback</a>
+      <a href="{{ route('frontend.feedback-statistics') }}">Statistics of Feedback</a>
+      <a href="{{ route('frontend.certificate') }}">Apply for Certificate</a>
+      <a href="{{ route('frontend.contact') }}">Contact Us</a>
     </div>
 
     <!-- CONTACT -->
@@ -370,7 +370,7 @@
     <div class="footer-contact-col">
       <h4>Contact</h4>
 
-      <a href="contact-us.html">
+      <a href="{{ route('frontend.contact') }}">
         <i class="bi bi-geo-alt"></i>
         <span>Near Gauriamath, Mithapur, Patna - 800001</span>
       </a>
@@ -408,9 +408,9 @@
     <span>&copy; 2026 B.D. College, Patna. All Rights Reserved.</span>
 
     <div class="footer-bottom-links">
-      <a href="index.html">Home</a>
-      <a href="contact-us.html">Contact</a>
-      <a href="downloads.html">Downloads</a>
+      <a href="{{ route('frontend.home') }}">Home</a>
+      <a href="{{ route('frontend.contact') }}">Contact</a>
+      <a href="{{ route('frontend.downloads') }}">Downloads</a>
       <a href="#top">Back to top <i class="bi bi-arrow-up"></i></a>
     </div>
   </div>

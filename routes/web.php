@@ -18,9 +18,11 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 
+Route::view('/index', 'frontend.index')->name('frontend.home');
 Route::get('/about-us', 'Frontend\AboutController@index')->name('frontend.about');
 Route::get('/academics', 'Frontend\AcademicController@index')->name('frontend.academic');
 Route::get('/administration', 'Frontend\AdministrationController@index')->name('frontend.administration');
+Route::view('/contact-us', 'frontend.contact-us')->name('frontend.contact');
 
 Route::get('/departments', 'Frontend\DepartmentController@index')->name('frontend.departments');
 Route::get('/departments/{department}', 'Frontend\DepartmentController@show')->name('frontend.departments.show');
@@ -30,11 +32,17 @@ Route::get('/extension-activities/{extensionActivity}', 'Frontend\ExtensionActiv
 
 Route::get('/iqac', 'Frontend\IqacController@index')->name('frontend.iqac');
 Route::get('/iqac-members', 'Frontend\IqacMemberController@index')->name('frontend.iqac-members');
+Route::view('/iqac-policy', 'frontend.iqac-policy')->name('frontend.iqac-policy');
+Route::view('/iqac-feedback', 'frontend.iqac-feedback')->name('frontend.iqac-feedback');
 
 Route::get('/iqac-reports', 'Frontend\IqacReportController@index')->name('frontend.iqac-reports');
 
 Route::get('/nirf', 'Frontend\NirfController@index')->name('frontend.nirf');
 Route::get('/nirf-reports', 'Frontend\NirfReportController@index')->name('frontend.nirf-report');
+Route::view('/nirf-data', 'frontend.nirf-data')->name('frontend.nirf-data');
+
+Route::view('/student-zone', 'frontend.student-zone')->name('frontend.student-zone');
+Route::view('/reservation-policy', 'frontend.reservation-policy')->name('frontend.reservation-policy');
 
 Route::get('/notice', 'Frontend\NoticeController@index')->name('frontend.notice');
 Route::get('/notice/{noticeBoard}', 'Frontend\NoticeController@show')->name('frontend.notice.show');
@@ -50,6 +58,28 @@ Route::get('/teacher-feedback', 'Frontend\TeacherFeedbackController@index')->nam
 Route::post('/teacher-feedback', 'Frontend\TeacherFeedbackController@store')->name('frontend.teacher-feedback.store');
 
 Route::post('/contact-enquiry', 'Frontend\ContactEnquiryController@store')->name('frontend.contact-enquiry.store');
+
+Route::get('/administrative-staff', 'Frontend\AdministrationController@index')->name('frontend.administrative-staff');
+Route::view('/certificate', 'frontend.student-zone')->name('frontend.certificate');
+Route::get('/downloads', 'Frontend\NoticeController@index')->name('frontend.downloads');
+Route::get('/notice-downloads', 'Frontend\NoticeController@index')->name('frontend.notice-downloads');
+Route::get('/event-downloads', 'Frontend\EventController@index')->name('frontend.event-downloads');
+Route::view('/official-assets', 'frontend.index')->name('frontend.official-assets');
+Route::get('/syllabus-downloads', 'Frontend\AcademicController@index')->name('frontend.syllabus-downloads');
+Route::get('/nss', 'Frontend\ExtensionActivityController@nss')->name('frontend.nss');
+Route::get('/ncc', 'Frontend\ExtensionActivityController@ncc')->name('frontend.ncc');
+Route::get('/startup-cell', 'Frontend\ExtensionActivityController@startupCell')->name('frontend.startup-cell');
+Route::get('/eco-club', 'Frontend\ExtensionActivityController@ecoClub')->name('frontend.eco-club');
+Route::get('/debate-club', 'Frontend\ExtensionActivityController@debateClub')->name('frontend.debate-club');
+Route::get('/dramatics-society', 'Frontend\ExtensionActivityController@dramaticsSociety')->name('frontend.dramatics-society');
+Route::get('/literary-society', 'Frontend\ExtensionActivityController@literarySociety')->name('frontend.literary-society');
+Route::get('/health-center', 'Frontend\ExtensionActivityController@healthCenter')->name('frontend.health-center');
+Route::get('/feedback', 'Frontend\StudentFeedbackController@index')->name('frontend.feedback');
+Route::view('/parents-feedback', 'frontend.contact-us')->name('frontend.parents-feedback');
+Route::get('/feedback-statistics', 'Frontend\StudentFeedbackController@index')->name('frontend.feedback-statistics');
+Route::view('/placement-guidance-cell', 'frontend.student-zone')->name('frontend.placement-guidance-cell');
+Route::view('/students-grievance-redressal', 'frontend.student-zone')->name('frontend.students-grievance-redressal');
+Route::view('/demo', 'frontend.index')->name('frontend.demo');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes

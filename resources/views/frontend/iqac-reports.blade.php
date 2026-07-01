@@ -1,4 +1,4 @@
-﻿
+
 @extends('frontend.master')
 @section('content')
 
@@ -53,9 +53,9 @@
 
   <section class="iqac-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
-      <a href="iqac.html">IQAC & SSR</a>
+      <a href="{{ route('frontend.iqac') }}">IQAC & SSR</a>
       <i class="bi bi-chevron-right"></i>
       <strong>Reports</strong>
     </div>

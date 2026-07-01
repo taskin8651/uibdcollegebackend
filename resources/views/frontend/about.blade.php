@@ -1,4 +1,4 @@
-ï»¿
+
 @extends('frontend.master')
 @section('content')
 @php
@@ -69,7 +69,7 @@
   <!-- BREADCRUMB START -->
   <section class="about-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>About</span>
       <i class="bi bi-chevron-right"></i>
@@ -155,7 +155,7 @@
                 <div class="about-quote-box">
                     <i class="bi bi-quote"></i>
                     <p>
-                        â€œ{{ $aboutPage->founder_quote }}â€
+                        “{{ $aboutPage->founder_quote }}”
                     </p>
                 </div>
             @endif

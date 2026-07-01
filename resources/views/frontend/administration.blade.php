@@ -1,4 +1,4 @@
-﻿
+
 @extends('frontend.master')
 @section('content')
 
@@ -102,7 +102,7 @@
   <!-- BREADCRUMB START -->
   <section class="admin-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Administration</span>
       <i class="bi bi-chevron-right"></i>

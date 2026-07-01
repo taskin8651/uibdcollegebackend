@@ -1,4 +1,4 @@
-﻿
+
 
 @extends('frontend.master')
 @section('content')
@@ -27,11 +27,11 @@
             <i class="bi bi-calendar2-week"></i>
             Events List
           </a>
-          <a href="notice.html" class="btn light">
+          <a href="{{ route('frontend.notice') }}" class="btn light">
             <i class="bi bi-megaphone"></i>
             Notices
           </a>
-          <a href="tenders.html" class="btn ghost">
+          <a href="{{ route('frontend.tenders') }}" class="btn ghost">
             <i class="bi bi-file-earmark-text"></i>
             Tenders
           </a>
@@ -50,7 +50,7 @@
 
   <section class="notice-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Notice</span>
       <i class="bi bi-chevron-right"></i>

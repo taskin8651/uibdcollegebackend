@@ -1,4 +1,4 @@
-﻿
+
 
 @extends('frontend.master')
 @section('content')
@@ -33,7 +33,7 @@
             <i class="bi bi-list-check"></i>
             Feedback Areas
           </a>
-          <a href="feedback-statistics.html" class="btn ghost">
+          <a href="{{ route('frontend.feedback-statistics') }}" class="btn ghost">
             <i class="bi bi-bar-chart"></i>
             Statistics
           </a>
@@ -62,7 +62,7 @@
   <!-- BREADCRUMB START -->
   <section class="feedback-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Feedback</span>
       <i class="bi bi-chevron-right"></i>
@@ -88,13 +88,13 @@
         <span>Faculty feedback and academic suggestions</span>
       </a>
 
-      <a href="parents-feedback.html" class="feedback-quick-card reveal delay-2">
+      <a href="{{ route('frontend.parents-feedback') }}" class="feedback-quick-card reveal delay-2">
         <i class="bi bi-people"></i>
         <strong>Parents Feedback</strong>
         <span>Parent satisfaction and support response</span>
       </a>
 
-      <a href="feedback-statistics.html" class="feedback-quick-card reveal delay-3">
+      <a href="{{ route('frontend.feedback-statistics') }}" class="feedback-quick-card reveal delay-3">
         <i class="bi bi-bar-chart"></i>
         <strong>Statistics of Feedback</strong>
         <span>Feedback report and analysis</span>
@@ -360,7 +360,7 @@
                 ['name' => 'qf6', 'label' => 'Q-F-6. Are you happy with the food served in the present canteen?'],
                 ['name' => 'qf7', 'label' => 'Q-F-7. Is there a Student Amenity Centre in your Campus?'],
                 ['name' => 'qf8', 'label' => 'Q-F-8. Are you aware of the functioning of a placement cell in College?'],
-                ['name' => 'qf9', 'label' => 'Q-F-9. Are the Lab. Equipment’s in proper working conditions?'],
+                ['name' => 'qf9', 'label' => 'Q-F-9. Are the Lab. Equipment�s in proper working conditions?'],
                 ['name' => 'qf10', 'label' => "Q-F-10. Are you aware of the 'Earn While you Learn' Scheme in our College?"],
                 ['name' => 'qf11', 'label' => 'Q-F-11. Do you avail any Scholarship?'],
             ],

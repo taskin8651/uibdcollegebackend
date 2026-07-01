@@ -1,4 +1,4 @@
-﻿
+
 
 @extends('frontend.master')
 @section('content')
@@ -28,11 +28,11 @@
             <i class="bi bi-list-ul"></i>
             Latest Notices
           </a>
-          <a href="events.html" class="btn light">
+          <a href="{{ route('frontend.events') }}" class="btn light">
             <i class="bi bi-calendar-event"></i>
             Events
           </a>
-          <a href="tenders.html" class="btn ghost">
+          <a href="{{ route('frontend.tenders') }}" class="btn ghost">
             <i class="bi bi-file-earmark-text"></i>
             Tenders
           </a>
@@ -61,7 +61,7 @@
   <!-- BREADCRUMB START -->
   <section class="notice-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Notice</span>
       <i class="bi bi-chevron-right"></i>
@@ -81,13 +81,13 @@
         <span>All latest official notices</span>
       </a>
 
-      <a href="events.html" class="notice-quick-card reveal delay-1">
+      <a href="{{ route('frontend.events') }}" class="notice-quick-card reveal delay-1">
         <i class="bi bi-calendar-event"></i>
         <strong>Events</strong>
         <span>College events and activities</span>
       </a>
 
-      <a href="tenders.html" class="notice-quick-card reveal delay-2">
+      <a href="{{ route('frontend.tenders') }}" class="notice-quick-card reveal delay-2">
         <i class="bi bi-file-earmark-text"></i>
         <strong>Tenders</strong>
         <span>Tender notices and official documents</span>
@@ -343,13 +343,13 @@
           <span>Patliputra University notices and instructions</span>
         </a>
 
-        <a href="events.html" class="notice-category-card reveal delay-4">
+        <a href="{{ route('frontend.events') }}" class="notice-category-card reveal delay-4">
           <i class="bi bi-calendar-event"></i>
           <strong>Events</strong>
           <span>Seminar, camps, student activities and college programmes</span>
         </a>
 
-        <a href="tenders.html" class="notice-category-card reveal delay-5">
+        <a href="{{ route('frontend.tenders') }}" class="notice-category-card reveal delay-5">
           <i class="bi bi-file-earmark-text"></i>
           <strong>Tenders</strong>
           <span>Tender documents and official procurement notices</span>

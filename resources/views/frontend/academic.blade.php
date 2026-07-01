@@ -1,4 +1,4 @@
-﻿
+
 @extends('frontend.master')
 @section('content')
 
@@ -61,7 +61,7 @@
   <!-- BREADCRUMB START -->
   <section class="academic-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>Academic</span>
       <i class="bi bi-chevron-right"></i>
@@ -426,28 +426,28 @@
           <i class="bi bi-flask"></i>
           <h3>Science Syllabus</h3>
           <p>Physics, Chemistry, Botany, Zoology, Mathematics and practical syllabus.</p>
-          <a href="syllabus-downloads.html">View Syllabus <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.syllabus-downloads') }}">View Syllabus <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="syllabus-card reveal delay-1">
           <i class="bi bi-book"></i>
           <h3>Humanities Syllabus</h3>
           <p>Hindi, English, History, Political Science, Sociology and other subjects.</p>
-          <a href="syllabus-downloads.html">View Syllabus <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.syllabus-downloads') }}">View Syllabus <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="syllabus-card reveal delay-2">
           <i class="bi bi-cash-coin"></i>
           <h3>Commerce Syllabus</h3>
           <p>Commerce, accounting, business studies, finance and economics syllabus.</p>
-          <a href="syllabus-downloads.html">View Syllabus <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.syllabus-downloads') }}">View Syllabus <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="syllabus-card reveal delay-3">
           <i class="bi bi-laptop"></i>
           <h3>Vocational Syllabus</h3>
           <p>BCA, BBA, MBA, MCA and professional course syllabus documents.</p>
-          <a href="syllabus-downloads.html">View Syllabus <i class="bi bi-arrow-right"></i></a>
+          <a href="{{ route('frontend.syllabus-downloads') }}">View Syllabus <i class="bi bi-arrow-right"></i></a>
         </article>
 
       </div>

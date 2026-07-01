@@ -1,4 +1,4 @@
-﻿
+
 @extends('frontend.master')
 @section('content')
 
@@ -61,7 +61,7 @@
   <!-- BREADCRUMB START -->
   <section class="iqac-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <span>IQAC & SSR</span>
       <i class="bi bi-chevron-right"></i>
@@ -81,19 +81,19 @@
         <span>Quality enhancement and sustenance</span>
       </a>
 
-      <a href="iqac-members.html" class="iqac-quick-card reveal delay-1">
+      <a href="{{ route('frontend.iqac-members') }}" class="iqac-quick-card reveal delay-1">
         <i class="bi bi-people"></i>
         <strong>Members</strong>
         <span>IQAC chairman, coordinator and representatives</span>
       </a>
 
-      <a href="iqac-policy.html" class="iqac-quick-card reveal delay-2">
+      <a href="{{ route('frontend.iqac-policy') }}" class="iqac-quick-card reveal delay-2">
         <i class="bi bi-file-earmark-text"></i>
         <strong>Policy Documents</strong>
         <span>Vision, mission, objectives and QA mechanism</span>
       </a>
 
-      <a href="iqac-reports.html" class="iqac-quick-card reveal delay-3">
+      <a href="{{ route('frontend.iqac-reports') }}" class="iqac-quick-card reveal delay-3">
         <i class="bi bi-folder2-open"></i>
         <strong>SSR / AQAR</strong>
         <span>Reports, yearly records and accreditation documents</span>
@@ -355,25 +355,25 @@
 
       <div class="iqac-document-grid">
 
-        <a href="iqac-reports.html" class="iqac-document-card reveal">
+        <a href="{{ route('frontend.iqac-reports') }}" class="iqac-document-card reveal">
           <i class="bi bi-file-earmark-pdf"></i>
           <strong>Self Study Report</strong>
           <span>SSR document and accreditation reports</span>
         </a>
 
-        <a href="iqac-reports.html" class="iqac-document-card reveal delay-1">
+        <a href="{{ route('frontend.iqac-reports') }}" class="iqac-document-card reveal delay-1">
           <i class="bi bi-file-bar-graph"></i>
           <strong>AQAR</strong>
           <span>Annual Quality Assurance Report</span>
         </a>
 
-        <a href="iqac-reports.html" class="iqac-document-card reveal delay-2">
+        <a href="{{ route('frontend.iqac-reports') }}" class="iqac-document-card reveal delay-2">
           <i class="bi bi-journal-check"></i>
           <strong>Minutes of Meeting</strong>
           <span>IQAC meeting records and action taken reports</span>
         </a>
 
-        <a href="iqac-feedback.html" class="iqac-document-card reveal delay-3">
+        <a href="{{ route('frontend.iqac-feedback') }}" class="iqac-document-card reveal delay-3">
           <i class="bi bi-chat-square-text"></i>
           <strong>Satisfaction Surveys</strong>
           <span>Student, teacher and stakeholder feedback</span>

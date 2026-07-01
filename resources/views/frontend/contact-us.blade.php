@@ -1,4 +1,4 @@
-﻿
+
 @extends('frontend.master')
 @section('content')
 
@@ -64,7 +64,7 @@
   <!-- BREADCRUMB START -->
   <section class="contact-breadcrumb">
     <div class="site-shell breadcrumb-inner">
-      <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+      <a href="{{ route('frontend.home') }}"><i class="bi bi-house-door"></i> Home</a>
       <i class="bi bi-chevron-right"></i>
       <strong>Contact Us</strong>
     </div>
@@ -183,7 +183,7 @@
             <strong>10:30 AM - 5:00 PM</strong>
           </div>
 
-          <a href="administrative-staff.html" class="btn primary">
+          <a href="{{ route('frontend.administrative-staff') }}" class="btn primary">
             <i class="bi bi-people"></i>
             Administrative Staff
           </a>
@@ -410,37 +410,37 @@
 
       <div class="contact-related-grid">
 
-        <a href="student-zone.html" class="contact-related-card reveal">
+        <a href="{{ route('frontend.student-zone') }}" class="contact-related-card reveal">
           <i class="bi bi-person-check"></i>
           <strong>Student Zone</strong>
           <span>Student login, fee payment, admission and reservation policy</span>
         </a>
 
-        <a href="notice.html" class="contact-related-card reveal delay-1">
+        <a href="{{ route('frontend.notice') }}" class="contact-related-card reveal delay-1">
           <i class="bi bi-megaphone"></i>
           <strong>Notice Board</strong>
           <span>Latest notices, examination updates and downloads</span>
         </a>
 
-        <a href="administrative-staff.html" class="contact-related-card reveal delay-2">
+        <a href="{{ route('frontend.administrative-staff') }}" class="contact-related-card reveal delay-2">
           <i class="bi bi-people"></i>
           <strong>Administrative Staff</strong>
           <span>Contact other administrative staff and office support</span>
         </a>
 
-        <a href="students-grievance-redressal.html" class="contact-related-card reveal delay-3">
+        <a href="{{ route('frontend.students-grievance-redressal') }}" class="contact-related-card reveal delay-3">
           <i class="bi bi-shield-check"></i>
           <strong>Students Grievance</strong>
           <span>Student grievance redressal and support mechanism</span>
         </a>
 
-        <a href="feedback-statistics.html" class="contact-related-card reveal delay-4">
+        <a href="{{ route('frontend.feedback-statistics') }}" class="contact-related-card reveal delay-4">
           <i class="bi bi-chat-square-text"></i>
           <strong>Feedback</strong>
           <span>Student, teacher, parent feedback and statistics</span>
         </a>
 
-        <a href="iqac.html" class="contact-related-card reveal delay-5">
+        <a href="{{ route('frontend.iqac') }}" class="contact-related-card reveal delay-5">
           <i class="bi bi-award"></i>
           <strong>IQAC</strong>
           <span>Quality assurance, SSR, AQAR and reports</span>
