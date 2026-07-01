@@ -556,6 +556,15 @@ Department Notices
     </a>
 @endcan
 
+@can('tender_notice_access')
+    <a href="{{ route('admin.tender-notices.index') }}"
+       class="nav-link {{ request()->is('admin/tender-notices*') ? 'active' : '' }}"
+       data-tooltip="Tender Notices">
+        <i class="fas fa-file-contract nav-icon"></i>
+        <span class="nav-label">Tender Notices</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

@@ -41,6 +41,8 @@ Route::get('/notice/{noticeBoard}', 'Frontend\NoticeController@show')->name('fro
 
 Route::get('/events', 'Frontend\EventController@index')->name('frontend.events');
 Route::get('/events/{collegeEvent}', 'Frontend\EventController@show')->name('frontend.events.show');
+
+Route::get('/tenders', 'Frontend\TenderController@index')->name('frontend.tenders');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -159,6 +161,9 @@ Route::resource('notice-boards', 'NoticeBoardsController');
 
 Route::delete('college-events/destroy', 'CollegeEventsController@massDestroy')->name('college-events.massDestroy');
 Route::resource('college-events', 'CollegeEventsController');
+
+Route::delete('tender-notices/destroy', 'TenderNoticesController@massDestroy')->name('tender-notices.massDestroy');
+Route::resource('tender-notices', 'TenderNoticesController');
 });
 
 
