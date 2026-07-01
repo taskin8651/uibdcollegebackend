@@ -1,475 +1,613 @@
 @extends('layouts.admin')
 
-@section('styles')
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --accent:       #4F46E5;
-        --accent-light: #EEF2FF;
-        --accent-dark:  #3730A3;
-        --sidebar-bg:   #0F172A;
-    }
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+@section('page-title', 'Dashboard')
 
-    /* ── Stat Cards ── */
-    .stat-card {
-        background: #fff;
-        border-radius: 14px;
-        padding: 1.25rem 1.5rem;
-        border: 1px solid #E5E7EB;
+@section('styles')
+<style>
+    .dash-hero {
         position: relative;
         overflow: hidden;
-        transition: transform .2s, box-shadow .2s;
+        border-radius: 18px;
+        padding: 26px;
+        color: #fff;
+        background:
+            linear-gradient(135deg, rgba(18, 63, 140, .96), rgba(15, 118, 110, .9)),
+            url("{{ asset('assets/img/bdcpat_img_001.jpg') }}") center/cover;
+        border: 1px solid rgba(255,255,255,.18);
+        box-shadow: 0 18px 45px rgba(15, 23, 42, .16);
     }
-    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,.08); }
-    .stat-card .icon-wrap {
-        width: 48px; height: 48px; border-radius: 12px;
-        display: flex; align-items: center; justify-content: center;
-        background: var(--accent-light); color: var(--accent);
-        font-size: 20px;
+    .dash-hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -80px -120px auto;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.12);
     }
-    .stat-card .badge-up   { color: #16A34A; background: #DCFCE7; }
-    .stat-card .badge-down { color: #DC2626; background: #FEE2E2; }
-    .stat-card .badge { padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-
-    /* ── Chart Card ── */
-    .chart-card {
+    .dash-hero-content { position: relative; z-index: 1; }
+    .dash-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.14);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+    .dash-title {
+        margin: 14px 0 8px;
+        font-size: 30px;
+        font-weight: 900;
+        letter-spacing: 0;
+    }
+    .dash-subtitle {
+        margin: 0;
+        max-width: 760px;
+        color: rgba(255,255,255,.84);
+        font-size: 14px;
+        line-height: 1.7;
+    }
+    .dash-hero-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+        max-width: 650px;
+    }
+    .dash-hero-mini {
+        background: rgba(255,255,255,.13);
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 12px;
+        padding: 12px 14px;
+        backdrop-filter: blur(6px);
+    }
+    .dash-hero-mini span {
+        display: block;
+        font-size: 11px;
+        color: rgba(255,255,255,.72);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .dash-hero-mini strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 22px;
+        font-weight: 900;
+    }
+    .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0;
+    }
+    .metric-card,
+    .dash-card {
         background: #fff;
+        border: 1px solid #E2E8F0;
         border-radius: 14px;
-        padding: 1.25rem 1.5rem;
-        border: 1px solid #E5E7EB;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, .045);
     }
-
-    /* ── Table ── */
-    .dash-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-    .dash-table th { background: #F8FAFC; color: #6B7280; font-weight: 600; font-size: 12px;
-                     text-transform: uppercase; letter-spacing: .05em; padding: 10px 16px; border-bottom: 1px solid #E5E7EB; }
-    .dash-table td { padding: 11px 16px; border-bottom: 1px solid #F3F4F6; color: #374151; vertical-align: middle; }
-    .dash-table tr:last-child td { border-bottom: none; }
-    .dash-table tr:hover td { background: #F9FAFB; }
-
-    /* ── Status Pill ── */
-    .pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px;
-            border-radius: 20px; font-size: 12px; font-weight: 600; }
-    .pill-green  { background: #DCFCE7; color: #15803D; }
-    .pill-yellow { background: #FEF9C3; color: #A16207; }
-    .pill-red    { background: #FEE2E2; color: #B91C1C; }
-    .pill-blue   { background: #DBEAFE; color: #1D4ED8; }
-
-    /* ── Avatar ── */
-    .avatar { width: 32px; height: 32px; border-radius: 50%; display: inline-flex;
-              align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
-              color: #fff; background: var(--accent); flex-shrink: 0; }
-
-    /* ── Theme Panel ── */
-    #theme-panel {
-        position: fixed; right: -280px; top: 0; height: 100vh; width: 280px; z-index: 999;
-        background: #fff; box-shadow: -4px 0 30px rgba(0,0,0,.12);
-        transition: right .3s ease; padding: 0;
-        display: flex; flex-direction: column;
+    .metric-card {
+        padding: 18px;
+        min-height: 132px;
     }
-    #theme-panel.open { right: 0; }
-    #theme-toggle-btn {
-        position: fixed; right: 0; top: 50%; transform: translateY(-50%);
-        background: var(--accent); color: #fff; border: none; cursor: pointer;
-        padding: 14px 10px; border-radius: 10px 0 0 10px; z-index: 1000;
-        font-size: 16px; box-shadow: -2px 2px 12px rgba(0,0,0,.2);
-        transition: background .2s;
+    .metric-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
     }
-    .color-swatch {
-        width: 32px; height: 32px; border-radius: 8px; cursor: pointer; border: 3px solid transparent;
-        transition: transform .15s, border-color .15s; display: inline-block;
+    .metric-label {
+        margin: 0 0 8px;
+        color: #64748B;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: .06em;
+        text-transform: uppercase;
     }
-    .color-swatch:hover { transform: scale(1.1); }
-    .color-swatch.active { border-color: #374151 !important; }
-
-    /* ── Welcome Banner ── */
-    .welcome-banner {
-        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-        border-radius: 16px; padding: 1.5rem 2rem; color: #fff; position: relative; overflow: hidden;
+    .metric-value {
+        margin: 0;
+        color: #0F172A;
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1;
     }
-    .welcome-banner::before {
-        content: ''; position: absolute; width: 200px; height: 200px; border-radius: 50%;
-        background: rgba(255,255,255,.08); right: -40px; top: -60px;
+    .metric-icon {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        color: #fff;
+        flex: 0 0 auto;
     }
-    .welcome-banner::after {
-        content: ''; position: absolute; width: 120px; height: 120px; border-radius: 50%;
-        background: rgba(255,255,255,.06); right: 80px; top: 20px;
+    .metric-note {
+        margin-top: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #64748B;
+        font-size: 12px;
+        font-weight: 700;
     }
-
-    /* ── Mini Progress ── */
-    .progress-bar { height: 6px; background: #E5E7EB; border-radius: 3px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .6s ease; }
-
-    /* ── Responsive ── */
-    @media(max-width: 768px) {
-        .stat-grid { grid-template-columns: 1fr 1fr !important; }
-        .chart-grid { grid-template-columns: 1fr !important; }
+    .dash-grid {
+        display: grid;
+        grid-template-columns: 1.4fr .9fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+    .dash-card { padding: 18px; }
+    .dash-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .dash-card-title {
+        margin: 0;
+        color: #0F172A;
+        font-size: 16px;
+        font-weight: 900;
+    }
+    .dash-card-subtitle {
+        margin: 3px 0 0;
+        color: #94A3B8;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .module-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .module-card {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid #E2E8F0;
+        text-decoration: none;
+        background: linear-gradient(180deg, #fff, #F8FAFC);
+        transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .module-card:hover {
+        transform: translateY(-2px);
+        border-color: #CBD5E1;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, .07);
+    }
+    .module-icon {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        color: #fff;
+        flex: 0 0 auto;
+    }
+    .module-meta strong {
+        display: block;
+        color: #0F172A;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 1;
+    }
+    .module-meta span {
+        display: block;
+        margin-top: 4px;
+        color: #64748B;
+        font-size: 12px;
+        font-weight: 700;
+    }
+    .mini-list {
+        display: grid;
+        gap: 9px;
+    }
+    .mini-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #F8FAFC;
+        border: 1px solid #EEF2F7;
+        text-decoration: none;
+    }
+    .mini-row span {
+        color: #334155;
+        font-size: 12px;
+        font-weight: 800;
+    }
+    .mini-row strong {
+        color: #0F172A;
+        font-size: 15px;
+        font-weight: 900;
+    }
+    .dash-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .dash-table th {
+        padding: 10px 12px;
+        background: #F8FAFC;
+        color: #64748B;
+        font-size: 11px;
+        font-weight: 900;
+        text-align: left;
+        text-transform: uppercase;
+        border-bottom: 1px solid #E2E8F0;
+    }
+    .dash-table td {
+        padding: 12px;
+        color: #334155;
+        font-size: 13px;
+        border-bottom: 1px solid #F1F5F9;
+        vertical-align: top;
+    }
+    .dash-table tr:last-child td { border-bottom: 0; }
+    .soft-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #EEF2FF;
+        color: #4338CA;
+        font-size: 11px;
+        font-weight: 800;
+    }
+    .activity-feed {
+        display: grid;
+        gap: 10px;
+    }
+    .activity-item {
+        display: flex;
+        gap: 10px;
+        padding: 11px;
+        border-radius: 11px;
+        background: #F8FAFC;
+        border: 1px solid #EEF2F7;
+    }
+    .activity-dot {
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: #E0F2FE;
+        color: #0369A1;
+        flex: 0 0 auto;
+    }
+    .activity-item p {
+        margin: 0;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+    .activity-item small {
+        display: block;
+        margin-top: 3px;
+        color: #94A3B8;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+    }
+    .quick-action {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 900;
+        background: #F8FAFC;
+        color: #334155;
+        border: 1px solid #E2E8F0;
+    }
+    .quick-action i { color: var(--accent); }
+    @media (max-width: 1200px) {
+        .metric-grid, .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .quick-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 900px) {
+        .dash-grid { grid-template-columns: 1fr; }
+        .dash-hero-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+        .metric-grid, .module-grid, .quick-actions { grid-template-columns: 1fr; }
+        .dash-title { font-size: 24px; }
     }
 </style>
 @endsection
 
 @section('content')
 
-{{-- ═══════════════════════════════════════════
-     THEME CUSTOMIZER PANEL
-════════════════════════════════════════════ --}}
-<button id="theme-toggle-btn" onclick="toggleTheme()" title="Customize Theme">
-    <i class="fas fa-palette"></i>
-</button>
-
-<div id="theme-panel">
-    <div style="background: var(--accent); color:#fff; padding: 1rem 1.25rem; display:flex; justify-content:space-between; align-items:center;">
-        <div>
-            <p style="font-weight:700; font-size:15px; margin:0;">Theme Customizer</p>
-            <p style="font-size:12px; opacity:.8; margin:0;">Personalize your dashboard</p>
-        </div>
-        <button onclick="toggleTheme()" style="background:rgba(255,255,255,.2); border:none; color:#fff; width:28px; height:28px; border-radius:6px; cursor:pointer; font-size:14px;">✕</button>
-    </div>
-
-    <div style="padding: 1.25rem; overflow-y:auto; flex:1;">
-
-        {{-- Accent Color --}}
-        <p style="font-size: 12px; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 10px;">Accent Color</p>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
-            <div class="color-swatch active" style="background:#4F46E5;" data-accent="#4F46E5" data-light="#EEF2FF" data-dark="#3730A3" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#0EA5E9;" data-accent="#0EA5E9" data-light="#E0F2FE" data-dark="#0284C7" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#10B981;" data-accent="#10B981" data-light="#D1FAE5" data-dark="#059669" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#F59E0B;" data-accent="#F59E0B" data-light="#FEF3C7" data-dark="#D97706" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#EF4444;" data-accent="#EF4444" data-light="#FEE2E2" data-dark="#DC2626" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#8B5CF6;" data-accent="#8B5CF6" data-light="#EDE9FE" data-dark="#7C3AED" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#EC4899;" data-accent="#EC4899" data-light="#FCE7F3" data-dark="#DB2777" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#14B8A6;" data-accent="#14B8A6" data-light="#CCFBF1" data-dark="#0F766E" onclick="setAccent(this)"></div>
-            <div class="color-swatch" style="background:#F97316;" data-accent="#F97316" data-light="#FFEDD5" data-dark="#EA580C" onclick="setAccent(this)"></div>
-        </div>
-
-        {{-- Custom Color Picker --}}
-        <div style="margin-bottom: 1.5rem;">
-            <p style="font-size: 12px; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 8px;">Custom Color</p>
-            <div style="display:flex; gap:8px; align-items:center;">
-                <input type="color" id="custom-color" value="#4F46E5"
-                       style="width:42px; height:38px; border:1px solid #E5E7EB; border-radius:8px; cursor:pointer; padding:2px;"
-                       oninput="applyCustomColor(this.value)">
-                <span id="hex-display" style="font-size:13px; font-weight:600; color:#374151; font-family:monospace;">#4F46E5</span>
-            </div>
-        </div>
-
-        {{-- Sidebar Style --}}
-        <p style="font-size: 12px; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 10px;">Background Style</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem;">
-            <button onclick="setBg('bg-gray-100')" id="bg-gray" class="theme-bg-btn active-bg"
-                style="padding: 8px; border-radius: 8px; border: 2px solid var(--accent); background: #F3F4F6; font-size: 12px; font-weight: 600; cursor:pointer; color: #374151;">
-                ☁ Light Gray
-            </button>
-            <button onclick="setBg('bg-white')" id="bg-white"
-                style="padding: 8px; border-radius: 8px; border: 2px solid #E5E7EB; background: #fff; font-size: 12px; font-weight: 600; cursor:pointer; color: #374151;">
-                ◻ White
-            </button>
-            <button onclick="setBg('bg-slate-800')" id="bg-dark"
-                style="padding: 8px; border-radius: 8px; border: 2px solid #E5E7EB; background: #1E293B; font-size: 12px; font-weight: 600; cursor:pointer; color: #fff;">
-                ◾ Dark
-            </button>
-            <button onclick="setBg('bg-blue-50')" id="bg-blue"
-                style="padding: 8px; border-radius: 8px; border: 2px solid #E5E7EB; background: #EFF6FF; font-size: 12px; font-weight: 600; cursor:pointer; color: #1D4ED8;">
-                💧 Blue Tint
-            </button>
-        </div>
-
-        {{-- Font Size --}}
-        <p style="font-size: 12px; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 8px;">Interface Size</p>
-        <div style="display: flex; gap: 6px; margin-bottom: 1.5rem;">
-            <button onclick="setSize('compact')"   style="flex:1; padding:7px; border-radius:8px; border:1.5px solid #E5E7EB; font-size:12px; cursor:pointer; background:#fff; font-weight:600;">Compact</button>
-            <button onclick="setSize('default')"   style="flex:1; padding:7px; border-radius:8px; border:1.5px solid var(--accent); font-size:12px; cursor:pointer; background:var(--accent-light); font-weight:600; color:var(--accent);">Default</button>
-            <button onclick="setSize('spacious')"  style="flex:1; padding:7px; border-radius:8px; border:1.5px solid #E5E7EB; font-size:12px; cursor:pointer; background:#fff; font-weight:600;">Spacious</button>
-        </div>
-
-        <button onclick="resetTheme()"
-            style="width:100%; padding:10px; background:#F3F4F6; border:none; border-radius:10px; font-size:13px; font-weight:600; color:#6B7280; cursor:pointer;">
-            ↺ Reset to Default
-        </button>
-    </div>
-</div>
-
-{{-- ═══════════════════════════════════════════
-     PAGE HEADER
-════════════════════════════════════════════ --}}
-<div class="flex items-center justify-between mb-6">
-    <div>
-        <h2 style="font-size:22px; font-weight:700; color:#111827; margin:0;">Dashboard</h2>
-        <p style="font-size:13px; color:#6B7280; margin:4px 0 0;">
-            Welcome back, <strong>{{ auth()->user()->name }}</strong> — here's what's happening today.
+<section class="dash-hero">
+    <div class="dash-hero-content">
+        <span class="dash-kicker"><i class="fas fa-chart-line"></i> College CMS Command Center</span>
+        <h1 class="dash-title">Good {{ now()->hour < 12 ? 'Morning' : (now()->hour < 17 ? 'Afternoon' : 'Evening') }}, {{ explode(' ', auth()->user()->name)[0] }}</h1>
+        <p class="dash-subtitle">
+            Live overview of website content, admissions communication, feedback, enquiries, academic modules and admin activity for {{ optional($websiteSetting)->college_name ?: 'B.D. College, Patna' }}.
         </p>
-    </div>
-    <div class="flex items-center gap-3">
-        <span style="font-size:12px; color:#9CA3AF;">
-            <i class="fas fa-clock mr-1"></i>
-            {{ now()->format('D, d M Y') }}
-        </span>
-        <button style="background:var(--accent); color:#fff; border:none; padding: 8px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;">
-            <i class="fas fa-download"></i> Export
-        </button>
-    </div>
-</div>
 
-{{-- ═══════════════════════════════════════════
-     WELCOME BANNER
-════════════════════════════════════════════ --}}
-<div class="welcome-banner mb-6">
-    <div style="position:relative; z-index:1;">
-        <p style="font-size:20px; font-weight:700; margin:0 0 4px;">Good {{ now()->hour < 12 ? 'Morning' : (now()->hour < 17 ? 'Afternoon' : 'Evening') }}, {{ explode(' ', auth()->user()->name)[0] }}! 👋</p>
-        <p style="font-size:13px; opacity:.85; margin:0 0 16px;">Your admin panel is running smoothly. Here's a summary of today's activity.</p>
-        <div style="display:flex; gap:16px; flex-wrap:wrap;">
-            <div style="background:rgba(255,255,255,.15); padding:8px 16px; border-radius:10px; backdrop-filter:blur(4px);">
-                <span style="font-size:11px; opacity:.8; display:block;">Total Users</span>
-                <span style="font-size:18px; font-weight:700;">1,284</span>
+        <div class="dash-hero-grid">
+            <div class="dash-hero-mini">
+                <span>Today Feedback</span>
+                <strong>{{ number_format($userStats['today_feedback']) }}</strong>
             </div>
-            <div style="background:rgba(255,255,255,.15); padding:8px 16px; border-radius:10px;">
-                <span style="font-size:11px; opacity:.8; display:block;">Active Now</span>
-                <span style="font-size:18px; font-weight:700;">42</span>
+            <div class="dash-hero-mini">
+                <span>Today Enquiries</span>
+                <strong>{{ number_format($userStats['today_enquiries']) }}</strong>
             </div>
-            <div style="background:rgba(255,255,255,.15); padding:8px 16px; border-radius:10px;">
-                <span style="font-size:11px; opacity:.8; display:block;">Today's Logins</span>
-                <span style="font-size:18px; font-weight:700;">138</span>
+            <div class="dash-hero-mini">
+                <span>System Logs</span>
+                <strong>{{ number_format($userStats['audit_logs']) }}</strong>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-{{-- ═══════════════════════════════════════════
-     STAT CARDS
-════════════════════════════════════════════ --}}
-<div class="stat-grid mb-6" style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
-
-    <div class="stat-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+<section class="metric-grid">
+    <article class="metric-card">
+        <div class="metric-top">
             <div>
-                <p style="font-size:12px; color:#6B7280; font-weight:600; margin:0 0 6px; text-transform:uppercase; letter-spacing:.05em;">Total Users</p>
-                <p style="font-size:26px; font-weight:700; color:#111827; margin:0 0 8px; line-height:1;">1,284</p>
-                <span class="badge badge-up">↑ 12.5% this month</span>
+                <p class="metric-label">Users</p>
+                <p class="metric-value">{{ number_format($userStats['users']) }}</p>
             </div>
-            <div class="icon-wrap"><i class="fas fa-users"></i></div>
+            <div class="metric-icon" style="background:#2563EB;"><i class="fas fa-users"></i></div>
         </div>
-        <div class="progress-bar mt-3"><div class="progress-bar-fill" style="width:72%"></div></div>
-    </div>
+        <span class="metric-note"><i class="fas fa-user-plus"></i> {{ number_format($userStats['today_users']) }} added today</span>
+    </article>
 
-    <div class="stat-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <article class="metric-card">
+        <div class="metric-top">
             <div>
-                <p style="font-size:12px; color:#6B7280; font-weight:600; margin:0 0 6px; text-transform:uppercase; letter-spacing:.05em;">Total Roles</p>
-                <p style="font-size:26px; font-weight:700; color:#111827; margin:0 0 8px; line-height:1;">8</p>
-                <span class="badge" style="background:#F3F4F6; color:#374151;">2 added recently</span>
+                <p class="metric-label">Roles</p>
+                <p class="metric-value">{{ number_format($userStats['roles']) }}</p>
             </div>
-            <div class="icon-wrap" style="background:#F0FDF4; color:#16A34A;"><i class="fas fa-shield-alt"></i></div>
+            <div class="metric-icon" style="background:#059669;"><i class="fas fa-user-shield"></i></div>
         </div>
-        <div class="progress-bar mt-3"><div class="progress-bar-fill" style="width:40%; background:#16A34A;"></div></div>
-    </div>
+        <span class="metric-note"><i class="fas fa-lock"></i> {{ number_format($userStats['permissions']) }} permissions</span>
+    </article>
 
-    <div class="stat-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <article class="metric-card">
+        <div class="metric-top">
             <div>
-                <p style="font-size:12px; color:#6B7280; font-weight:600; margin:0 0 6px; text-transform:uppercase; letter-spacing:.05em;">Permissions</p>
-                <p style="font-size:26px; font-weight:700; color:#111827; margin:0 0 8px; line-height:1;">64</p>
-                <span class="badge" style="background:#FEF3C7; color:#92400E;">Active & assigned</span>
+                <p class="metric-label">Feedback</p>
+                <p class="metric-value">{{ number_format(collect($supportModules)->whereIn('label', ['Student Feedback', 'Teacher Feedback'])->sum('count')) }}</p>
             </div>
-            <div class="icon-wrap" style="background:#FFFBEB; color:#D97706;"><i class="fas fa-lock"></i></div>
+            <div class="metric-icon" style="background:#7C3AED;"><i class="fas fa-comments"></i></div>
         </div>
-        <div class="progress-bar mt-3"><div class="progress-bar-fill" style="width:88%; background:#D97706;"></div></div>
-    </div>
+        <span class="metric-note"><i class="fas fa-chart-pie"></i> Student and teacher responses</span>
+    </article>
 
-    <div class="stat-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <article class="metric-card">
+        <div class="metric-top">
             <div>
-                <p style="font-size:12px; color:#6B7280; font-weight:600; margin:0 0 6px; text-transform:uppercase; letter-spacing:.05em;">Audit Logs</p>
-                <p style="font-size:26px; font-weight:700; color:#111827; margin:0 0 8px; line-height:1;">5,918</p>
-                <span class="badge badge-down">↑ 3.2% today</span>
+                <p class="metric-label">Content Items</p>
+                <p class="metric-value">{{ number_format(collect($contentModules)->sum('count') + collect($cmsModules)->sum('count')) }}</p>
             </div>
-            <div class="icon-wrap" style="background:#FFF1F2; color:#E11D48;"><i class="fas fa-history"></i></div>
+            <div class="metric-icon" style="background:#D97706;"><i class="fas fa-layer-group"></i></div>
         </div>
-        <div class="progress-bar mt-3"><div class="progress-bar-fill" style="width:55%; background:#E11D48;"></div></div>
-    </div>
+        <span class="metric-note"><i class="fas fa-globe"></i> Across all website modules</span>
+    </article>
+</section>
 
-</div>
-
-{{-- ═══════════════════════════════════════════
-     CHARTS ROW
-════════════════════════════════════════════ --}}
-<div class="chart-grid mb-6" style="display:grid; grid-template-columns:2fr 1fr; gap:16px;">
-
-    {{-- Line Chart --}}
-    <div class="chart-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+<section class="dash-grid">
+    <div class="dash-card">
+        <div class="dash-card-head">
             <div>
-                <p style="font-size:15px; font-weight:700; color:#111827; margin:0;">User Registrations</p>
-                <p style="font-size:12px; color:#9CA3AF; margin:3px 0 0;">Last 7 days activity</p>
-            </div>
-            <div style="display:flex; gap:6px;">
-                <button style="padding:5px 12px; border-radius:8px; border:1.5px solid var(--accent); background:var(--accent-light); color:var(--accent); font-size:12px; font-weight:600; cursor:pointer;">Week</button>
-                <button style="padding:5px 12px; border-radius:8px; border:1.5px solid #E5E7EB; background:#fff; color:#6B7280; font-size:12px; cursor:pointer;">Month</button>
+                <h2 class="dash-card-title">Primary Modules</h2>
+                <p class="dash-card-subtitle">Main website entities with live database counts</p>
             </div>
         </div>
-        <canvas id="lineChart" height="90"></canvas>
-    </div>
-
-    {{-- Doughnut Chart --}}
-    <div class="chart-card">
-        <div style="margin-bottom:16px;">
-            <p style="font-size:15px; font-weight:700; color:#111827; margin:0;">User Roles</p>
-            <p style="font-size:12px; color:#9CA3AF; margin:3px 0 0;">Distribution by role</p>
-        </div>
-        <canvas id="doughnutChart" height="160"></canvas>
-        <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:6px;" id="doughnut-legend"></div>
-    </div>
-
-</div>
-
-{{-- ═══════════════════════════════════════════
-     TABLE + ACTIVITY
-════════════════════════════════════════════ --}}
-<div style="display:grid; grid-template-columns:1.6fr 1fr; gap:16px; margin-bottom:24px;">
-
-    {{-- Recent Users Table --}}
-    <div class="chart-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-            <p style="font-size:15px; font-weight:700; color:#111827; margin:0;">Recent Users</p>
-            <a href="{{ route('admin.users.index') }}" style="font-size:12px; color:var(--accent); font-weight:600; text-decoration:none;">View All →</a>
-        </div>
-        <table class="dash-table">
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Joined</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar">A</div>
-                            <div>
-                                <p style="margin:0; font-weight:600; font-size:13px;">Alice Johnson</p>
-                                <p style="margin:0; font-size:11px; color:#9CA3AF;">alice@example.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td><span class="pill pill-blue">Admin</span></td>
-                    <td><span class="pill pill-green">Active</span></td>
-                    <td style="color:#9CA3AF; font-size:12px;">2 days ago</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#0EA5E9;">R</div>
-                            <div>
-                                <p style="margin:0; font-weight:600; font-size:13px;">Rahul Sharma</p>
-                                <p style="margin:0; font-size:11px; color:#9CA3AF;">rahul@example.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td><span class="pill pill-yellow">Editor</span></td>
-                    <td><span class="pill pill-green">Active</span></td>
-                    <td style="color:#9CA3AF; font-size:12px;">5 days ago</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#10B981;">P</div>
-                            <div>
-                                <p style="margin:0; font-weight:600; font-size:13px;">Priya Singh</p>
-                                <p style="margin:0; font-size:11px; color:#9CA3AF;">priya@example.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td><span class="pill" style="background:#F3F4F6; color:#374151;">Viewer</span></td>
-                    <td><span class="pill pill-yellow">Pending</span></td>
-                    <td style="color:#9CA3AF; font-size:12px;">1 week ago</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#8B5CF6;">M</div>
-                            <div>
-                                <p style="margin:0; font-weight:600; font-size:13px;">Mohammed Ali</p>
-                                <p style="margin:0; font-size:11px; color:#9CA3AF;">mali@example.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td><span class="pill pill-blue">Moderator</span></td>
-                    <td><span class="pill pill-red">Inactive</span></td>
-                    <td style="color:#9CA3AF; font-size:12px;">2 weeks ago</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    {{-- Recent Activity --}}
-    <div class="chart-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-            <p style="font-size:15px; font-weight:700; color:#111827; margin:0;">Recent Activity</p>
-            <a href="{{ route('admin.audit-logs.index') }}" style="font-size:12px; color:var(--accent); font-weight:600; text-decoration:none;">Audit Log →</a>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:0;">
-
-            @php
-            $activities = [
-                ['icon'=>'fa-user-plus',   'color'=>'#4F46E5', 'bg'=>'#EEF2FF', 'text'=>'New user <strong>Alice</strong> registered', 'time'=>'2 min ago'],
-                ['icon'=>'fa-shield-alt',  'color'=>'#16A34A', 'bg'=>'#DCFCE7', 'text'=>'Role <strong>Editor</strong> updated',         'time'=>'15 min ago'],
-                ['icon'=>'fa-sign-in-alt', 'color'=>'#D97706', 'bg'=>'#FEF3C7', 'text'=>'<strong>Rahul</strong> logged in',             'time'=>'1 hr ago'],
-                ['icon'=>'fa-lock',        'color'=>'#DC2626', 'bg'=>'#FEE2E2', 'text'=>'Failed login attempt detected',               'time'=>'2 hr ago'],
-                ['icon'=>'fa-user-edit',   'color'=>'#0EA5E9', 'bg'=>'#E0F2FE', 'text'=>'Profile updated by <strong>Priya</strong>',   'time'=>'3 hr ago'],
-                ['icon'=>'fa-trash',       'color'=>'#6B7280', 'bg'=>'#F3F4F6', 'text'=>'Permission <strong>post_edit</strong> removed','time'=>'5 hr ago'],
-            ];
-            @endphp
-
-            @foreach($activities as $i => $a)
-            <div style="display:flex; gap:12px; align-items:flex-start; padding:10px 0; {{ $i < count($activities)-1 ? 'border-bottom:1px solid #F3F4F6;' : '' }}">
-                <div style="width:34px; height:34px; border-radius:10px; background:{{ $a['bg'] }}; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                    <i class="fas {{ $a['icon'] }}" style="color:{{ $a['color'] }}; font-size:13px;"></i>
-                </div>
-                <div style="flex:1; min-width:0;">
-                    <p style="font-size:13px; color:#374151; margin:0; line-height:1.4;">{!! $a['text'] !!}</p>
-                    <p style="font-size:11px; color:#9CA3AF; margin:3px 0 0;">{{ $a['time'] }}</p>
-                </div>
-            </div>
+        <div class="module-grid">
+            @foreach($contentModules as $module)
+                <a class="module-card" href="{{ Route::has($module['route']) ? route($module['route']) : '#' }}">
+                    <span class="module-icon" style="background:{{ $module['color'] }};"><i class="fas {{ $module['icon'] }}"></i></span>
+                    <span class="module-meta">
+                        <strong>{{ number_format($module['count']) }}</strong>
+                        <span>{{ $module['label'] }}</span>
+                    </span>
+                </a>
             @endforeach
-
         </div>
     </div>
 
-</div>
-
-{{-- ═══════════════════════════════════════════
-     QUICK ACTIONS
-════════════════════════════════════════════ --}}
-<div class="chart-card mb-2">
-    <p style="font-size:15px; font-weight:700; color:#111827; margin:0 0 14px;">Quick Actions</p>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:10px;">
-        @can('user_create')
-        <a href="{{ route('admin.users.create') }}" style="display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:10px; background:var(--accent-light); color:var(--accent); text-decoration:none; font-size:13px; font-weight:600; transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-user-plus"></i> Add User
-        </a>
-        @endcan
-        @can('role_create')
-        <a href="{{ route('admin.roles.create') }}" style="display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:10px; background:#F0FDF4; color:#16A34A; text-decoration:none; font-size:13px; font-weight:600; transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-plus-circle"></i> New Role
-        </a>
-        @endcan
-        @can('permission_create')
-        <a href="{{ route('admin.permissions.create') }}" style="display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:10px; background:#FFFBEB; color:#D97706; text-decoration:none; font-size:13px; font-weight:600; transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-lock"></i> Add Permission
-        </a>
-        @endcan
-        @can('audit_log_access')
-        <a href="{{ route('admin.audit-logs.index') }}" style="display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:10px; background:#FFF1F2; color:#E11D48; text-decoration:none; font-size:13px; font-weight:600; transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-history"></i> View Logs
-        </a>
-        @endcan
-        <a href="{{ route('profile.password.edit') }}" style="display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:10px; background:#F3F4F6; color:#374151; text-decoration:none; font-size:13px; font-weight:600; transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-key"></i> Change Password
-        </a>
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">Feedback Mix</h2>
+                <p class="dash-card-subtitle">Student, teacher and contact response share</p>
+            </div>
+        </div>
+        <canvas id="feedbackPie" height="220"></canvas>
     </div>
-</div>
+</section>
+
+<section class="dash-grid">
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">All CMS Modules</h2>
+                <p class="dash-card-subtitle">Every connected model visible from the dashboard</p>
+            </div>
+        </div>
+        <div class="module-grid">
+            @foreach($cmsModules as $module)
+                <a class="mini-row" href="{{ Route::has($module['route']) ? route($module['route']) : '#' }}">
+                    <span>{{ $module['label'] }}</span>
+                    <strong>{{ number_format($module['count']) }}</strong>
+                </a>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">User Access</h2>
+                <p class="dash-card-subtitle">Roles, permissions and users</p>
+            </div>
+        </div>
+        <canvas id="accessDoughnut" height="210"></canvas>
+    </div>
+</section>
+
+<section class="dash-grid">
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">Latest Notices</h2>
+                <p class="dash-card-subtitle">Most recent notice board entries</p>
+            </div>
+            @can('notice_board_access')
+                <a class="soft-pill" href="{{ route('admin.notice-boards.index') }}">View All</a>
+            @endcan
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($recentNotices as $notice)
+                        <tr>
+                            <td>{{ \Illuminate\Support\Str::limit($notice->heading ?: $notice->document_title ?: 'Untitled notice', 58) }}</td>
+                            <td><span class="soft-pill">{{ $notice->notice_type ?: 'General' }}</span></td>
+                            <td>{{ optional($notice->created_at)->format('d M Y') }}</td>
+                            <td>{{ $notice->status ? 'Published' : 'Draft' }}</td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="4">No notices found.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">Recent Enquiries</h2>
+                <p class="dash-card-subtitle">Latest public contact submissions</p>
+            </div>
+        </div>
+        <div class="activity-feed">
+            @forelse($recentEnquiries as $enquiry)
+                <div class="activity-item">
+                    <span class="activity-dot"><i class="fas fa-envelope-open-text"></i></span>
+                    <div>
+                        <p>{{ $enquiry->name ?? 'Visitor' }}: {{ \Illuminate\Support\Str::limit($enquiry->message ?? $enquiry->subject ?? 'New enquiry', 64) }}</p>
+                        <small>{{ optional($enquiry->created_at)->diffForHumans() }}</small>
+                    </div>
+                </div>
+            @empty
+                <div class="activity-item">
+                    <span class="activity-dot"><i class="fas fa-inbox"></i></span>
+                    <div><p>No enquiries yet.</p><small>Contact form data will appear here.</small></div>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+<section class="dash-grid">
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">Recent Users</h2>
+                <p class="dash-card-subtitle">Latest accounts and assigned roles</p>
+            </div>
+            @can('user_access')
+                <a class="soft-pill" href="{{ route('admin.users.index') }}">Manage Users</a>
+            @endcan
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($recentUsers as $user)
+                        <tr>
+                            <td><strong>{{ $user->name }}</strong></td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->roles->pluck('title')->implode(', ') ?: '-' }}</td>
+                            <td>{{ optional($user->created_at)->format('d M Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="4">No users found.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="dash-card">
+        <div class="dash-card-head">
+            <div>
+                <h2 class="dash-card-title">Audit Activity</h2>
+                <p class="dash-card-subtitle">Recent admin changes</p>
+            </div>
+        </div>
+        <div class="activity-feed">
+            @forelse($recentLogs as $log)
+                <div class="activity-item">
+                    <span class="activity-dot"><i class="fas fa-history"></i></span>
+                    <div>
+                        <p>{{ $log->description ?? $log->subject_type ?? 'Audit log entry' }}</p>
+                        <small>{{ optional($log->created_at)->diffForHumans() }}</small>
+                    </div>
+                </div>
+            @empty
+                <div class="activity-item">
+                    <span class="activity-dot"><i class="fas fa-shield-alt"></i></span>
+                    <div><p>No audit logs yet.</p><small>System activity will appear here.</small></div>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+<section class="dash-card">
+    <div class="dash-card-head">
+        <div>
+            <h2 class="dash-card-title">Quick Actions</h2>
+            <p class="dash-card-subtitle">Fast access to the most-used admin areas</p>
+        </div>
+    </div>
+    <div class="quick-actions">
+        @can('notice_board_create')<a class="quick-action" href="{{ route('admin.notice-boards.create') }}"><i class="fas fa-plus"></i> Add Notice</a>@endcan
+        @can('college_event_create')<a class="quick-action" href="{{ route('admin.college-events.create') }}"><i class="fas fa-calendar-plus"></i> Add Event</a>@endcan
+        @can('department_create')<a class="quick-action" href="{{ route('admin.departments.create') }}"><i class="fas fa-building"></i> Add Department</a>@endcan
+        @can('tender_notice_create')<a class="quick-action" href="{{ route('admin.tender-notices.create') }}"><i class="fas fa-file-contract"></i> Add Tender</a>@endcan
+        @can('website_setting_access')<a class="quick-action" href="{{ route('admin.website-settings.edit') }}"><i class="fas fa-cogs"></i> Website Settings</a>@endcan
+    </div>
+</section>
 
 @endsection
 
@@ -477,170 +615,44 @@
 @parent
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-// ─────────── CHARTS ───────────
-const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#4F46E5';
+    const feedbackLabels = @json(collect($supportModules)->pluck('label')->values());
+    const feedbackData = @json(collect($supportModules)->pluck('count')->values());
+    const accessLabels = ['Users', 'Roles', 'Permissions', 'Audit Logs'];
+    const accessData = [
+        {{ (int) $userStats['users'] }},
+        {{ (int) $userStats['roles'] }},
+        {{ (int) $userStats['permissions'] }},
+        {{ (int) $userStats['audit_logs'] }},
+    ];
+    const colors = ['#2563EB', '#7C3AED', '#059669', '#D97706', '#DB2777', '#0891B2'];
 
-// Line Chart
-const lineCtx = document.getElementById('lineChart').getContext('2d');
-const lineChart = new Chart(lineCtx, {
-    type: 'line',
-    data: {
-        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-        datasets: [{
-            label: 'Registrations',
-            data: [18, 35, 22, 48, 31, 57, 42],
-            borderColor: accentColor,
-            backgroundColor: accentColor + '1A',
-            borderWidth: 2.5,
-            fill: true,
-            tension: 0.45,
-            pointBackgroundColor: accentColor,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { grid: { display: false }, ticks: { font: { size: 12 }, color: '#9CA3AF' } },
-            y: { grid: { color: '#F3F4F6' }, ticks: { font: { size: 12 }, color: '#9CA3AF' } }
+    new Chart(document.getElementById('feedbackPie'), {
+        type: 'pie',
+        data: {
+            labels: feedbackLabels,
+            datasets: [{ data: feedbackData, backgroundColor: colors, borderWidth: 0 }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true, font: { size: 11, weight: '700' } } }
+            }
         }
-    }
-});
-
-// Doughnut
-const roleColors = ['#4F46E5','#0EA5E9','#10B981','#F59E0B','#EF4444'];
-const roleLabels = ['Admin','Editor','Moderator','Viewer','Guest'];
-const roleData   = [12, 24, 8, 36, 20];
-const dCtx = document.getElementById('doughnutChart').getContext('2d');
-new Chart(dCtx, {
-    type: 'doughnut',
-    data: {
-        labels: roleLabels,
-        datasets: [{ data: roleData, backgroundColor: roleColors, borderWidth: 0, hoverOffset: 6 }]
-    },
-    options: {
-        responsive: true,
-        cutout: '68%',
-        plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
-        }
-    }
-});
-
-// Custom Legend
-const legendEl = document.getElementById('doughnut-legend');
-roleLabels.forEach((l, i) => {
-    legendEl.innerHTML += `<div style="display:flex;align-items:center;gap:6px;">
-        <span style="width:10px;height:10px;border-radius:3px;background:${roleColors[i]};display:inline-block;"></span>
-        <span style="font-size:12px;color:#6B7280;">${l}</span>
-        <span style="font-size:12px;font-weight:700;color:#111827;margin-left:auto;">${roleData[i]}%</span>
-    </div>`;
-});
-
-// ─────────── THEME ENGINE ───────────
-function setCSSVar(name, val) {
-    document.documentElement.style.setProperty(name, val);
-}
-
-function setAccent(el) {
-    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-    const a = el.dataset.accent, l = el.dataset.light, d = el.dataset.dark;
-    setCSSVar('--accent', a);
-    setCSSVar('--accent-light', l);
-    setCSSVar('--accent-dark', d);
-    document.getElementById('custom-color').value = a;
-    document.getElementById('hex-display').textContent = a.toUpperCase();
-    updateChartColors(a);
-    saveTheme();
-}
-
-function applyCustomColor(hex) {
-    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-    document.getElementById('hex-display').textContent = hex.toUpperCase();
-    const light = hex + '1A', dark = hex;
-    setCSSVar('--accent', hex);
-    setCSSVar('--accent-light', light);
-    setCSSVar('--accent-dark', dark);
-    updateChartColors(hex);
-    saveTheme();
-}
-
-function updateChartColors(color) {
-    if (lineChart) {
-        lineChart.data.datasets[0].borderColor = color;
-        lineChart.data.datasets[0].backgroundColor = color + '1A';
-        lineChart.data.datasets[0].pointBackgroundColor = color;
-        lineChart.update();
-    }
-}
-
-const bgMap = {
-    'bg-gray-100': '#F3F4F6', 'bg-white': '#FFFFFF',
-    'bg-slate-800': '#1E293B', 'bg-blue-50': '#EFF6FF'
-};
-
-function setBg(cls) {
-    const mainEl = document.querySelector('body > .flex.min-h-screen > .flex-1');
-    if (mainEl) {
-        const color = bgMap[cls] || '#F3F4F6';
-        mainEl.style.background = color;
-    }
-    document.querySelectorAll('.theme-bg-btn').forEach(b => {
-        b.style.borderColor = '#E5E7EB';
     });
-    const btn = document.getElementById('bg-' + cls.replace('bg-','').replace('-100','').replace('-800','dark').replace('-50','blue'));
-    if (btn) btn.style.borderColor = 'var(--accent)';
-    localStorage.setItem('dash_bg', cls);
-}
 
-function setSize(size) {
-    const s = { compact: '13px', default: '14px', spacious: '15px' };
-    document.documentElement.style.fontSize = s[size];
-}
-
-function toggleTheme() {
-    document.getElementById('theme-panel').classList.toggle('open');
-}
-
-function resetTheme() {
-    setCSSVar('--accent', '#4F46E5');
-    setCSSVar('--accent-light', '#EEF2FF');
-    setCSSVar('--accent-dark', '#3730A3');
-    updateChartColors('#4F46E5');
-    document.getElementById('custom-color').value = '#4F46E5';
-    document.getElementById('hex-display').textContent = '#4F46E5';
-    document.querySelectorAll('.color-swatch').forEach((s,i) => { if(i===0) s.classList.add('active'); else s.classList.remove('active'); });
-    localStorage.removeItem('dash_theme');
-    localStorage.removeItem('dash_bg');
-}
-
-function saveTheme() {
-    const t = { accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() };
-    localStorage.setItem('dash_theme', JSON.stringify(t));
-}
-
-// ─ Restore saved theme ─
-(function() {
-    const saved = localStorage.getItem('dash_theme');
-    if (saved) {
-        try {
-            const t = JSON.parse(saved);
-            if (t.accent) applyCustomColor(t.accent.trim());
-        } catch(e) {}
-    }
-})();
-
-// Close theme panel on outside click
-document.addEventListener('click', function(e) {
-    const panel = document.getElementById('theme-panel');
-    const btn   = document.getElementById('theme-toggle-btn');
-    if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== btn) {
-        panel.classList.remove('open');
-    }
-});
+    new Chart(document.getElementById('accessDoughnut'), {
+        type: 'doughnut',
+        data: {
+            labels: accessLabels,
+            datasets: [{ data: accessData, backgroundColor: colors.slice(0, 4), borderWidth: 0 }]
+        },
+        options: {
+            responsive: true,
+            cutout: '66%',
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true, font: { size: 11, weight: '700' } } }
+            }
+        }
+    });
 </script>
 @endsection

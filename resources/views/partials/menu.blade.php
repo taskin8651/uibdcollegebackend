@@ -465,6 +465,9 @@ Department Notices
         </div>
     </div>
 @endif
+
+<div class="nav-divider"></div>
+
 @if(
     auth()->user()->can('iqac_page_access') ||
     auth()->user()->can('iqac_member_access') ||
@@ -528,6 +531,74 @@ Department Notices
         </div>
     </div>
 @endif
+<div class="nav-divider"></div>
+
+@if(
+    auth()->user()->can('student_feedback_access') ||
+    auth()->user()->can('teacher_feedback_access') ||
+    auth()->user()->can('contact_enquiry_access')
+)
+    @php
+        $feedbackActive = request()->is('admin/student-feedback*')
+            || request()->is('admin/teacher-feedback*')
+            || request()->is('admin/contact-enquiries*');
+    @endphp
+
+    <div x-data="{ open: {{ $feedbackActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Feedback & Enquiries"
+                class="nav-link nav-group-btn {{ $feedbackActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-comments nav-icon"></i>
+                <span class="nav-label">Feedback & Enquiries</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('student_feedback_access')
+                <a href="{{ route('admin.student-feedback.index') }}"
+                   class="sub-link {{ request()->is('admin/student-feedback*') ? 'active' : '' }}">
+                    <i class="fas fa-user-graduate"></i>
+                    Student Feedback
+                </a>
+            @endcan
+
+            @can('teacher_feedback_access')
+                <a href="{{ route('admin.teacher-feedback.index') }}"
+                   class="sub-link {{ request()->is('admin/teacher-feedback*') ? 'active' : '' }}">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    Teacher Feedback
+                </a>
+            @endcan
+
+            @can('contact_enquiry_access')
+                <a href="{{ route('admin.contact-enquiries.index') }}"
+                   class="sub-link {{ request()->is('admin/contact-enquiries*') ? 'active' : '' }}">
+                    <i class="fas fa-envelope-open-text"></i>
+                    Contact Enquiries
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endif
+
+<div class="nav-divider"></div>
+
 
 @can('nirf_report_access')
     <a href="{{ route('admin.nirf-reports.index') }}"
@@ -565,41 +636,9 @@ Department Notices
     </a>
 @endcan
 
-@can('student_feedback_access')
-    <a href="{{ route('admin.student-feedback.index') }}"
-       class="nav-link {{ request()->is('admin/student-feedback*') ? 'active' : '' }}"
-       data-tooltip="Student Feedback">
-        <i class="fas fa-comments nav-icon"></i>
-        <span class="nav-label">Student Feedback</span>
-    </a>
-@endcan
 
-@can('teacher_feedback_access')
-    <a href="{{ route('admin.teacher-feedback.index') }}"
-       class="nav-link {{ request()->is('admin/teacher-feedback*') ? 'active' : '' }}"
-       data-tooltip="Teacher Feedback">
-        <i class="fas fa-chalkboard-teacher nav-icon"></i>
-        <span class="nav-label">Teacher Feedback</span>
-    </a>
-@endcan
 
-@can('contact_enquiry_access')
-    <a href="{{ route('admin.contact-enquiries.index') }}"
-       class="nav-link {{ request()->is('admin/contact-enquiries*') ? 'active' : '' }}"
-       data-tooltip="Contact Enquiries">
-        <i class="fas fa-envelope-open-text nav-icon"></i>
-        <span class="nav-label">Contact Enquiries</span>
-    </a>
-@endcan
 
-@can('website_setting_access')
-    <a href="{{ route('admin.website-settings.edit') }}"
-       class="nav-link {{ request()->is('admin/website-settings*') ? 'active' : '' }}"
-       data-tooltip="Website Settings">
-        <i class="fas fa-cogs nav-icon"></i>
-        <span class="nav-label">Website Settings</span>
-    </a>
-@endcan
 
 <p class="sidebar-section-title compact nav-label">Account</p>
 
@@ -615,13 +654,14 @@ Department Notices
             @endcan
         @endif
 
-        {{-- Settings --}}
-        <a href="#"
-           data-tooltip="Settings"
-           class="nav-link">
-            <i class="fas fa-cog nav-icon"></i>
-            <span class="nav-label">Settings</span>
-        </a>
+       @can('website_setting_access')
+    <a href="{{ route('admin.website-settings.edit') }}"
+       class="nav-link {{ request()->is('admin/website-settings*') ? 'active' : '' }}"
+       data-tooltip="Website Settings">
+        <i class="fas fa-cogs nav-icon"></i>
+        <span class="nav-label">Website Settings</span>
+    </a>
+@endcan
 
     </nav>
 
