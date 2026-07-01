@@ -43,6 +43,9 @@ Route::get('/events', 'Frontend\EventController@index')->name('frontend.events')
 Route::get('/events/{collegeEvent}', 'Frontend\EventController@show')->name('frontend.events.show');
 
 Route::get('/tenders', 'Frontend\TenderController@index')->name('frontend.tenders');
+
+Route::get('/student-feedback', 'Frontend\StudentFeedbackController@index')->name('frontend.student-feedback');
+Route::post('/student-feedback', 'Frontend\StudentFeedbackController@store')->name('frontend.student-feedback.store');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -164,6 +167,9 @@ Route::resource('college-events', 'CollegeEventsController');
 
 Route::delete('tender-notices/destroy', 'TenderNoticesController@massDestroy')->name('tender-notices.massDestroy');
 Route::resource('tender-notices', 'TenderNoticesController');
+
+Route::delete('student-feedback/destroy', 'StudentFeedbackController@massDestroy')->name('student-feedback.massDestroy');
+Route::resource('student-feedback', 'StudentFeedbackController')->only(['index', 'show', 'destroy']);
 });
 
 

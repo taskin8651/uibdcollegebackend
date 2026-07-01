@@ -565,6 +565,15 @@ Department Notices
     </a>
 @endcan
 
+@can('student_feedback_access')
+    <a href="{{ route('admin.student-feedback.index') }}"
+       class="nav-link {{ request()->is('admin/student-feedback*') ? 'active' : '' }}"
+       data-tooltip="Student Feedback">
+        <i class="fas fa-comments nav-icon"></i>
+        <span class="nav-label">Student Feedback</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}
