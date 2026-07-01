@@ -17,7 +17,7 @@
           Contact Us
         </span>
 
-        <h1>Contact B.D. College, Patna</h1>
+        <h1>Contact {{ $websiteSetting->college_name }}</h1>
 
         <p>
           Reach the college office for admission enquiry, student support, administrative
@@ -25,12 +25,12 @@
         </p>
 
         <div class="hero-actions">
-          <a href="tel:06122209909" class="btn primary">
+          <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone) }}" class="btn primary">
             <i class="bi bi-telephone"></i>
             Principal Office
           </a>
 
-          <a href="mailto:principalbdcollegepatna@gmail.com" class="btn light">
+          <a href="mailto:{{ $websiteSetting->email }}" class="btn light">
             <i class="bi bi-envelope"></i>
             Email College
           </a>
@@ -47,7 +47,7 @@
           <i class="bi bi-building"></i>
         </div>
 
-        <h3>B.D. College, Patna</h3>
+        <h3>{{ $websiteSetting->college_name }}</h3>
         <p>A Constituent Unit of Patliputra University, Patna, Bihar.</p>
 
         <div class="contact-hero-pills">
@@ -76,22 +76,22 @@
   <section class="contact-quick-section">
     <div class="site-shell contact-quick-grid">
 
-      <a href="tel:+917903912273" class="contact-quick-card reveal">
+      <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->alternate_phone) }}" class="contact-quick-card reveal">
         <i class="bi bi-headset"></i>
         <strong>Enquiry Counter</strong>
-        <span>+91 7903912273</span>
+        <span>{{ $websiteSetting->alternate_phone }}</span>
       </a>
 
-      <a href="tel:06122209909" class="contact-quick-card reveal delay-1">
+      <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone) }}" class="contact-quick-card reveal delay-1">
         <i class="bi bi-telephone"></i>
         <strong>Principal Office</strong>
-        <span>06122209909</span>
+        <span>{{ $websiteSetting->phone }}</span>
       </a>
 
-      <a href="mailto:principalbdcollegepatna@gmail.com" class="contact-quick-card reveal delay-2">
+      <a href="mailto:{{ $websiteSetting->email }}" class="contact-quick-card reveal delay-2">
         <i class="bi bi-envelope"></i>
         <strong>Email Address</strong>
-        <span>principalbdcollegepatna@gmail.com</span>
+        <span>{{ $websiteSetting->email }}</span>
       </a>
 
       <a href="#contactMap" class="contact-quick-card reveal delay-3">
@@ -115,10 +115,10 @@
           College Contact Information
         </span>
 
-        <h2>B.D. College, Patna</h2>
+        <h2>{{ $websiteSetting->college_name }}</h2>
 
         <p>
-          Near Gauriamath, Mithapur, Patna, Post-GPO, Bihar India 800001.
+          {{ $websiteSetting->address }}.
           Students and visitors may contact the college on working days during
           official contact hours.
         </p>
@@ -129,7 +129,7 @@
             <i class="bi bi-geo-alt"></i>
             <div>
               <strong>Address</strong>
-              <span>B.D. College, Near Gauriamath, Mithapur, Patna, Post-GPO, Bihar India 800001</span>
+              <span>{{ $websiteSetting->address }}</span>
             </div>
           </div>
 
@@ -145,7 +145,7 @@
             <i class="bi bi-headset"></i>
             <div>
               <strong>Enquiry Counter</strong>
-              <span><a href="tel:+917903912273">+91 7903912273</a></span>
+              <span><a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->alternate_phone) }}">{{ $websiteSetting->alternate_phone }}</a></span>
             </div>
           </div>
 
@@ -153,7 +153,7 @@
             <i class="bi bi-telephone"></i>
             <div>
               <strong>Principal Office</strong>
-              <span><a href="tel:06122209909">06122209909</a></span>
+              <span><a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone) }}">{{ $websiteSetting->phone }}</a></span>
             </div>
           </div>
 
@@ -161,7 +161,7 @@
             <i class="bi bi-envelope"></i>
             <div>
               <strong>Email</strong>
-              <span><a href="mailto:principalbdcollegepatna@gmail.com">principalbdcollegepatna@gmail.com</a></span>
+              <span><a href="mailto:{{ $websiteSetting->email }}">{{ $websiteSetting->email }}</a></span>
             </div>
           </div>
 
@@ -355,9 +355,9 @@
           <i class="bi bi-map"></i>
           My Google Maps
         </span>
-        <h2>Find B.D. College on map.</h2>
+        <h2>Find {{ $websiteSetting->college_name }} on map.</h2>
         <p>
-          B.D. College is located near Gauriamath, Mithapur, Patna, Bihar.
+          {{ $websiteSetting->college_name }} is located at {{ $websiteSetting->address }}.
         </p>
       </div>
 
@@ -365,7 +365,7 @@
 
         <div class="map-box reveal">
           <iframe
-            src="https://www.google.com/maps?q=B.D.%20College%2C%20Near%20Gauriamath%2C%20Mithapur%2C%20Patna%2C%20Bihar%20800001&output=embed"
+            src="{{ $websiteSetting->map_embed_url }}"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="B.D. College Patna Google Map">
@@ -376,12 +376,11 @@
           <i class="bi bi-geo-alt"></i>
           <h3>College Location</h3>
           <p>
-            B.D. College, Near Gauriamath, Mithapur, Patna, Post-GPO,
-            Bihar India 800001.
+            {{ $websiteSetting->address }}
           </p>
 
           <a
-            href="https://www.google.com/maps/search/?api=1&query=B.D.%20College%20Near%20Gauriamath%20Mithapur%20Patna%20Bihar%20800001"
+            href="{{ $websiteSetting->map_direction_url }}"
             target="_blank"
             class="btn primary">
             <i class="bi bi-box-arrow-up-right"></i>

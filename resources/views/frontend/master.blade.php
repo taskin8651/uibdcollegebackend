@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  @php
+    $siteTitle = $websiteSetting->site_title ?: 'B.D. College, Patna | Official Website';
+    $siteDescription = $websiteSetting->meta_description ?: 'Official website of B.D. College, Patna.';
+    $headerLogo = $websiteSetting->mediaUrl('header_logo', 'assets/img/logo_bdcpat.png');
+    $universityLogo = $websiteSetting->mediaUrl('university_logo', 'assets/img/logo_ppupat.png');
+    $footerLogo = $websiteSetting->mediaUrl('footer_logo', 'assets/img/logo_bdcpat.png');
+    $favicon = $websiteSetting->getFirstMediaUrl('favicon');
+    $ogImage = $websiteSetting->getFirstMediaUrl('og_image');
+  @endphp
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>B.D. College, Patna | Official Website Redesign</title>
-  <meta name="description" content="Frontend redesign prototype for B.D. College, Patna covering notices, admissions, academics, departments, NAAC/IQAC, RTI, downloads and student support." />
+  <title>{{ $siteTitle }}</title>
+  <meta name="description" content="{{ $siteDescription }}" />
+  @if($websiteSetting->meta_keywords)
+    <meta name="keywords" content="{{ $websiteSetting->meta_keywords }}" />
+  @endif
+  <meta property="og:title" content="{{ $websiteSetting->og_title ?: $siteTitle }}" />
+  <meta property="og:description" content="{{ $websiteSetting->og_description ?: $siteDescription }}" />
+  @if($ogImage)
+    <meta property="og:image" content="{{ $ogImage }}" />
+  @endif
+  @if($favicon)
+    <link rel="icon" href="{{ $favicon }}">
+  @endif
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@500;700;800&display=swap" rel="stylesheet">
@@ -20,12 +40,12 @@
   <div class="topbar">
     <div class="site-shell topbar-inner">
       <div class="topbar-left">
-        <span><i class="bi bi-bank2"></i> A Constituent Unit of Patliputra University, Patna</span>
-        <span><i class="bi bi-patch-check-fill"></i> AISHE Code C-12847</span>
+        <span><i class="bi bi-bank2"></i> {{ $websiteSetting->affiliation_text }}</span>
+        <span><i class="bi bi-patch-check-fill"></i> AISHE Code {{ $websiteSetting->aishe_code }}</span>
       </div>
       <div class="topbar-right">
-        <a href="mailto:principalbdcollegepatna@gmail.com"><i class="bi bi-envelope"></i> principalbdcollegepatna@gmail.com</a>
-        <a href="tel:06122209909"><i class="bi bi-telephone"></i> 06122209909</a>
+        <a href="mailto:{{ $websiteSetting->email }}"><i class="bi bi-envelope"></i> {{ $websiteSetting->email }}</a>
+        <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone) }}"><i class="bi bi-telephone"></i> {{ $websiteSetting->phone }}</a>
       </div>
     </div>
   </div>
@@ -34,20 +54,20 @@
   <header class="masthead" id="top">
     <div class="site-shell masthead-inner">
       <a href="#top" class="brand">
-        <img src="assets/img/logo_bdcpat.png" alt="B.D. College logo">
+        <img src="{{ $headerLogo }}" alt="{{ $websiteSetting->college_name }} logo">
         <span>
-          <strong>B.D. College, Patna</strong>
-          <small>भुवनेश्वरी दयाल कॉलेज, पटना</small>
+          <strong>{{ $websiteSetting->college_name }}</strong>
+          <small>{{ $websiteSetting->college_name_hindi }}</small>
         </span>
       </a>
 
       <div class="identity-strip">
-        <img src="assets/img/logo_ppupat.png" alt="Patliputra University logo">
-        <span>NAAC Accredited Grade B+ with CGPA 2.39/4</span>
-        <span>Near Gauriamath, Mithapur, Patna</span>
+        <img src="{{ $universityLogo }}" alt="University logo">
+        <span>{{ $websiteSetting->naac_text }}</span>
+        <span>{{ $websiteSetting->address }}</span>
       </div>
 
-      <a class="mobile-admission-btn" href="https://bdcollege.tcspatna.in/" target="_blank" rel="noopener">Admission Open</a>
+      <a class="mobile-admission-btn" href="{{ $websiteSetting->admission_url }}" target="_blank" rel="noopener">Admission Open</a>
 
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu">
         <i class="bi bi-list"></i>
@@ -122,8 +142,8 @@
       <div class="dropdown-menu">
         <a href="{{ route('frontend.student-zone') }}">Student Zone</a>
         <a href="{{ route('frontend.student-zone') }}#studentServices">Student Login</a>
-        <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Fee Payment</a>
-        <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Admission</a>
+        <a href="{{ $websiteSetting->admission_url }}" target="_blank">Online Fee Payment</a>
+        <a href="{{ $websiteSetting->admission_url }}" target="_blank">Online Admission</a>
         <a href="{{ route('frontend.reservation-policy') }}">Reservation Policy</a>
         <a href="{{ route('frontend.student-zone') }}#formsCertificates">Certificates / Forms</a>
       </div>
@@ -236,16 +256,15 @@
     <!-- BRAND -->
     <div class="footer-brand">
       <a href="{{ route('frontend.home') }}" class="footer-logo">
-        <img src="assets/img/logo_bdcpat.png" alt="B.D. College Logo">
+        <img src="{{ $footerLogo }}" alt="{{ $websiteSetting->college_name }} Logo">
         <div>
-          <h3>B.D. College, Patna</h3>
-          <span>A Constituent Unit of Patliputra University</span>
+          <h3>{{ $websiteSetting->college_name }}</h3>
+          <span>{{ $websiteSetting->affiliation_text }}</span>
         </div>
       </a>
 
       <p>
-        Official college website for academic information, admission updates,
-        notices, statutory disclosures, student support and institutional transparency.
+        {{ $websiteSetting->meta_description }}
       </p>
     </div>
 
@@ -287,8 +306,8 @@
       <h4>Student Zone</h4>
       <a href="{{ route('frontend.student-zone') }}">Student Zone</a>
       <a href="{{ route('frontend.student-zone') }}#studentServices">Student Login</a>
-      <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Fee Payment</a>
-      <a href="https://bdcollege.tcspatna.in/" target="_blank">Online Admission</a>
+      <a href="{{ $websiteSetting->admission_url }}" target="_blank">Online Fee Payment</a>
+      <a href="{{ $websiteSetting->admission_url }}" target="_blank">Online Admission</a>
       <a href="{{ route('frontend.reservation-policy') }}">Reservation Policy</a>
       <a href="{{ route('frontend.student-zone') }}#formsCertificates">Forms & Certificates</a>
     </div>
@@ -359,7 +378,7 @@
     <!-- COL 8 MAP -->
     <div class="footer-map-col">
       <iframe
-        src="https://www.google.com/maps?q=B.D.%20College%2C%20Near%20Gauriamath%2C%20Mithapur%2C%20Patna%2C%20Bihar%20800001&output=embed"
+        src="{{ $websiteSetting->map_embed_url }}"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         title="B.D. College Patna Google Map">
@@ -372,30 +391,39 @@
 
       <a href="{{ route('frontend.contact') }}">
         <i class="bi bi-geo-alt"></i>
-        <span>Near Gauriamath, Mithapur, Patna - 800001</span>
+        <span>{{ $websiteSetting->address }}</span>
       </a>
 
-      <a href="tel:06122209909">
+      <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone) }}">
         <i class="bi bi-telephone"></i>
-        <span>06122209909</span>
+        <span>{{ $websiteSetting->phone }}</span>
       </a>
 
-      <a href="tel:+917903912273">
+      <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->alternate_phone) }}">
         <i class="bi bi-headset"></i>
-        <span>+91 7903912273</span>
+        <span>{{ $websiteSetting->alternate_phone }}</span>
       </a>
 
-      <a href="mailto:principalbdcollegepatna@gmail.com">
+      <a href="mailto:{{ $websiteSetting->email }}">
         <i class="bi bi-envelope"></i>
-        <span>principalbdcollegepatna@gmail.com</span>
+        <span>{{ $websiteSetting->email }}</span>
       </a>
 
       <a
-        href="https://www.google.com/maps/search/?api=1&query=B.D.%20College%20Near%20Gauriamath%20Mithapur%20Patna%20Bihar%20800001"
+        href="{{ $websiteSetting->map_direction_url }}"
         target="_blank">
         <i class="bi bi-map"></i>
         <span>View Google Map</span>
       </a>
+
+      <div class="footer-social-links">
+        @if($websiteSetting->facebook_url)<a href="{{ $websiteSetting->facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>@endif
+        @if($websiteSetting->twitter_url)<a href="{{ $websiteSetting->twitter_url }}" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>@endif
+        @if($websiteSetting->instagram_url)<a href="{{ $websiteSetting->instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>@endif
+        @if($websiteSetting->youtube_url)<a href="{{ $websiteSetting->youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>@endif
+        @if($websiteSetting->linkedin_url)<a href="{{ $websiteSetting->linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>@endif
+        @if($websiteSetting->whatsapp_url)<a href="{{ $websiteSetting->whatsapp_url }}" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>@endif
+      </div>
     </div>
 
   </div>
@@ -405,7 +433,7 @@
   </div>
 
   <div class="site-shell footer-bottom">
-    <span>&copy; 2026 B.D. College, Patna. All Rights Reserved.</span>
+    <span>&copy; 2026 {{ $websiteSetting->college_name }}. All Rights Reserved.</span>
 
     <div class="footer-bottom-links">
       <a href="{{ route('frontend.home') }}">Home</a>

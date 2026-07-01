@@ -90,6 +90,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('website-settings', 'WebsiteSettingController@edit')->name('website-settings.edit');
+    Route::put('website-settings', 'WebsiteSettingController@update')->name('website-settings.update');
+
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');

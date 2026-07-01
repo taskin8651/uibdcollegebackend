@@ -592,6 +592,15 @@ Department Notices
     </a>
 @endcan
 
+@can('website_setting_access')
+    <a href="{{ route('admin.website-settings.edit') }}"
+       class="nav-link {{ request()->is('admin/website-settings*') ? 'active' : '' }}"
+       data-tooltip="Website Settings">
+        <i class="fas fa-cogs nav-icon"></i>
+        <span class="nav-label">Website Settings</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}
