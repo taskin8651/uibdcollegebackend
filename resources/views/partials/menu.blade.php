@@ -529,6 +529,15 @@ Department Notices
     </div>
 @endif
 
+@can('nirf_report_access')
+    <a href="{{ route('admin.nirf-reports.index') }}"
+       class="nav-link {{ request()->is('admin/nirf-reports*') ? 'active' : '' }}"
+       data-tooltip="NIRF Reports">
+        <i class="fas fa-chart-line nav-icon"></i>
+        <span class="nav-label">NIRF Reports</span>
+    </a>
+@endcan
+
 <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}

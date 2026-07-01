@@ -32,6 +32,9 @@ Route::get('/iqac', 'Frontend\IqacController@index')->name('frontend.iqac');
 Route::get('/iqac-members', 'Frontend\IqacMemberController@index')->name('frontend.iqac-members');
 
 Route::get('/iqac-reports', 'Frontend\IqacReportController@index')->name('frontend.iqac-reports');
+
+Route::get('/nirf', 'Frontend\NirfController@index')->name('frontend.nirf');
+Route::get('/nirf-reports', 'Frontend\NirfReportController@index')->name('frontend.nirf-report');
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -141,6 +144,9 @@ Route::resource('iqac-members', 'IqacMembersController');
 
 Route::delete('iqac-documents/destroy', 'IqacDocumentsController@massDestroy')->name('iqac-documents.massDestroy');
 Route::resource('iqac-documents', 'IqacDocumentsController');
+
+Route::delete('nirf-reports/destroy', 'NirfReportsController@massDestroy')->name('nirf-reports.massDestroy');
+Route::resource('nirf-reports', 'NirfReportsController');
 });
 
 
